@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useState} from 'react';
 import { Button, Form, Input, message } from 'antd';
-import { apiEmailConfirmation } from '../../../api/api';
+import { apiEmailConfirmation, apiQRCode } from '../../../api/api';
 import axios from 'axios';
 import Congrats from './Congrats';
 
-export default function EmailForm({ email, csrfToken, hashedCode }) {
+export default function EmailForm({ email, csrfToken, hashedCode, uniqueID }) {
     const [otp, setOTP] = useState('');
     const [isResendOTP, setIsResendOTP] = useState(false);
     const [isVerifying, setIsVerifying] = useState(false);
@@ -16,8 +16,10 @@ export default function EmailForm({ email, csrfToken, hashedCode }) {
             }
       });
 
-      console.log("hash:", hashedCode)
+    const [qrCode, setQrCode] = useState("")
 
+      console.log("hash:", hashedCode)
+      console.log("uniqueID:", uniqueID)
 
     const handleSubmitOTP = async () => {
         setIsResendOTP(true);
@@ -32,6 +34,22 @@ export default function EmailForm({ email, csrfToken, hashedCode }) {
         } catch (error) {
           console.error('Error adding register:', error);
           message.error("Failed to register");
+        } finally {
+          setIsResendOTP(false);
+        }
+      };
+
+      const handleSubmitQRCode = async () => {
+        try {
+          const response = await axios.post(`${apiQRCode}${uniqueID}`,{
+            headers: {
+              'X-CSRFToken': csrfToken
+            }
+          });
+          console.log("qrcode:", response.data);
+          setQrCode(response.data)
+        } catch (error) {
+          console.error('Failed to get qr code:', error);
         } finally {
           setIsResendOTP(false);
         }
@@ -57,6 +75,8 @@ export default function EmailForm({ email, csrfToken, hashedCode }) {
           console.log("test:", response);
           setVerificationSuccess(true); // Set verification success
           message.success("Verify successfully!")
+          handleSubmitQRCode()
+
         } catch (error) {
           if (error.response && error.response.status === 400) {
             message.error("Incorrect OTP");
@@ -80,7 +100,7 @@ export default function EmailForm({ email, csrfToken, hashedCode }) {
       };
 
   if (verificationSuccess) {
-    return <Congrats />;
+    return <Congrats qrCode={qrCode} />;
   }
 
   return (
