@@ -1,0 +1,157 @@
+@tailwind components;
+
+
+@layer components{
+    .registerHeader{
+        background-image: url("../../assets/background.png");
+        background-size:cover;
+        @apply flex flex-col items-center h-[50vh]
+    }
+
+    .registerHeader img{
+        @apply w-[35%] mt-10
+    }
+
+    .registerHeader p{
+        @apply font-opensans text-[#475569] text-center text-base mt-10
+    }
+
+    .registerContainerForm{
+        @apply flex items-center justify-center mt-10 pb-10
+    } 
+
+    .registerFormWrapper{
+        @apply relative  w-full flex items-center justify-center px-10 lg:px-0
+    }
+
+    .registerForm{
+        @apply border w-[600px] flex flex-col 
+        p-10 rounded-lg bg-white 
+    }
+
+
+
+    .registerForm h1{
+        @apply text-[#11385D] text-xl text-center
+         font-bold font-montserrat
+    }
+
+    .registerForm .ant-col{
+        @apply font-opensans text-[#334155] font-semibold
+    }
+
+    .registerForm .ant-input{
+        @apply  font-opensans text-[#334155] 
+        font-semibold p-2 
+    }
+
+    
+    .registerForm .ant-select{
+        @apply  font-opensans text-[#334155] 
+        font-semibold h-[40px] 
+    }
+
+    .registerForm .ant-btn{
+        @apply bg-[#11385D] w-full font-opensans mt-10
+        h-[40px] text-sm font-semibold tracking-wide hover:bg-gray-400
+    }
+
+
+    .registerForm .ant-btn:hover{
+        background-color: #F1F5F9 !important;
+        color: #11385D !important;
+        border: 1px solid #11385D !important ;
+    }
+
+    .waveBackground1{
+        @apply absolute left-0 mt-40  -z-10
+    }
+
+    .waveBackground2{
+        @apply absolute right-0  -z-10 
+    } 
+
+  
+
+    .emailForm{
+        @apply border w-[600px] flex flex-col 
+        p-10 rounded-lg bg-white font-opensans
+        text-center my-20
+    }
+
+    .emailForm .ant-input{
+        @apply h-[50px] p-3 mt-5 font-bold text-lg font-opensans
+    }
+
+
+    .emailForm h2{
+        @apply font-montserrat text-[#11385D] text-xl font-bold
+    }
+
+    .emailForm p{
+        @apply text-[#334155] text-sm font-semibold mt-3
+    }
+
+
+    .emailFormBox{
+        @apply flex flex-col gap-10 items-center
+    }
+
+    .emailFormBtn{
+        @apply flex flex-col gap-2 w-full
+    }
+
+
+    .emailFormBtn .btn1{
+        @apply text-[#11385D] w-full font-opensans 
+        h-[40px] text-sm font-semibold tracking-wide hover:tracking-widest duration-200
+    }
+
+ 
+    
+    .emailFormBtn .btn2{
+        @apply bg-[#11385D] w-full font-opensans 
+        h-[40px] text-sm font-semibold tracking-wide hover:bg-gray-400
+    }
+
+
+    .emailFormBtn .btn2:hover{
+        background-color: #F1F5F9 !important;
+        color: #11385D !important;
+        border: 1px solid #11385D !important ;
+    }
+
+
+    .congratsForm{
+        @apply border w-[700px] flex flex-col 
+        p-10 rounded-lg bg-white font-opensans
+        text-center my-20 items-center gap-5
+    }
+
+    .congratsForm img{
+        @apply w-[100px]
+    }
+
+    .congratsForm h2{
+        @apply font-montserrat text-[#11385D] font-bold text-3xl
+    }
+
+    .congratsForm h4{
+        @apply font-opensans text-[#334155] text-xl
+    }
+
+
+    .congratsForm .btn2{
+        @apply bg-[#11385D] w-full font-opensans 
+        h-[40px] text-sm font-semibold tracking-wide hover:bg-gray-400
+    }
+
+
+    .congratsForm .btn2:hover{
+        background-color: #F1F5F9 !important;
+        color: #11385D !important;
+        border: 1px solid #11385D !important ;
+    }
+
+
+}

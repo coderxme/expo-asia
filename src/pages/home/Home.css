@@ -1,0 +1,128 @@
+@tailwind components;
+
+@layer components{
+    .carouselBox{
+        background-image:url("../../assets/carouselBackground.svg");
+        background-size: cover;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        @apply  font-opensans 
+    }
+
+    .carouselBox img{
+        @apply  w-[60%] lg:h-[400px] mt-16
+    }
+
+    .carouselBox a{
+        text-decoration: none;
+    }
+
+    .carouselBox p{
+        @apply text-xs sm:text-sm md:text-base text-[#475569] 
+        font-medium text-center mt-10 leading-5 md:leading-7 px-3
+    }
+
+    .carouselBtn{
+        @apply pb-20 flex gap-5 flex-col lg:flex-row lg:mt-10
+    }
+
+    .carouselBox button{
+        @apply border p-2 md:p-3 border-[#11385D] font-bold text-xs sm:text-sm 
+        text-[#11385D] w-[200px]  md:w-[250px] hover:bg-[#11385D] hover:text-white 
+        flex items-center justify-center gap-1
+    }
+
+    .homeContext2{
+        @apply text-[#11385D]  font-opensans
+        flex flex-col items-center justify-center p-5 md:p-10
+    }
+
+    .homeContext2Header{
+        @apply flex flex-col items-center md:p-10 gap-5 pt-20
+    }
+
+    .homeContext2Header h2{
+        @apply text-xl font-bold lg:text-[2rem] font-montserrat
+    }
+
+    .homeContext2Header p{
+        @apply text-sm lg:text-base text-center px-5 text-[#475569] font-medium
+    }
+
+    .homeContext2Box1{
+        @apply flex gap-10 justify-center  flex-col lg:flex-row w-full
+    }
+
+    .homeContext2Box1 .detailBox{
+        @apply flex flex-col gap-7 mt-5 
+    }
+
+    .homeContext2Box1 .detailBox h3{
+        @apply text-xl font-bold lg:text-[2rem] font-montserrat
+    }
+
+
+    .homeContext2Box1 .detailBox span{
+        @apply flex items-start gap-5
+    }
+
+    .homeContext2Box1 .detailBox span p{
+        @apply text-xs sm:text-sm lg:text-base font-medium text-[#475569]
+    }
+
+    .homeContext2Box1 .image1{
+        box-shadow:-10px 10px #11385D;
+        @apply w-[600px] 
+        
+    }
+
+    .homeContext2Box1 .ant-image-mask{
+        @apply w-[600px] 
+
+    }
+
+    .homeContext2Box1 .wave1{
+        @apply w-[600px] absolute left-0 -z-30 mt-40
+        
+    }
+
+
+    .homeContext2Box2{
+        @apply flex flex-col items-center pt-10 pb-36
+    }
+
+    .homeContext2Box2 p{
+        @apply  text-[rgb(71,85,105)] font-medium
+        text-sm lg:text-base p-10  lg:p-16 text-justify lg:text-center
+        lg:w-[80%]
+    }
+
+
+    .homeContext2BoxImg{
+        @apply flex gap-10 flex-col lg:flex-row
+    }
+
+    .homeContext2BoxImg .wave2{
+        @apply absolute right-0
+    }
+
+    .homeContext2BoxImg .image1{
+        box-shadow:-10px 10px #11385D;
+        @apply w-[600px]
+        
+    }
+   
+
+}
+
+
+.slick-dots .slick-active button{
+    background: #11385D !important;
+
+}
+
+.slick-dots li{
+    background-color: #fff !important;
+    width:30px !important;
+}

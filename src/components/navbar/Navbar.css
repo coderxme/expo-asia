@@ -1,0 +1,64 @@
+@tailwind components;
+
+
+
+
+@layer components {
+    .navbarLinkBox{
+        @apply w-full mt-2 p-2 gap-10 rounded-md flex lg:items-end lg:justify-end 
+    }
+
+    .navbarLinkBox .dropdown-menu{
+        border: none ;
+        box-shadow: 0 0 10px #00000032;
+        @apply rounded-none  font-opensans text-sm  
+    }
+
+    .navbarLinkBox .dropdown-menu .dropdown-item{
+        border-bottom: 1px solid  #11385d23 !important;
+        @apply  text-[#11385D] font-medium
+    }
+ 
+
+    .navbarLinkBox .dropdown-menu{
+        --bs-dropdown-link-active-bg: #fcfcfc;
+    }
+
+   
+    
+    .navbarLinkBox .dropdown-item.active{
+        @apply bg-[#E8ECEF]
+    }
+
+    .navbarLinkBox a {
+        @apply font-opensans text-sm text-[#11385D] font-semibold p-5 lg:p-3
+      }
+
+    .nav-link.active {
+        color: #11385D !important;
+        background: #E8ECEF !important;
+        font-weight: bold;
+        @apply font-opensans text-sm 
+      }
+
+      .linkMenuBox{
+        @apply relative 
+      }
+
+      .linkMenuBox span{
+        @apply flex items-center gap-2
+        w-full
+      }
+
+
+      .linkMenu{
+        box-shadow:0 0 10px #0000003c;
+        @apply absolute bg-white w-full 
+        flex flex-col mt-3 font-opensans z-10
+      }
+
+      .linkMenu a{
+        text-decoration: none; 
+        @apply border-b border-[#11385d30]
+      }
+}

@@ -1,0 +1,19 @@
+@tailwind components;
+
+
+
+@layer components {
+    .airForceHeaderContainer{
+        background-image: url("../../assets/blue-background.svg");
+        @apply lg:h-[90vh] flex flex-col items-center p-10 text-white
+    }
+
+    .airForceHeaderContainer h1{
+        @apply border-4 p-3  font-montserrat font-bold
+        text-3xl mt-10
+    }
+
+    .airForceHeaderContainer p{
+        @apply font-opensans text-center mt-10 lg:w-[80%]
+    }
+}
