@@ -5,7 +5,20 @@
 @layer components {
     .airForceHeaderContainer{
         background-image: url("../../assets/blue-background.svg");
-        @apply lg:h-[90vh] flex flex-col items-center p-10 text-white
+        @apply lg:h-[90vh] flex flex-col items-center p-10 text-white  
+    }
+
+    .airForceHeaderContainer .image1{
+        @apply absolute right-0 top-0
+    }
+
+    .airForceHeaderContainer .image2{
+        @apply absolute left-0 bottom-0
+    }
+
+    .airForceHeaderContainer .image3{
+        box-shadow: -10px 10px 0px #fff;
+        @apply mt-10 w-[30%]
     }
 
     .airForceHeaderContainer h1{
@@ -16,4 +29,123 @@
     .airForceHeaderContainer p{
         @apply font-opensans text-center mt-10 lg:w-[80%]
     }
+
+    .countDownBox{
+        @apply mt-10
+    }
+    
+    .countDownCard{
+        @apply flex gap-5 
+    }
+
+    .countDownCard span{
+        @apply  flex flex-col items-center bg-[#ffffff13] w-[100px] p-3
+        border-b-4
+    }
+
+    .countDownCard span h3{
+        @apply font-montserrat font-bold 
+    }
+    .countDownCard span h5{
+        @apply font-opensans font-medium text-sm uppercase
+    }
+
+    .countdownItem {
+        transition: border-color 0.3s ease;
+      }
+      
+      .countdownItem.active {
+        border-bottom: 2px solid #04f5d5; /* Change this to your desired color */
+      }
+      
+
+
+    .speakersContainer{
+        @apply flex flex-col items-center p-10 pt-20 pb-20 relative
+    }
+
+    .speakersContainer .image1{
+        @apply w-[70%]
+    }
+
+    .speakersContainer .image2{
+        @apply absolute -z-10 top-[30%]
+    }
+
+
+    .speakersContainer h1{
+        @apply border-4 border-[#27638D] p-3  font-montserrat font-bold
+        text-3xl mt-10 text-[#27638D] 
+    }
+
+    .speakersContainer p{
+        @apply bg-[#E2EEF3]  text-center p-2 w-full lg:w-[70%]
+        border-b-2 font-opensans font-bold text-[#334155] my-10 
+    }
+
+    .programContainer{
+        background-image: url("../../assets/blue-background.svg");
+        @apply flex flex-col items-center bg-cover pt-20
+        gap-10 pb-20  relative
+    }
+
+    .programContainer .blueWave1{
+        @apply absolute right-0 top-0 -mt-20
+    }
+
+    .programContainer .blueWave2{
+        @apply absolute left-0 bottom-0
+    }
+
+    .programContainer h1{
+        @apply border-4 p-3  font-montserrat font-bold
+        text-3xl mt-10 border-[#fff] text-white
+    }
+
+    .programImageBox{
+        @apply flex w-full items-center justify-center flex-col lg:flex-row
+    }
+
+    .programImageBox .image{
+        @apply w-[600px]
+    }
+
+    
+    .programImageBox .ant-image-mask{
+        @apply  w-[600px]
+    }
+
+    .osContainer{
+        @apply flex items-center lg:p-40 justify-center
+        gap-20 flex-col py-10 lg:flex-row
+    }
+
+    .osWrapper1{
+        @apply flex items-start 
+    }
+
+    .osWrapper1 span{
+        @apply flex flex-col items-center 
+        gap-4 lg:items-start
+    }
+
+    .osWrapper1 span h2{
+        @apply text-[#27638D] font-montserrat font-bold text-2xl
+        text-center mt-10 lg:mt-0 lg:text-start
+    }
+
+    .osWrapper1 .registerLink{
+        text-decoration: none;
+        @apply flex items-center font-opensans text-[#27638D]
+        font-semibold border-[#27638D] border-2 p-3
+    }
+
+    .osWrapper2{
+        @apply relative flex items-center justify-center text-white
+    }
+
+    .osWrapper2 img{
+        @apply w-[700px]
+    }
+
 }

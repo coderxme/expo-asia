@@ -1,35 +1,38 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react/prop-types */
+/* eslint-disable react/no-unescaped-entities */
 import image from '../../../assets/congrats-check.svg';
-import { Button } from 'antd';
+import { Button, Image } from 'antd';
 import { useNavigate } from 'react-router-dom';
-
+import { AiOutlineDownload } from "react-icons/ai";
 export default function Congrats({ qrCode }) {
-  const [qrCodeSrc, setQRCodeSrc] = useState('');
   const navigate = useNavigate();
+ 
+  const handleDownloadQRCode = () => {
+    const downloadLink = document.createElement('a');
+    downloadLink.href = qrCode;
+    downloadLink.download = 'QRCode.png';
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  };
 
-  useEffect(() => {
-    if (!qrCode) return; // Ensure qrCode is not empty
 
-    // Convert the raw PNG image data to a data URL
-    const bytes = new Uint8Array(qrCode.length);
-    for (let i = 0; i < qrCode.length; i++) {
-      bytes[i] = qrCode.charCodeAt(i);
-    }
-    const dataUrl = `data:image/png;base64,${btoa(String.fromCharCode.apply(null, bytes))}`;
-    setQRCodeSrc(dataUrl);
-  }, [qrCode]);
-
+ 
   const handleFinish = () => {
     navigate("/home");
   };
 
   return (
     <div className="congratsForm">
-      <img src={image} alt="" />
+      <img className='check' src={image} alt="" />
       <h2>Congratulations! <br /> You're now registered.</h2>
-      <h4>Your unique QR code will be sent to your email shortly. <br />
-        You can use it to check in at the event venue.</h4>
-      {qrCodeSrc && <img src={qrCodeSrc} alt="QR Code" />}
+      <div className="qrcodeBox">
+      <Image width={200} src={qrCode} alt="QR Code"  className='qrcodeImage'/>
+     <Button  icon={<AiOutlineDownload /> } onClick={handleDownloadQRCode}>
+        Download
+      </Button>
+      </div>
+     <h4>Please use this unique QR code to check in at the event venue. <br /> It will also be sent to your email shortly.</h4>
       <Button className='btn2' type="primary" onClick={handleFinish}>
         Finish
       </Button>

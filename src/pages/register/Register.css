@@ -128,16 +128,16 @@
         text-center my-20 items-center gap-5
     }
 
-    .congratsForm img{
-        @apply w-[100px]
+    .congratsForm .check{
+        @apply w-[70px]
     }
 
     .congratsForm h2{
-        @apply font-montserrat text-[#11385D] font-bold text-3xl
+        @apply font-montserrat text-[#11385D] font-bold text-2xl
     }
 
     .congratsForm h4{
-        @apply font-opensans text-[#334155] text-xl
+        @apply font-opensans text-[#334155] text-base font-semibold
     }
 
 
@@ -146,12 +146,33 @@
         h-[40px] text-sm font-semibold tracking-wide hover:bg-gray-400
     }
 
+    .qrcodeBox{
+        @apply flex flex-col gap-4 items-center
+    }
+
+    .qrcodeBox .ant-btn{
+        @apply border-0 bg-[#E2EEF3] text-[#27638D]
+        font-opensans flex items-center text-xs font-medium
+    }
+
+    .qrcodeImage{
+        @apply border-[#27638D]  p-1
+         border rounded-md
+    }
+
 
     .congratsForm .btn2:hover{
         background-color: #F1F5F9 !important;
         color: #11385D !important;
         border: 1px solid #11385D !important ;
     }
+
+    .submitting {
+        background-color: #F1F5F9 !important;
+        color: #11385D !important;
+
+      }
+      
 
 
 }

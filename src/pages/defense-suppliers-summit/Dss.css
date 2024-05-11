@@ -1,0 +1,55 @@
+@tailwind components;
+
+
+@layer components {
+    .dssHeaderContainer{
+        background-image: url("../../assets/blue-background.svg");
+        @apply lg:h-[90vh] flex flex-col items-center p-10 text-white  
+    }
+
+    .dssHeaderContainer .image1{
+        @apply absolute right-0 top-0
+    }
+
+    .dssHeaderContainer .image2{
+        @apply absolute left-0 bottom-0
+    }
+
+    .dssHeaderContainer .image3{
+        box-shadow: -10px 10px 0px #fff;
+        @apply mt-10 w-[30%]
+    }
+
+    .dssHeaderContainer h1{
+        @apply border-4 p-3  font-montserrat font-bold
+        text-3xl mt-10
+    }
+
+    .dssHeaderContainer p{
+        @apply font-opensans text-center mt-10 lg:w-[80%]
+    }
+
+    .countDownBox{
+        @apply mt-10
+    }
+    
+    .countDownCard{
+        @apply flex gap-5 
+    }
+
+    .countDownCard span{
+        @apply  flex flex-col items-center bg-[#ffffff13] w-[100px] p-3
+        border-b-4
+    }
+
+    .countDownCard span h3{
+        @apply font-montserrat font-bold 
+    }
+    .countDownCard span h5{
+        @apply font-opensans font-medium text-sm uppercase
+    }
+
+    .countdownItem {
+        transition: border-color 0.3s ease;
+      }
+}

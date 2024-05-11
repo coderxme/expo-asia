@@ -18,7 +18,6 @@ export default function EmailForm({ email, csrfToken, hashedCode, uniqueID }) {
 
     const [qrCode, setQrCode] = useState("")
 
-      console.log("hash:", hashedCode)
       console.log("uniqueID:", uniqueID)
 
     const handleSubmitOTP = async () => {
@@ -39,54 +38,60 @@ export default function EmailForm({ email, csrfToken, hashedCode, uniqueID }) {
         }
       };
 
-      const handleSubmitQRCode = async () => {
-        try {
-          const response = await axios.post(`${apiQRCode}${uniqueID}`,{
-            headers: {
-              'X-CSRFToken': csrfToken
+    const handleSubmitQRCode = async () => {
+    try {
+        const response = await axios.get(
+            `${apiQRCode}${uniqueID}`,
+            {}, // pass empty object as the second parameter
+            {
+                headers: {
+                    'X-CSRFToken': csrfToken
+                }
             }
-          });
-          console.log("qrcode:", response.data);
-          setQrCode(response.data)
-        } catch (error) {
-          console.error('Failed to get qr code:', error);
-        } finally {
-          setIsResendOTP(false);
-        }
-      };
+        );
+        console.log("qrcode:", response);
+        setQrCode(response.request.responseURL);
+    } catch (error) {
+        console.error('Failed to get qr code:', error);
+    } finally {
+        setIsResendOTP(false);
+    }
+};
+
 
 
       const handleVerify = async () => {
-
-      
         setIsVerifying(true);
         try {
-          const response = await axios.post(apiEmailConfirmation, {
-            VerifyEmailConfirmation: {
-                email_sent_to: email,
-                code:otp,
-                hashed_code: hashedCode,
+            const response = await axios.post(apiEmailConfirmation, {
+                VerifyEmailConfirmation: {
+                    email_sent_to: email,
+                    code: otp,
+                    hashed_code: hashedCode,
+                }
+            }, {
+                headers: {
+                    'X-CSRFToken': csrfToken
+                }
+            });
+            console.log("test:", response);
+            setVerificationSuccess(true); // Set verification success
+            message.success("Verify successfully!");
+            // If verification is successful, call handleSubmitQRCode
+            if (response.status === 200) {
+                handleSubmitQRCode();
             }
-          }, {
-            headers: {
-              'X-CSRFToken': csrfToken
-            }
-          });
-          console.log("test:", response);
-          setVerificationSuccess(true); // Set verification success
-          message.success("Verify successfully!")
-          handleSubmitQRCode()
-
         } catch (error) {
-          if (error.response && error.response.status === 400) {
-            message.error("Incorrect OTP");
-          } else {
-            message.error("Failed to verify")
-          }
+            if (error.response && error.response.status === 400) {
+                message.error("Incorrect OTP");
+            } else {
+                message.error("Failed to verify");
+            }
         } finally {
-          setIsVerifying(false);
+            setIsVerifying(false);
         }
-      };
+    };
+    
 
 
   

@@ -3,6 +3,7 @@ import OnlineStreaming from "./OnlineStreaming";
 import Program from "./Program";
 import Speakers from "./Speakers";
 import './AirForce.css'
+import Footer from '../footer/Footer'
 
 export default function Index() {
   return (
@@ -11,6 +12,7 @@ export default function Index() {
         <Speakers />
         <Program />
         <OnlineStreaming />
+        <Footer />
     </div>
   )
 }

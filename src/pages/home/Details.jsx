@@ -1,5 +1,7 @@
 import { Image } from "antd"
-import noImage from '../../assets/no-image.svg'
+import image1 from '../../assets/home/image1.svg'
+import image2 from '../../assets/home/image2.svg'
+import image3 from '../../assets/home/image3.svg'
 import dot from '../../assets/dot.svg'
 import waveL from '../../assets/waves-l.svg'
 import waveR from '../../assets/waves-r.svg'
@@ -17,7 +19,7 @@ export default function Details() {
         </div>
 
         <div className="homeContext2Box1">
-             <Image  src={noImage} alt="image" className="image1" />
+             <Image  src={image1} alt="image" className="image1" />
              <img  src={waveL} alt="image" className="wave1" />
              <div className="detailBox">
                  <h3>Why be part of this event?</h3>
@@ -45,8 +47,8 @@ export default function Details() {
             Air Force.</p>
             <div className="homeContext2BoxImg">
              <img  src={waveR} alt="image" className="wave2" />
-             <Image  src={noImage} alt="image" className="image1" />
-             <Image  src={noImage} alt="image" className="image1" />
+             <Image  src={image2} alt="image" className="image1" />
+             <Image  src={image3} alt="image" className="image1" />
             </div>
         </div>
     </div>

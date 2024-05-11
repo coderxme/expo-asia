@@ -6,7 +6,9 @@ import Speakers from './pages/air-force-symposium/Speakers'
 import Program from './pages/air-force-symposium/Program'
 import OnlineStreaming from './pages/air-force-symposium/OnlineStreaming'
 import ContactUs from './pages/contact-us/ContactUs'
-import Index from './pages/air-force-symposium'
+import Index1 from './pages/air-force-symposium/index'
+import Index2 from './pages/defense-suppliers-summit/index'
+
 
 export default function App() {
   return (
@@ -20,7 +22,8 @@ export default function App() {
       <Route path='/program' element={<Program />} />
       <Route path='/online-streaming' element={<OnlineStreaming />} />
       <Route path='/contact-us' element={<ContactUs/>} />
-      <Route path='/air-force-symposium' element={<Index/>} />
+      <Route path='/air-force-symposium' element={<Index1/>} />
+      <Route path='/defense-suppliers-summit' element={<Index2/>} />
     </Routes>
     </>
   )

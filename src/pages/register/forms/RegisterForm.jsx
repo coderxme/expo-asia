@@ -10,6 +10,8 @@ import WaveBackground1 from '../../../assets/waves-l.svg'
 import WaveBackground2 from '../../../assets/waves-r.svg'
 import { useLocation } from 'react-router-dom';
 
+// import ReCAPTCHA from 'react-google-recaptcha';
+
 const { Option } = Select; // Destructure Option from Select
 
 const RegisterForm = () => {
@@ -19,25 +21,23 @@ const RegisterForm = () => {
 
   const user = location.state.user;
 
-  console.log("user:", location)
   const [uniqueID, setUniqueID] = useState("")
-
   const [formData, setFormData] = useState({
     invite_details:{
       custom_msg:"This is a test",
       event:1
     },
     participant_details:{
-      first_name: "",
-      last_name:"",
-      middle_name:"",
-      email: "",
-      designation:"",
-      company_org_other:"",
-      military_branch:"",
-      phone_no:"",
-      viber_no:"",
-      whatsapp_no:"",
+      first_name: "test",
+      last_name:"test",
+      middle_name:"test",
+      email: "genolauzureta@gmail.com",
+      designation:"test",
+      company_org_other:"test",
+      military_branch:"test",
+      phone_no:"0987654321",
+      viber_no:"0987654321",
+      whatsapp_no:"0987654321",
     }
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -45,6 +45,14 @@ const RegisterForm = () => {
   const [isSendingEmail, setIsSendingEmail] = useState(false);
   const [hashedCode, setHashedCode] = useState("");
   const [formType, setFormType] = useState(user); // State to track form type
+  // const [captchaValue, setCaptchaValue] = useState(null);
+  
+  // const handleCaptchaChange = (value) => {
+  //   setCaptchaValue(value);
+    
+  // };
+
+
 
   useEffect(() => {
     const fetchCompanyType = async () => {
@@ -60,6 +68,12 @@ const RegisterForm = () => {
 
   const handleRegisterSubmit = async () => {
     // Perform client-side validation
+
+    // if (!captchaValue) {
+    //   message.error("Please complete the reCAPTCHA");
+    //   return;
+    // }
+  
 
     if (formData.participant_details.last_name === '') {
       message.error("Last Name field cannot be empty");
@@ -172,6 +186,12 @@ const RegisterForm = () => {
 
   return (
     <div className='registerFormWrapper'>
+      <div className="absolute z-30">
+      {/* <ReCAPTCHA
+        sitekey=""
+        onChange={handleCaptchaChange}
+      /> */}
+      </div>
       <img src={WaveBackground1}  className='waveBackground1' alt="wave background" />
       <img src={WaveBackground2}  className='waveBackground2' alt="wave background" />
       {!isSendingEmail && !registrationSuccess && (
@@ -243,9 +263,14 @@ const RegisterForm = () => {
               <Input placeholder="Enter Name" value={formData.name} name="name" onChange={handleFormChange} />
             </Form.Item>
             
-              <Button defaultHoverBg="#000" type="primary" onClick={handleRegisterSubmit} disabled={isSubmitting}>
-                {isSubmitting ? "Submitting..." : "Register"}
-              </Button>
+            <Button
+              type="primary"
+              onClick={handleRegisterSubmit}
+              disabled={isSubmitting}
+              className={isSubmitting ? 'submitting' : ''}
+            >
+              {isSubmitting ? 'Submitting...' : 'Register'}
+            </Button>
           </Form>
         )}
       </div>
