@@ -1,0 +1,14 @@
+@tailwind components;
+
+@layer components {
+    .loginContainer{
+        background-image: url("../../assets/background.png");
+        @apply flex items-center flex-col pt-20 h-[100vh]
+        bg-cover
+    }
+
+    .loginForm{
+        @apply border w-[400px] p-5 rounded-lg bg-white
+        shadow-lg 
+    }
+}

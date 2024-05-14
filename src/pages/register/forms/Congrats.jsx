@@ -19,7 +19,7 @@ export default function Congrats({ qrCode }) {
 
  
   const handleFinish = () => {
-    navigate("/home");
+    navigate("/expo-asia/home");
   };
 
   return (

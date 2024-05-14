@@ -1,6 +1,7 @@
+import { Image } from 'antd';
 import image1 from '../../assets/blue-image1.svg';
 import image2 from '../../assets/blue-image2.svg';
-import noImage from '../../assets/no-image.svg';
+import image3 from '../../assets/page3/image1.svg';
 import CountDown from './CountDown';
 
 export default function Header() {
@@ -15,7 +16,7 @@ export default function Header() {
            operators to learn from the best practices of proponents and other Air Forces on how to effectively and 
           cost-efficiently operate and manage platforms currently utilized by the PAF.</p>
 
-           <img src={noImage} className='image3' />
+           <Image src={image3} className='image3' />
 
            <CountDown />
     </div>

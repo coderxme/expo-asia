@@ -18,46 +18,49 @@
 
     .airForceHeaderContainer .image3{
         box-shadow: -10px 10px 0px #fff;
-        @apply mt-10 w-[30%]
+        @apply mt-10 w-[500px]
+    }
+
+    .airForceHeaderContainer .ant-image-mask{
+        @apply mt-10 lg:w-[500px]
     }
 
     .airForceHeaderContainer h1{
         @apply border-4 p-3  font-montserrat font-bold
-        text-3xl mt-10
+        text-base md:text-2xl lg:text-3xl md:mt-10 text-center
     }
 
     .airForceHeaderContainer p{
         @apply font-opensans text-center mt-10 lg:w-[80%]
+        text-xs md:text-sm lg:text-base
     }
 
-    .countDownBox{
+    .af-countDownBox{
         @apply mt-10
     }
     
-    .countDownCard{
-        @apply flex gap-5 
+    .af-countDownCard{
+        @apply flex gap-2 md:gap-5 
     }
 
-    .countDownCard span{
-        @apply  flex flex-col items-center bg-[#ffffff13] w-[100px] p-3
+    .af-countDownCard span{
+        @apply  flex flex-col items-center bg-[#ffffff13]  w-[70px] lg:w-[100px] p-1 md:p-3
         border-b-4
     }
 
-    .countDownCard span h3{
+    .af-countDownCard span h3{
         @apply font-montserrat font-bold 
+        text-sm lg:text-lg
     }
-    .countDownCard span h5{
-        @apply font-opensans font-medium text-sm uppercase
+    .af-countDownCard span h5{
+        @apply font-opensans font-medium lg:text-sm uppercase
+        text-xs
     }
 
-    .countdownItem {
+    .af-countdownItem {
         transition: border-color 0.3s ease;
       }
-      
-      .countdownItem.active {
-        border-bottom: 2px solid #04f5d5; /* Change this to your desired color */
-      }
-      
+
 
 
     .speakersContainer{
@@ -75,7 +78,7 @@
 
     .speakersContainer h1{
         @apply border-4 border-[#27638D] p-3  font-montserrat font-bold
-        text-3xl mt-10 text-[#27638D] 
+        mt-10 text-[#27638D]   text-base md:text-2xl lg:text-3xl
     }
 
     .speakersContainer p{
@@ -99,7 +102,7 @@
 
     .programContainer h1{
         @apply border-4 p-3  font-montserrat font-bold
-        text-3xl mt-10 border-[#fff] text-white
+        md:mt-10 border-[#fff] text-white text-base md:text-2xl lg:text-3xl
     }
 
     .programImageBox{
@@ -107,12 +110,12 @@
     }
 
     .programImageBox .image{
-        @apply w-[600px]
+        @apply w-[300px] md:w-[600px]
     }
 
     
     .programImageBox .ant-image-mask{
-        @apply  w-[600px]
+        @apply  md:w-[600px]
     }
 
     .osContainer{
@@ -130,14 +133,19 @@
     }
 
     .osWrapper1 span h2{
-        @apply text-[#27638D] font-montserrat font-bold text-2xl
-        text-center mt-10 lg:mt-0 lg:text-start
+        @apply text-[#27638D] font-montserrat font-bold 
+        text-center mt-10 lg:mt-0 lg:text-start text-base md:text-2xl lg:text-3xl
+    }
+
+    .osWrapper1 span p{
+        @apply font-opensans text-xs md:text-sm
     }
 
     .osWrapper1 .registerLink{
         text-decoration: none;
         @apply flex items-center font-opensans text-[#27638D]
-        font-semibold border-[#27638D] border-2 p-3
+        font-semibold border-[#27638D] border-2 p-3 text-xs md:text-sm
+        hover:bg-[#27638D] hover:text-white duration-200
     }
 
     .osWrapper2{

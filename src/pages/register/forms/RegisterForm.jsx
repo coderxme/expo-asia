@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
-import { apiCompanyOrgType, apiEmailConfirmation, apiRegisterParticipantNoCaptcha } from '../../../api/api';
+import { apiCompanyOrgType, apiEmailConfirmation, apiRegisterCompanyNoCaptcha, apiRegisterParticipantNoCaptcha } from '../../../api/api';
 import axios from 'axios';
 import GetToken from '../../../context/GetToken';
 import { Button, Form, Input, message, Select } from 'antd'; // Import Select component from antd
@@ -9,7 +9,7 @@ import Loader from './Loader';
 import WaveBackground1 from '../../../assets/waves-l.svg'
 import WaveBackground2 from '../../../assets/waves-r.svg'
 import { useLocation } from 'react-router-dom';
-
+import {motion as m} from "framer-motion"
 // import ReCAPTCHA from 'react-google-recaptcha';
 
 const { Option } = Select; // Destructure Option from Select
@@ -40,6 +40,23 @@ const RegisterForm = () => {
       whatsapp_no:"0987654321",
     }
   });
+
+  const [companyFormData, setCompanyFormData] = useState({
+    invite_details:{
+      custom_msg:"This is a test",
+      event:1
+    },
+    company_details:{
+      name: "test",
+      address:"test",
+      phone:"test",
+      telephone:"test",
+      email: "genolauzureta@gmail.com",
+      website:"test",
+      is_exhibitor: true,
+      company_org_type:1,
+    }
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const [isSendingEmail, setIsSendingEmail] = useState(false);
@@ -66,7 +83,7 @@ const RegisterForm = () => {
     fetchCompanyType();
   }, []);
 
-  const handleRegisterSubmit = async () => {
+  const handleRegisterParticipantSubmit = async () => {
     // Perform client-side validation
 
     // if (!captchaValue) {
@@ -135,6 +152,35 @@ const RegisterForm = () => {
       setIsSubmitting(false);
     }
   };
+
+  const handleRegisterCompanySubmit = async () => {
+
+    if (companyFormData.company_details.name === '') {
+      message.error("Name field cannot be empty");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const response = await axios.post(apiRegisterCompanyNoCaptcha, companyFormData, {
+        headers: {
+          'X-CSRFToken': csrfToken
+        }
+      });
+      console.log("test:", response);
+      setUniqueID(response.data.data.unique_id)
+      setRegistrationSuccess(true); 
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.error && error.response.data.error.participant_details && error.response.data.error.participant_details.email) {
+        const errorMessage = error.response.data.error.participant_details.email[0];
+        message.error(errorMessage);
+      } else {
+        message.error("Failed to register");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   
 
   const sendEmailConfirmation = async (emailToSend) => {
@@ -166,8 +212,14 @@ const RegisterForm = () => {
     }
   }, [registrationSuccess, formData.email]);
 
+  useEffect(() => {
+    if (registrationSuccess && companyFormData.company_details.email) {
+      sendEmailConfirmation(companyFormData.company_details.email);
+    }
+  }, [registrationSuccess, companyFormData.email]);
 
-  const handleFormChange = (e) => {
+
+  const handleFormChangeParticipant = (e) => {
     const { name, value } = e.target;
     const updatedFormData = { ...formData };
     // Check if the field belongs to the participant_details object
@@ -182,10 +234,31 @@ const RegisterForm = () => {
     }
     setFormData(updatedFormData);
   };
+
+
+  const handleFormChangeCompany = (e) => {
+    const { name, value } = e.target;
+    const updatedFormData = { ...companyFormData };
+    if (name.startsWith('company_details.')) {
+      // Extract the nested field name
+      const nestedFieldName = name.split('.')[1];
+      // Update the nested field
+      updatedFormData.company_details[nestedFieldName] = value;
+    } else {
+      // Update regular fields
+      updatedFormData[name] = value;
+    }
+    setCompanyFormData(updatedFormData);
+  };
+  
   
 
   return (
-    <div className='registerFormWrapper'>
+    <m.div 
+    initial={{ opacity:0 }}
+   animate={{ opacity:1 }}
+   transition={{ duration:0.75, ease: "easeOut" }}
+    className='registerFormWrapper'>
       <div className="absolute z-30">
       {/* <ReCAPTCHA
         sitekey=""
@@ -210,48 +283,48 @@ const RegisterForm = () => {
         {formType === 'visitor' && (
           <Form layout="vertical">
             <Form.Item label="Last Name" required>
-              <Input placeholder="Enter Last Name"  value={formData.participant_details.last_name} name="participant_details.last_name" onChange={handleFormChange}/>
+              <Input placeholder="Enter Last Name"  value={formData.participant_details.last_name} name="participant_details.last_name" onChange={handleFormChangeParticipant}/>
             </Form.Item>
             <Form.Item label="First Name" required>
-              <Input placeholder="Enter First Name" value={formData.participant_details.first_name} name="participant_details.first_name" onChange={handleFormChange} />
+              <Input placeholder="Enter First Name" value={formData.participant_details.first_name} name="participant_details.first_name" onChange={handleFormChangeParticipant} />
             </Form.Item>
             <Form.Item label="Middle Name">
-              <Input placeholder="Enter Middle Name" value={formData.participant_details.middle_name} name="participant_details.middle_name" onChange={handleFormChange} />
+              <Input placeholder="Enter Middle Name" value={formData.participant_details.middle_name} name="participant_details.middle_name" onChange={handleFormChangeParticipant} />
             </Form.Item>
 
             <Form.Item label="Designation" required>
-              <Input placeholder="Enter Designation" value={formData.participant_details.designation} name="participant_details.designation" onChange={handleFormChange} />
+              <Input placeholder="Enter Designation" value={formData.participant_details.designation} name="participant_details.designation" onChange={handleFormChangeParticipant} />
             </Form.Item>
 
             <Form.Item label="Organization/Company Name" required>
-              <Input placeholder="Enter Organization/Company Name" value={formData.participant_details.company_org_other} name="participant_details.company_org_other" onChange={handleFormChange} />
+              <Input placeholder="Enter Organization/Company Name" value={formData.participant_details.company_org_other} name="participant_details.company_org_other" onChange={handleFormChangeParticipant} />
             </Form.Item>
 
             <Form.Item label="Military Branch of Service" required>
-              <Input placeholder="Enter Military Branch of Service" value={formData.participant_details.military_branch} name="participant_details.military_branch" onChange={handleFormChange} />
+              <Input placeholder="Enter Military Branch of Service" value={formData.participant_details.military_branch} name="participant_details.military_branch" onChange={handleFormChangeParticipant} />
             </Form.Item>
 
             <Form.Item label="Mobile No" required>
-              <Input placeholder="Enter Mobile No" value={formData.participant_details.phone_no} name="participant_details.phone_no" onChange={handleFormChange} />
+              <Input placeholder="Enter Mobile No" value={formData.participant_details.phone_no} name="participant_details.phone_no" onChange={handleFormChangeParticipant} />
             </Form.Item>
 
 
             <Form.Item label="Viber No" required>
-              <Input placeholder="Enter Viber No" value={formData.participant_details.viber_no} name="participant_details.viber_no" onChange={handleFormChange} />
+              <Input placeholder="Enter Viber No" value={formData.participant_details.viber_no} name="participant_details.viber_no" onChange={handleFormChangeParticipant} />
             </Form.Item>
 
        
 
             <Form.Item label="WhatsApp No" required>
-              <Input placeholder="Enter WhatsApp No" value={formData.participant_details.whatsapp_no} name="participant_details.whatsapp_no" onChange={handleFormChange} />
+              <Input placeholder="Enter WhatsApp No" value={formData.participant_details.whatsapp_no} name="participant_details.whatsapp_no" onChange={handleFormChangeParticipant} />
             </Form.Item>
 
             <Form.Item label="Email address" required>
-              <Input placeholder="Enter Email address" value={formData.participant_details.email} name="participant_details.email" onChange={handleFormChange} />
+              <Input placeholder="Enter Email address" value={formData.participant_details.email} name="participant_details.email" onChange={handleFormChangeParticipant} />
             </Form.Item>
 
             <Form.Item >
-              <Button  type="primary" onClick={handleRegisterSubmit} disabled={isSubmitting}>
+              <Button  type="primary" onClick={handleRegisterParticipantSubmit} disabled={isSubmitting}>
                 {isSubmitting ? "Submitting..." : "Register"}
               </Button>
             </Form.Item>
@@ -260,12 +333,29 @@ const RegisterForm = () => {
         {formType === 'exhibitor' && ( 
           <Form layout="vertical">
             <Form.Item label="Name">
-              <Input placeholder="Enter Name" value={formData.name} name="name" onChange={handleFormChange} />
+              <Input placeholder="Enter Name" value={formData.name} name="name" onChange={handleFormChangeCompany} />
             </Form.Item>
-            
+            <Form.Item label="Address">
+              <Input placeholder="Enter Address" value={formData.address} name="address" onChange={handleFormChangeCompany} />
+            </Form.Item>
+            <Form.Item label="Phone">
+              <Input placeholder="Enter Phone" value={formData.phone} name="phone" onChange={handleFormChangeCompany} />
+            </Form.Item>
+            <Form.Item label="Telephone">
+              <Input placeholder="Enter Telephone" value={formData.telephone} name="telephone" onChange={handleFormChangeCompany} />
+            </Form.Item>
+            <Form.Item label="Email">
+              <Input placeholder="Enter Email" value={formData.email} name="email" onChange={handleFormChangeCompany} />
+            </Form.Item>
+            <Form.Item label="Website">
+              <Input placeholder="Enter Website" value={formData.website} name="website" onChange={handleFormChangeCompany} />
+            </Form.Item>
+            {/* <Form.Item label="Company Organization Type">
+              <Input placeholder="Enter Company Organization Type" value={formData.website} name="website" onChange={handleFormChangeCompany} />
+            </Form.Item> */}
             <Button
               type="primary"
-              onClick={handleRegisterSubmit}
+              onClick={handleRegisterCompanySubmit}
               disabled={isSubmitting}
               className={isSubmitting ? 'submitting' : ''}
             >
@@ -282,7 +372,7 @@ const RegisterForm = () => {
          uniqueID={uniqueID} 
          csrfToken={csrfToken}
          />}
-    </div>
+    </m.div>
   );
 };
 

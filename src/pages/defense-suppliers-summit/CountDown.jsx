@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import  { useState, useEffect } from 'react';
 
+
 function DateTimeConverter({ dateString }) {
   const [timeRemaining, setTimeRemaining] = useState(null);
 
@@ -34,9 +35,9 @@ function DateTimeConverter({ dateString }) {
   }, [dateString]);
 
   return (
-    <div className='countDownBox'>
+    <div className='dds-countDownBox'>
       {timeRemaining && (
-        <div className='countDownCard'>
+        <div className='dds-countDownCard'>
             <span>
               <h3>{timeRemaining.days}</h3> 
               <h5>Days</h5>

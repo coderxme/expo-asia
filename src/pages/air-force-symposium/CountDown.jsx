@@ -34,9 +34,9 @@ function DateTimeConverter({ dateString }) {
   }, [dateString]);
 
   return (
-    <div className='countDownBox'>
+    <div className='af-countDownBox'>
       {timeRemaining && (
-        <div className='countDownCard'>
+        <div className='af-countDownCard'>
             <span>
               <h3>{timeRemaining.days}</h3> 
               <h5>Days</h5>

@@ -38,10 +38,10 @@ function BasicExample() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" >
           <Nav className="navbarLinkBox">
-            <Nav.Link as={NavLink} onClick={() => { window.scroll(0, 0) }}  to="/home" activeClassName="active">Home</Nav.Link>
+            <Nav.Link as={NavLink} onClick={() => { window.scroll(0, 0) }}  to="/expo-asia/home" activeClassName="active">Home</Nav.Link>
 
          
-            <Nav.Link as={NavLink} className='linkMenuBox' onClick={handleMenu1} to="/air-force-symposium" activeClassName="active">
+            <Nav.Link as={NavLink} className='linkMenuBox' onClick={handleMenu1} to="/expo-asia/air-force-symposium" activeClassName="active">
               <span className=''> Air Force Symposium <FaAngleDown/></span>   
               {showMenu1 ? (
               <div className='linkMenu'>
@@ -53,13 +53,13 @@ function BasicExample() {
             </Nav.Link>
 
 
-            <Nav.Link as={NavLink} className='linkMenuBox' onClick={handleMenu2} to="/defense-suppliers-summit" activeClassName="active">
+            <Nav.Link as={NavLink} className='linkMenuBox' onClick={handleMenu2} to="/expo-asia/defense-suppliers-summit" activeClassName="active">
               <span className=''>Defense Suppliers Summit <FaAngleDown/></span>   
               {showMenu2 ? (
               <div className='linkMenu'>
-                  <a href="#speakers">Speakers</a>
-                  <a href="#program">Program</a>
-                  <a href="#online-streaming">Meetings</a>
+                  <HashLink to="#speakers">Speakers</HashLink>
+                  <HashLink to="#program">Program</HashLink>
+                  <HashLink to="#online-streaming">Meetings</HashLink>
              </div>
             ):null}
             </Nav.Link>
@@ -68,11 +68,11 @@ function BasicExample() {
 
             
             <NavDropdown   onClick={() => { window.scroll(0, 0) }}  title="Expo" id="basic-nav-dropdown">
-              <NavDropdown.Item as={NavLink} to="/sponsors-partners" activeClassName="active">Sponsors/Partners</NavDropdown.Item>
-              <NavDropdown.Item as={NavLink} to="/visitors" activeClassName="active">Visitors</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/expo-asia/sponsors-partners" activeClassName="active">Sponsors/Partners</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/expo-asia/visitors" activeClassName="active">Visitors</NavDropdown.Item>
             </NavDropdown>
 
-            <Nav.Link  onClick={() => { window.scroll(0, 0) }}  as={NavLink} to="/contact-us" activeClassName="active">Contact Us</Nav.Link>
+            <Nav.Link  onClick={() => { window.scroll(0, 0) }}  as={NavLink} to="/expo-asia/contact-us" activeClassName="active">Contact Us</Nav.Link>
 
           </Nav>
         </Navbar.Collapse>

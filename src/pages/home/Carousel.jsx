@@ -8,16 +8,16 @@ const App = () => (
   <Carousel autoplay>
     <div className='carouselBox carouselBox1'>
         <img src={image} alt="" />
-        <p>Join the biggest Pre-Anniversary celebration of the Philippine Air Force <br />
+        <p >Join the biggest Pre-Anniversary celebration of the Philippine Air Force <br />
         June 13-14, 2024 | Marriott Grand Ballroom Manila<br />
          <b>Air Force Symposium & Expo 2024</b>
         </p>
 
         <div className='carouselBtn'>
-           <Link to={'/register'}  state={{ user: "visitor" }}>
+           <Link to={'/expo-asia/register'}  state={{ user: "visitor" }}>
               <button>Register as Visitor <GrNext/> </button>
            </Link>
-           <Link to={'/register'}  state={{ user: "exhibitor" }}>
+           <Link to={'/expo-asia/register'}  state={{ user: "exhibitor" }}>
             <button>Register as Sponsor/Exhibitor <GrNext/></button>
            </Link>
 
@@ -31,10 +31,10 @@ const App = () => (
         </p>
 
         <div className='carouselBtn'>
-           <Link to={'/register'} state={{ user: "visitor" }}>
+           <Link to={'/expo-asia/register'} state={{ user: "visitor" }}>
             <button>Register as Visitor <GrNext/> </button>
             </Link>
-            <Link to={'/register'} state={{ user: "exhibitor" }}>
+            <Link to={'/expo-asia/register'} state={{ user: "exhibitor" }}>
               <button>Register as Sponsor/Exhibitor <GrNext/></button>
             </Link>
         </div>
@@ -47,10 +47,10 @@ const App = () => (
         </p>
 
         <div className='carouselBtn'>
-           <Link to={'/register'} state={{ user: "visitor" }}>
+           <Link to={'/expo-asia/register'} state={{ user: "visitor" }}>
               <button>Register as Visitor <GrNext/> </button>
             </Link>
-            <Link to={'/register'}  state={{ user: "exhibitor" }}>
+            <Link to={'/expo-asia/register'}  state={{ user: "exhibitor" }}>
               <button>Register as Sponsor/Exhibitor <GrNext/></button>
             </Link>
         </div>

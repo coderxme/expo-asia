@@ -73,12 +73,12 @@
 
     .homeContext2Box1 .image1{
         box-shadow:-10px 10px #11385D;
-        @apply w-[600px] 
+        @apply lg:w-[600px] 
         
     }
 
     .homeContext2Box1 .ant-image-mask{
-        @apply w-[600px] 
+        @apply lg:w-[600px] 
 
     }
 

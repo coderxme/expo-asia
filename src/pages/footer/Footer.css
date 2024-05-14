@@ -3,7 +3,7 @@
 
 @layer components{
     .footerContainer{
-        @apply bg-[#F1F5F9] font-montserrat pt-20 
+        @apply bg-[#F1F5F9] font-montserrat pt-10 lg:pt-20  text-[#27638D]
     }
 
     .footerContainer img{
@@ -11,28 +11,30 @@
     }
 
     .footerWrapper{
-        @apply flex justify-around flex-col items-center gap-10
-        lg:flex-row
+        @apply flex justify-around flex-col-reverse items-center gap-10
+        md:flex-row
     }
 
     .footerBox{
-        @apply flex
+        @apply flex lg:gap-10 flex-col  lg:flex-row 
+        px-10
     }
 
     .footerBox span{
-        @apply w-[200px]
+        @apply lg:w-[200px]
     }
 
     .footerBox span h3{
-        @apply font-bold text-lg
+        @apply font-bold text-sm lg:text-lg
     }
 
     .footerBox span p{
-        @apply text-sm font-medium flex items-center gap-2
+        @apply font-medium flex items-center gap-2
+        text-xs md:text-sm 
     }
 
     .footerBox .span2 p{
-        @apply text-sm font-medium flex  gap-2 items-start 
+        @apply text-xs md:text-sm font-medium flex  gap-2 items-start 
     }
 
     .footerBox .span2 svg{
@@ -41,5 +43,12 @@
 
     .footerDetail{
         @apply bg-[#11385D] text-white mb-0 p-5 text-center mt-20
+        text-xs md:text-sm
+    }
+
+    
+  
+    .footerSocial p a svg{
+        @apply text-[#27638D] text-xl
     }
 }

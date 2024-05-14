@@ -10,7 +10,7 @@ export default function Details() {
   return (
     <div className="homeContext2">
         <div className="homeContext2Header">
-           <h2>Overview</h2>
+           <h2 className="animate__animated animate__bounce">Overview</h2>
            <p>As part of the 77th Philippine Air Force Pre-Anniversary activity, 
             we are holding the <b>Air Force Symposium & Expo</b> on <b>June 13-14, 2024</b> at
             the <b>Marriott Grand Ballroom Manila.</b> <br /> The event is a dynamic exchange

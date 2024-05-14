@@ -17,39 +17,93 @@
 
     .dssHeaderContainer .image3{
         box-shadow: -10px 10px 0px #fff;
-        @apply mt-10 w-[30%]
+        @apply mt-10 w-[500px]
+    }
+
+    .dssHeaderContainer .ant-image-mask{
+        @apply mt-10 lg:w-[500px]
     }
 
     .dssHeaderContainer h1{
         @apply border-4 p-3  font-montserrat font-bold
-        text-3xl mt-10
+        text-base md:text-2xl lg:text-3xl md:mt-10 text-center
     }
 
     .dssHeaderContainer p{
         @apply font-opensans text-center mt-10 lg:w-[80%]
+        text-xs md:text-sm lg:text-base
     }
 
-    .countDownBox{
+    .dds-countDownBox{
         @apply mt-10
     }
     
-    .countDownCard{
+    .dds-countDownCard{
         @apply flex gap-5 
     }
 
-    .countDownCard span{
-        @apply  flex flex-col items-center bg-[#ffffff13] w-[100px] p-3
+    .dds-countDownCard span{
+        @apply  flex flex-col items-center bg-[#ffffff13]  w-[70px] lg:w-[100px] p-1 md:p-3
         border-b-4
     }
 
-    .countDownCard span h3{
+    .dds-countDownCard span h3{
         @apply font-montserrat font-bold 
+        text-sm lg:text-lg
     }
-    .countDownCard span h5{
-        @apply font-opensans font-medium text-sm uppercase
+    
+    .dds-countDownCard span h5{
+        @apply font-opensans font-medium lg:text-sm uppercase
+        text-xs
     }
 
-    .countdownItem {
+    .dds-countdownItem {
         transition: border-color 0.3s ease;
       }
+
+      
+    .dds-speakersContainer{
+        @apply flex flex-col items-center p-10 pt-20 pb-20 relative
+    }
+
+    .dds-speakersContainer .image1{
+        @apply w-[70%]
+    }
+
+    .dds-speakersContainer .image2{
+        @apply absolute -z-10 top-[30%]
+    }
+
+
+    .dds-speakersContainer h1{
+        @apply border-4 border-[#27638D] p-3  font-montserrat font-bold
+        mt-10 text-[#27638D]   text-base md:text-2xl lg:text-3xl
+    }
+
+    .dds-speakersContainer p{
+        @apply bg-[#E2EEF3]  text-center p-2 w-full lg:w-[70%]
+        border-b-2 font-opensans font-bold text-[#334155] my-10 
+    }
+
+    .tabsContainer{
+        @apply w-full flex flex-col items-center gap-10
+    }
+
+    .tabsBtnBox{
+        @apply w-full flex  lg:w-[70%] mt-10
+    }
+
+    .tabsBtnBox button{
+        @apply w-full p-2  border-b-2 text-[#334155] font-semibold text-sm
+    }
+
+    .tabsBtnBox button b{
+        @apply text-[#27638D] font-bold 
+    }
+
+
+    .activeTab{
+        @apply bg-[#E2EEF3]   text-black  
+
+    }
 }

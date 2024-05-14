@@ -10,10 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.3.7",
+    "animate.css": "^4.1.1",
     "antd": "^5.17.0",
     "axios": "^1.6.8",
     "base64-js": "^1.5.1",
     "bootstrap": "^5.3.3",
+    "framer-motion": "^11.1.9",
+    "js-cookie": "^3.0.5",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
     "react-dom": "^18.2.0",
@@ -23,6 +27,7 @@
     "react-router-hash-link": "^2.4.3"
   },
   "devDependencies": {
+    "-": "^0.0.1",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
@@ -31,8 +36,20 @@
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
+    "http-proxy-middleware": "^3.0.0",
+    "install": "^0.13.0",
+    "npm": "^10.7.0",
+    "or": "^0.2.0",
     "postcss": "^8.4.38",
+    "save-dev": "^0.0.1-security",
     "tailwindcss": "^3.4.3",
     "vite": "^5.2.0"
+  },
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:8080",
+      "changeOrigin": true
+    }
   }
+  
 }

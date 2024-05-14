@@ -3,6 +3,9 @@ import './Footer.css'
 import { BsTelephoneFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
+import { FaFacebook } from "react-icons/fa";
+import { RiInstagramFill } from "react-icons/ri";
+import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   return (
@@ -23,6 +26,21 @@ export default function Footer() {
                 Sapphire Road, Ortigas Centre,
                 Pasig City 1600 Philippines
                 </p>
+             </span>
+
+             <span className='footerSocial'>
+                <h3>Socials</h3>
+               <p>
+               <a href="https://www.facebook.com/profile.php?id=100088332602409" target='_blank'>
+                   <FaFacebook/>
+                 </a>
+                <a href="https://www.instagram.com/expoasiainc/" target='_blank'>
+                   <RiInstagramFill />
+                </a>
+                <a href="https://twitter.com/expoasiainc" target='_blank'>
+                   <FaXTwitter/>
+                </a>
+               </p>
              </span>
           </div>
         </div>

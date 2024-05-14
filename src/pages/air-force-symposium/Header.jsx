@@ -1,6 +1,7 @@
+import { Image } from 'antd';
 import image1 from '../../assets/blue-image1.svg';
 import image2 from '../../assets/blue-image2.svg';
-import noImage from '../../assets/no-image.svg';
+import image3 from '../../assets/page2/image1.svg';
 import CountDown from './CountDown';
 
 export default function Header() {
@@ -14,7 +15,7 @@ export default function Header() {
            security environment. It aims to inform and update policymakers on the emerging 
            threats in various security domains.</p>
 
-           <img src={noImage} className='image3' />
+           <Image src={image3} className='image3' />
 
            <CountDown />
     </div>
