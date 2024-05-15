@@ -6,13 +6,14 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FaFacebook } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
 import { FaXTwitter } from "react-icons/fa6";
+import ScrollAnimation from 'react-animate-on-scroll';
 
 export default function Footer() {
   return (
     <div className='footerContainer'>
+        <ScrollAnimation animateIn="fadeIn">
         <div className="footerWrapper">
           <img src={Logo} alt="" />
-
           <div className="footerBox">
              <span>
                 <h3>Contact Us</h3>
@@ -44,6 +45,7 @@ export default function Footer() {
              </span>
           </div>
         </div>
+        </ScrollAnimation>
         <p className='footerDetail'>Copyright 2024 | All Rights Reserved | Expo Asia</p>
     </div>
   )

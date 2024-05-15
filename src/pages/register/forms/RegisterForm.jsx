@@ -28,16 +28,16 @@ const RegisterForm = () => {
       event:1
     },
     participant_details:{
-      first_name: "test",
-      last_name:"test",
-      middle_name:"test",
-      email: "genolauzureta@gmail.com",
-      designation:"test",
-      company_org_other:"test",
-      military_branch:"test",
-      phone_no:"0987654321",
-      viber_no:"0987654321",
-      whatsapp_no:"0987654321",
+      first_name: "",
+      last_name:"",
+      middle_name:"",
+      email: "",
+      designation:"",
+      company_org_other:"",
+      military_branch:"",
+      phone_no:"",
+      viber_no:"",
+      whatsapp_no:"",
     }
   });
 
@@ -47,12 +47,12 @@ const RegisterForm = () => {
       event:1
     },
     company_details:{
-      name: "test",
-      address:"test",
-      phone:"test",
-      telephone:"test",
-      email: "genolauzureta@gmail.com",
-      website:"test",
+      name: "",
+      address:"",
+      phone:"",
+      telephone:"",
+      email: "",
+      website:"",
       is_exhibitor: true,
       company_org_type:1,
     }

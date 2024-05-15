@@ -1,0 +1,196 @@
+@tailwind components;
+
+
+@layer components{
+
+    .expoHeader{
+        background-image: url("../../assets/expo/background.svg");
+        @apply  bg-cover
+        flex flex-col items-center  text-[#334155] py-10 lg:h-[80vh]
+    }
+
+    .expoHeader h1{
+        @apply text-[#27638D] border-[#27638D] border-4
+        p-1 font-montserrat font-semibold text-[2rem]
+    }
+
+    .expoHeader p{
+        @apply font-opensans text-center text-sm mt-10
+        font-medium
+    }
+
+    .expoHeader img{
+        @apply lg:w-[35%]
+    }
+
+
+    .expoHeader .btn{
+        @apply text-[#27638D] border-[#27638D] border-2
+        p-2 font-montserrat font-semibold text-sm rounded-none px-2
+        flex items-center gap-2 hover:bg-[#27638D] hover:text-white
+        duration-200 mt-5 
+    }
+
+    .sponsorsContainer{
+        background-image: url("../../assets/expo/background2.svg");
+        background-size:cover;
+        @apply  flex flex-col items-center text-white py-20
+    }
+
+    .sponsorsContainer h1{
+        @apply font-montserrat text-[2rem] border-4 p-1 mt-10
+    }
+
+    .sponsorsContainer p{
+        @apply font-opensans text-sm font-medium mt-5
+        text-center
+    }
+
+    .sponsorsContainer img{
+        @apply w-[60%] mt-5
+    }
+
+    .featuredContainer{
+        @apply flex flex-col items-center py-20 bg-[#F1F5F9]
+    }
+
+    .featuredContainer h1{
+        @apply  text-[#27638D] 
+        p-1 font-montserrat font-bold text-[2rem]
+    }
+
+    .featuredContainer img{
+        @apply w-[60%] mt-10
+    }
+
+    .visitorsContainer{
+        @apply flex flex-col items-center py-20 justify-center
+    }
+
+    .visitorsContainer h1{
+        @apply text-[#27638D] border-[#27638D] border-4
+        p-1 font-montserrat font-bold text-[2rem] mb-10
+    }
+
+    .visitorsContainer .ant-image{
+        @apply w-[60%] 
+    }
+
+    .visitorsContainer .ant-image-mask{
+        @apply w-[100%] 
+
+    }
+
+    
+    .accomodationContainer{
+        @apply flex flex-col items-center py-20 bg-[#F1F5F9]
+        justify-center
+    }
+
+    .accomodationContainer h1{
+        @apply  text-[#27638D] 
+        p-1 font-montserrat font-bold text-[2rem]
+    }
+
+    .accomodationContainer p {
+        @apply font-opensans text-sm font-normal
+        text-center
+    }
+
+    .accomodationBoxWrapper{
+        @apply flex flex-wrap gap-5 lg:w-[80%]
+        items-center justify-center mt-10
+    }
+
+    .accomodationBox{
+        box-shadow: 0 0 10px #00000019;
+        @apply flex bg-white font-opensans p-5 w-[600px]
+        gap-5
+    }
+
+   
+
+    .accomodationBox span{
+        @apply flex flex-col items-start
+    }
+    .accomodationBox span h3{
+        @apply text-[#11385D] text-lg font-bold 
+    }
+
+    .accomodationBox span h4{
+        @apply bg-[#11385D] text-white text-sm p-1 font-normal
+    }
+
+    .accomodationBox .ant-image{
+        @apply h-full w-[200px]
+    }
+
+    .accomodationBox .ratings{
+        @apply flex items-center gap-1
+    }
+
+    .accomodationBox .ratings span{
+        @apply mr-1 text-gray-400 text-sm
+    }
+
+    .ratings .icons{
+        @apply flex gap-1
+    }
+
+    .accomodationBox .btnBox{
+        @apply flex
+    }
+
+    .accomodationBox .btnBox button{
+        @apply text-xs mr-2 text-[#00A7C8] bg-[#DFF9FF] font-opensans
+        p-1 rounded-full px-2 
+    }
+
+    .accomodationBox .text1{
+        @apply text-sm mt-2 
+    }
+
+
+    .accomodationBox .btnCheck{
+        text-decoration: none;
+        @apply text-[#27638D] border-[#27638D] border-2
+        font-montserrat font-bold text-xs flex items-center gap-1 p-1 
+        mt-3 hover:bg-[#27638D] hover:text-white duration-200
+    }
+
+
+    .officialContainer{
+        @apply bg-white p-10 flex items-center justify-center
+    }
+
+    .officialWrapper{
+        @apply flex lg:w-[70%] mt-10
+    }
+
+    .officialBox {
+        @apply flex flex-col  
+    }
+
+    .officialImg{
+        @apply h-[400px] overflow-hidden
+    }
+
+    .officialImg .ant-image{
+        @apply h-[400px] 
+    }
+
+   
+    .officialDetail{
+        @apply flex flex-col font-opensans p-5 lg:p-20
+        h-[400px] 
+    }
+
+    .officialDetail h1{
+        @apply text-[#27638D] text-2xl font-bold
+        font-montserrat
+    }
+
+    .officialDetail p{
+        @apply text-justify text-xs lg:text-sm
+    }
+}

@@ -2,11 +2,13 @@ import { GrNext } from "react-icons/gr";
 import {  Link } from 'react-router-dom'
 import linestreamImage from '../../assets/livestream-image.svg'
 import CountDown from './CountDown'
+import ScrollAnimation from 'react-animate-on-scroll';
 
 export default function OnlineStreaming() {
   return (
     <div className="osContainer" id="online-streaming">
        <div className="osWrapper1">
+      <ScrollAnimation animateIn="swing">
          <span>
           <h2>Watch the <br />
             Air Force Symposium Live</h2>
@@ -14,7 +16,9 @@ export default function OnlineStreaming() {
               Please register to watch the event.</p>
             <Link onClick={() => { window.scroll(0, 0) }} to={"/expo-asia/home"} className="registerLink">Register for access <GrNext /> </Link>
          </span>
+         </ScrollAnimation>
        </div>
+      <ScrollAnimation animateIn="bounceIn">
        <div className="osWrapper2">
          <img src={linestreamImage} alt="" />
          <div className="absolute flex flex-col items-start">
@@ -22,6 +26,7 @@ export default function OnlineStreaming() {
              <CountDown />
          </div>
        </div>
+       </ScrollAnimation>
     </div>
   )
 }

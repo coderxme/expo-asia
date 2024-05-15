@@ -30,7 +30,7 @@
     .carouselBox button{
         @apply border p-2 md:p-3 border-[#11385D] font-bold text-xs sm:text-sm 
         text-[#11385D] w-[200px]  md:w-[250px] hover:bg-[#11385D] hover:text-white 
-        flex items-center justify-center gap-1
+        flex items-center justify-center gap-1 h-[50px]
     }
 
     .homeContext2{
@@ -89,13 +89,13 @@
 
 
     .homeContext2Box2{
-        @apply flex flex-col items-center pt-10 pb-36
+        @apply flex flex-col items-center pt-10 pb-36 
     }
 
     .homeContext2Box2 p{
         @apply  text-[rgb(71,85,105)] font-medium
         text-sm lg:text-base p-10  lg:p-16 text-justify lg:text-center
-        lg:w-[80%]
+        lg:w-[80%] 
     }
 
 

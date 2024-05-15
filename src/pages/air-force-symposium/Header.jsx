@@ -17,6 +17,8 @@ export default function Header() {
 
            <Image src={image3} className='image3' />
 
+           
+
            <CountDown />
     </div>
   )

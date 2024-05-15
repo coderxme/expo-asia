@@ -53,7 +53,7 @@
 
       .linkMenu{
         box-shadow:0 0 10px #0000003c;
-        @apply absolute bg-white w-full 
+        @apply absolute bg-white w-[150px]
         flex flex-col mt-3 font-opensans z-10
       }
 
