@@ -3,10 +3,19 @@ import {  Carousel } from 'antd';
 import image from '../../assets/carouselImage.svg'
 import { GrNext } from "react-icons/gr";
 import { Link } from 'react-router-dom';
+import {motion as m} from "framer-motion"
 
 const App = () => (
   <Carousel autoplay>
-    <div className='carouselBox carouselBox1'>
+    <m.div
+     variants={{
+      hidden: { opacity: 0, y:75 },
+      visible: { opacity: 1, y:0 },
+    }}
+    initial="hidden"
+    animate="visible"
+    transition={{ duration: 0.5, delay: 0.50 }}
+    className='carouselBox carouselBox1'>
         <img src={image} alt="" />
         <p >Join the biggest Pre-Anniversary celebration of the Philippine Air Force <br />
         June 13-14, 2024 | Marriott Grand Ballroom Manila<br />
@@ -22,7 +31,7 @@ const App = () => (
            </Link>
 
         </div>
-    </div>
+    </m.div>
     <div className='carouselBox carouselBox1'>
         <img src={image} alt="" />
         <p>Join the biggest Pre-Anniversary celebration of the Philippine Air Force <br />

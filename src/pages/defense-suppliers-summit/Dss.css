@@ -3,8 +3,24 @@
 
 @layer components {
     .dssHeaderContainer{
-        background-image: url("../../assets/blue-background.svg");
+        /* background-image: url("../../assets/blue-background.svg"); */
+        background: linear-gradient(98deg, #27638d, #6ba1be, #386076);
+        background-size: 600% 600%;
+    
+        -webkit-animation: AnimationName 18s ease infinite;
+        animation: AnimationName 18s ease infinite;
         @apply lg:h-[90vh] flex flex-col items-center p-10 text-white  
+    }
+
+    @-webkit-keyframes AnimationName {
+        0%{background-position:0% 77%}
+        50%{background-position:100% 24%}
+        100%{background-position:0% 77%}
+    }
+    @keyframes AnimationName {
+        0%{background-position:0% 77%}
+        50%{background-position:100% 24%}
+        100%{background-position:0% 77%}
     }
 
     .dssHeaderContainer .image1{

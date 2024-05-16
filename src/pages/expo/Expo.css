@@ -6,21 +6,21 @@
     .expoHeader{
         background-image: url("../../assets/expo/background.svg");
         @apply  bg-cover
-        flex flex-col items-center  text-[#334155] py-10 lg:h-[80vh]
+        flex flex-col items-center  text-[#334155] py-10 lg:h-[80vh] 
     }
 
     .expoHeader h1{
         @apply text-[#27638D] border-[#27638D] border-4
-        p-1 font-montserrat font-semibold text-[2rem]
+        p-1 font-montserrat font-semibold text-xl lg:text-[2rem] 
     }
 
     .expoHeader p{
-        @apply font-opensans text-center text-sm mt-10
+        @apply font-opensans text-center px-10 lg:px-10 text-xs lg:text-sm mt-10
         font-medium
     }
 
     .expoHeader img{
-        @apply lg:w-[35%]
+        @apply w-[300px] lg:w-[35%] 
     }
 
 
@@ -32,22 +32,47 @@
     }
 
     .sponsorsContainer{
-        background-image: url("../../assets/expo/background2.svg");
         background-size:cover;
+        background: linear-gradient(98deg, #27638d, #6ba1be, #386076);
+        background-size: 600% 600%;
+    
+        -webkit-animation: AnimationName 18s ease infinite;
+        animation: AnimationName 18s ease infinite;
         @apply  flex flex-col items-center text-white py-20
+        relative
+    }
+
+    .sponsorsContainer .image1{
+        @apply absolute top-0 right-0 -mt-20 w-[35%]
+    }
+
+    .sponsorsContainer .image2{
+        @apply absolute left-0 bottom-0 w-[35%]
+    }
+
+
+        @-webkit-keyframes AnimationName {
+        0%{background-position:0% 77%}
+        50%{background-position:100% 24%}
+        100%{background-position:0% 77%}
+    }
+    @keyframes AnimationName {
+        0%{background-position:0% 77%}
+        50%{background-position:100% 24%}
+        100%{background-position:0% 77%}
     }
 
     .sponsorsContainer h1{
-        @apply font-montserrat text-[2rem] border-4 p-1 mt-10
+        @apply font-montserrat text-xl  lg:text-[2rem] border-4 p-1 mt-10
     }
 
     .sponsorsContainer p{
-        @apply font-opensans text-sm font-medium mt-5
-        text-center
+        @apply font-opensans text-xs lg:text-sm font-medium mt-5
+        text-center  px-5 lg:px-0
     }
 
     .sponsorsContainer img{
-        @apply w-[60%] mt-5
+        @apply w-[90%] lg:w-[60%] mt-5
     }
 
     .featuredContainer{
@@ -56,11 +81,11 @@
 
     .featuredContainer h1{
         @apply  text-[#27638D] 
-        p-1 font-montserrat font-bold text-[2rem]
+        p-1 font-montserrat font-bold text-xl  lg:text-[2rem]
     }
 
     .featuredContainer img{
-        @apply w-[60%] mt-10
+        @apply w-[90%] lg:w-[60%] mt-10
     }
 
     .visitorsContainer{
@@ -69,11 +94,11 @@
 
     .visitorsContainer h1{
         @apply text-[#27638D] border-[#27638D] border-4
-        p-1 font-montserrat font-bold text-[2rem] mb-10
+        p-1 font-montserrat font-bold text-xl  lg:text-[2rem] mb-10 
     }
 
     .visitorsContainer .ant-image{
-        @apply w-[60%] 
+        @apply w-[90%] lg:w-[60%] 
     }
 
     .visitorsContainer .ant-image-mask{
@@ -89,29 +114,29 @@
 
     .accomodationContainer h1{
         @apply  text-[#27638D] 
-        p-1 font-montserrat font-bold text-[2rem]
+        p-1 font-montserrat font-bold text-xl  lg:text-[2rem]
     }
 
     .accomodationContainer p {
-        @apply font-opensans text-sm font-normal
+        @apply font-opensans text-xs lg:text-sm font-normal
         text-center
     }
 
     .accomodationBoxWrapper{
-        @apply flex flex-wrap gap-5 lg:w-[80%]
+        @apply flex flex-wrap gap-5 lg:w-[90%]
         items-center justify-center mt-10
     }
 
     .accomodationBox{
         box-shadow: 0 0 10px #00000019;
-        @apply flex bg-white font-opensans p-5 w-[600px]
-        gap-5
+        @apply flex bg-white font-opensans p-5 w-[350px] sm:w-[400px] lg:w-[520px]
+        gap-5 flex-col items-center lg:flex-row lg:h-[250px]
     }
 
    
 
     .accomodationBox span{
-        @apply flex flex-col items-start
+        @apply flex flex-col items-center lg:items-start
     }
     .accomodationBox span h3{
         @apply text-[#11385D] text-lg font-bold 
@@ -142,7 +167,7 @@
     }
 
     .accomodationBox .btnBox button{
-        @apply text-xs mr-2 text-[#00A7C8] bg-[#DFF9FF] font-opensans
+        @apply  text-[8px] lg:text-[10px] mr-2 text-[#00A7C8] bg-[#DFF9FF] font-opensans
         p-1 rounded-full px-2 
     }
 

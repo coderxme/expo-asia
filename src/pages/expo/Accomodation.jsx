@@ -8,42 +8,50 @@ import image6 from '../../assets/expo/building/image6.svg'
 import { FaStar, FaRegStar } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import { GrNext } from "react-icons/gr";
+import ScrollAnimation from 'react-animate-on-scroll';
 
 
 export default function Accomodation() {
   return (
     <div className="accomodationContainer">
+      <ScrollAnimation animateIn="swing">
         <h1>Accomodation</h1>
+        </ScrollAnimation>
+
+        <ScrollAnimation animateIn="slideInLeft">
         <p>Explore nearby hotels for convenient lodging options.</p>
+        </ScrollAnimation>
         <div className="accomodationBoxWrapper">
-             <div className="accomodationBox">
-                 <Image src={image1} alt="image" />
-                 <span>
-                     <h3>Arzo Hotel Makati</h3>
-                     <h4>15 min</h4>
-                     <div className="ratings">
-                        <span>3.9</span>
-                        <div className="icons">
-                            <FaStar className='text-yellow-400'/>
-                            <FaStar className='text-yellow-400'/>
-                            <FaStar className='text-yellow-400'/>
-                            <FaStar className='text-yellow-400'/>
-                            <FaRegStar className='text-yellow-400'/>
+             <ScrollAnimation animateIn="zoomInLeft">
+                <div className="accomodationBox">
+                    <Image src={image1} alt="image" />
+                    <span>
+                        <h3>Arzo Hotel Makati</h3>
+                        <h4>15 min</h4>
+                        <div className="ratings">
+                            <span>3.9</span>
+                            <div className="icons">
+                                <FaStar className='text-yellow-400'/>
+                                <FaStar className='text-yellow-400'/>
+                                <FaStar className='text-yellow-400'/>
+                                <FaStar className='text-yellow-400'/>
+                                <FaRegStar className='text-yellow-400'/>
+                            </div>
+                            <span>(84)</span>
                         </div>
-                        <span>(84)</span>
-                     </div>
 
-                     <p className='text1'>Straightforward hotel with parking</p>
+                        <p className='text1'>Straightforward hotel with parking</p>
 
-                     <div className="btnBox">
-                         <button>Free Parking</button>
-                         <button>Free Wifi</button>
-                         <button>Air-conditioned</button>
-                     </div>
-                     <Link to={"#"} className='btnCheck'>Check <GrNext /></Link>
-                 </span>
-             </div>
-
+                        <div className="btnBox">
+                            <button>Free Parking</button>
+                            <button>Free Wifi</button>
+                            <button>Air-conditioned</button>
+                        </div>
+                        <Link to={"#"} className='btnCheck'>Check <GrNext /></Link>
+                    </span>
+                </div>
+             </ScrollAnimation>
+             <ScrollAnimation animateIn="zoomInRight">
              <div className="accomodationBox">
                  <Image src={image2} alt="image" />
                  <span>
@@ -71,7 +79,8 @@ export default function Accomodation() {
                      <Link to={"#"} className='btnCheck'>Check <GrNext /></Link>
                  </span>
              </div>
-
+             </ScrollAnimation>
+             <ScrollAnimation animateIn="zoomInLeft">
              <div className="accomodationBox">
                  <Image src={image3} alt="image" />
                  <span>
@@ -99,7 +108,9 @@ export default function Accomodation() {
                      <Link to={"#"} className='btnCheck'>Check <GrNext /></Link>
                  </span>
              </div>
+             </ScrollAnimation>
 
+             <ScrollAnimation animateIn="zoomInRight">
              <div className="accomodationBox">
                  <Image src={image4} alt="image" />
                  <span>
@@ -127,7 +138,9 @@ export default function Accomodation() {
                      <Link to={"#"} className='btnCheck'>Check <GrNext /></Link>
                  </span>
              </div>
+             </ScrollAnimation>
 
+             <ScrollAnimation animateIn="zoomInLeft">
              <div className="accomodationBox">
                  <Image src={image5} alt="image" />
                  <span>
@@ -155,7 +168,8 @@ export default function Accomodation() {
                      <Link to={"#"} className='btnCheck'>Check <GrNext /></Link>
                  </span>
              </div>
-
+             </ScrollAnimation>
+             <ScrollAnimation animateIn="zoomInRight">
              <div className="accomodationBox">
                  <Image src={image6} alt="image" />
                  <span>
@@ -183,6 +197,7 @@ export default function Accomodation() {
                      <Link to={"#"} className='btnCheck'>Check <GrNext /></Link>
                  </span>
              </div>
+             </ScrollAnimation>
         </div>
     </div>
   )
