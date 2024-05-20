@@ -10,11 +10,11 @@ export default function Details() {
   return (
     <div className="homeContext2">
         <div className="homeContext2Header">
-        <ScrollAnimation animateIn="fadeInRightBig">
+        <ScrollAnimation animateIn="backInUp">
            <h2 className="">Overview</h2>
         </ScrollAnimation>
 
-        <ScrollAnimation animateIn="bounceInLeft">
+        <ScrollAnimation animateIn="backInUp">
            <p>As part of the 77th Philippine Air Force Pre-Anniversary activity, 
             we are holding the <b>Air Force Symposium & Expo</b> on <b>June 13-14, 2024</b> at
             the <b>Marriott Grand Ballroom Manila.</b> <br /> The event is a dynamic exchange
@@ -24,28 +24,28 @@ export default function Details() {
         </div>
 
         <div className="homeContext2Box1">
-          <ScrollAnimation animateIn="bounceIn">
+          <ScrollAnimation animateIn="backInUp">
              <Image  src={image1} alt="image" className="image1" />
             </ScrollAnimation>
              <img  src={WaveBackground} alt="image" className="homeWaveBackground" />
              <div className="detailBox">
-                  <ScrollAnimation animateIn="backInRight">
+                  <ScrollAnimation animateIn="backInUp">
                  <h3>Why be part of this event?</h3>
                  </ScrollAnimation>
-                 <ScrollAnimation animateIn="bounceInRight">
+                 <ScrollAnimation animateIn="backInUp">
                  <span>
                     <img src={dot} alt="Dot" />
                     <p>It is a platform to introduce state-of-the-art technologies and developments <br /> in aero defense and security</p>
                  </span>
                  </ScrollAnimation>
 
-                 <ScrollAnimation animateIn="bounceInRight">
+                 <ScrollAnimation animateIn="backInUp">
                  <span>
                     <img src={dot} alt="Dot" />
                     <p>Have an opportunity to intensify your presence in the Philippines and Southeast <br /> Asia</p>
                  </span>
                  </ScrollAnimation>
-                 <ScrollAnimation animateIn="bounceInRight">
+                 <ScrollAnimation animateIn="backInUp">
                  <span>
                     <img src={dot} alt="Dot" />
                     <p>Network with key officials from the Philippine Air Force and other agencies <br /> to build, strengthen and maintain your relationship</p>
@@ -55,7 +55,7 @@ export default function Details() {
         </div>
 
         <div className="homeContext2Box2">
-        <ScrollAnimation animateIn="slideInLeft" className="flex items-center justify-center">
+        <ScrollAnimation animateIn="backInUp" className="flex items-center justify-center">
            <p className="">Globally recognized OEMs (Original Equipment Manufacturers) and
             proponents as well as homegrown innovators are invited to showcase
             the latest advancements and state-of-the-art technologies
@@ -64,10 +64,10 @@ export default function Details() {
             Air Force.</p>
          </ScrollAnimation>
             <div className="homeContext2BoxImg">
-             <ScrollAnimation animateIn="flipInX">
+             <ScrollAnimation animateIn="backInUp">
              <Image  src={image2} alt="image" className="image1" />
              </ScrollAnimation>
-             <ScrollAnimation animateIn="flipInX">
+             <ScrollAnimation animateIn="backInUp">
              <Image  src={image3} alt="image" className="image1" />
              </ScrollAnimation>
             </div>

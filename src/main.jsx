@@ -8,11 +8,10 @@ import { AuthProvider } from './auth/AuthContext.jsx';
 import "animate.css/animate.compat.css"
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
     <AuthProvider>
     <BrowserRouter>
     <App />
     </BrowserRouter>
     </AuthProvider>
-  </React.StrictMode>,
+,
 )

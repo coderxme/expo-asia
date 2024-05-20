@@ -8,7 +8,7 @@ export default function OnlineStreaming() {
   return (
     <div className="osContainer" id="online-streaming">
        <div className="osWrapper1">
-      <ScrollAnimation animateIn="swing">
+      <ScrollAnimation animateIn="backInUp">
          <span>
           <h2>Watch the <br />
             Air Force Symposium Live</h2>
@@ -18,7 +18,7 @@ export default function OnlineStreaming() {
          </span>
          </ScrollAnimation>
        </div>
-      <ScrollAnimation animateIn="bounceIn">
+      <ScrollAnimation animateIn="backInUp">
        <div className="osWrapper2">
          <img src={linestreamImage} alt="" />
          <div className="absolute flex flex-col items-start">

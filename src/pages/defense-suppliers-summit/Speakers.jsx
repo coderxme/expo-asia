@@ -6,10 +6,10 @@ export default function Speakers() {
   
   return (
     <section className="dds-speakersContainer" id='speakers'>
-      <ScrollAnimation animateIn="swing">
+      <ScrollAnimation animateIn="backInUp">
       <h1>Speakers</h1>
       </ScrollAnimation>
-      <ScrollAnimation animateIn="fadeIn">
+      <ScrollAnimation animateIn="backInUp">
       <Tabs />
       </ScrollAnimation>
     </section>

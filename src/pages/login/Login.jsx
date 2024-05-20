@@ -9,6 +9,7 @@ import { apiLogin } from '../../api/api';
 import GetToken from '../../context/GetToken';
 import { Input, Button, Form, message } from 'antd';
 import './Login.css'
+import { Link } from 'react-router-dom';
 
 export default function Login() {
   const csrfToken = GetToken();
@@ -77,11 +78,16 @@ export default function Login() {
           <Input.Password />
         </Form.Item>
         <Form.Item>
-          <Button className='w-full' htmlType="submit" loading={loading}>
+          <Button className='w-full' htmlType="submit" loading={loading} type='primary'>
             {loading ? 'Signing In...' : 'Sign In'}
           </Button>
+          <Link to={"/"}>
+           <Button  className='mt-2'>Go to Home</Button>
+          </Link>
         </Form.Item>
       </Form>
+
+     
     </div>
   );
 }

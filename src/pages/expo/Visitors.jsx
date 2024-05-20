@@ -5,7 +5,7 @@ import ScrollAnimation from 'react-animate-on-scroll';
 export default function Visitors() {
   return (
     <div className="visitorsContainer">
-      <ScrollAnimation animateIn="swing">
+      <ScrollAnimation animateIn="backInUp">
         <h1>Visitors</h1>
       </ScrollAnimation>
       <ScrollAnimation animateIn="zoomInUp" className='flex items-center justify-center'>

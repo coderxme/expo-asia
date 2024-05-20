@@ -8,7 +8,8 @@ import ContactUs from '../pages/contact-us/ContactUs'
 import Index1 from '../pages/air-force-symposium/index'
 import Index2 from '../pages/defense-suppliers-summit/index'
 import Expo from '../pages/expo/Expo'
-import VisitorRegister from '../pages/register/forms/visitor/RegisterForm'
+import VisitorRegister from '../pages/register/form/visitor/Register'
+import ExhibitorRegister from '../pages/register/form/exibitor/Register'
 
 
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
       <Route path='/air-force-symposium' element={<Index1/>} />
       <Route path='/defense-suppliers-summit' element={<Index2/>} />
       <Route path='/visitors'  element={<VisitorRegister/>} />
+      <Route path='/exhibitor'  element={<ExhibitorRegister/>} />
     </Routes>
   )
 }

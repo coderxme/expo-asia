@@ -6,6 +6,7 @@ import Visitors from "./Visitors";
 import Accomodation from "./Accomodation";
 import Official from "./Official";
 import Footer from '../footer/Footer'
+import { FloatButton } from 'antd';
 
 export default function Expo() {
   return (
@@ -17,6 +18,7 @@ export default function Expo() {
         <Accomodation />
         <Official />
         <Footer />
+      <FloatButton.BackTop />
     </div>
   )
 }

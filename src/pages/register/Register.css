@@ -25,15 +25,16 @@
         @apply relative  w-full flex items-center justify-center px-2 md:px-10 lg:px-0
     }
 
-    .registerContainer .footerContainer{
-        @apply mt-32
-    }
+   
 
     .registerForm{
         @apply border w-[600px] flex flex-col 
         p-5 md:p-10 rounded-lg bg-white relative
     }
 
+    .registerFormHeader{
+        @apply flex items-center flex-col
+    }
 
 
     .registerForm h1{
@@ -69,7 +70,7 @@
     .emailForm{
         @apply border w-[600px] flex flex-col 
         p-10 rounded-lg bg-white font-opensans
-        text-center  absolute top-0 left-0 z-10  shadow-xl
+        text-center  
     }
 
     .emailForm .ant-input{
@@ -118,7 +119,7 @@
     .congratsForm{
         @apply border w-[700px] flex flex-col 
         p-10 rounded-lg bg-white font-opensans
-        text-center my-20 items-center gap-5 absolute top-0 left-0 z-10 -mt-20 
+        text-center my-20 items-center gap-5 
     }
 
     .congratsForm .check{

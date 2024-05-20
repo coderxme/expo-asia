@@ -8,6 +8,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import Footer from "../footer/Footer";
 import { Image } from "antd";
 import {motion as m} from "framer-motion"
+import { FloatButton } from 'antd';
 
 
 export default function ContactUs() {
@@ -59,6 +60,8 @@ export default function ContactUs() {
          </div>
       </div>
       <Footer />
+      <FloatButton.BackTop />
+
     </m.div>
   )
 }

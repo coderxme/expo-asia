@@ -54,11 +54,41 @@
       .linkMenu{
         box-shadow:0 0 10px #0000003c;
         @apply absolute bg-white w-[150px]
-        flex flex-col mt-3 font-opensans z-10
+        flex flex-col font-opensans z-10
       }
 
       .linkMenu a{
         text-decoration: none; 
         @apply border-b border-[#11385d30]
       }
+
+
+      .navbarLinkBox .linkMenuBox {
+        position: relative;
+      }
+      
+      .linkMenu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: white;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        z-index: 10;
+      }
+      
+      .linkMenuBox:hover .linkMenu {
+        display: block;
+      }
+      
+      .linkMenu a {
+        display: block;
+        padding: 10px 20px;
+        white-space: nowrap;
+      }
+      
+      .linkMenu a:hover {
+        background-color: #f1f1f1;
+      }
+      
 }

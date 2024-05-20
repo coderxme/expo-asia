@@ -14,11 +14,11 @@ import ScrollAnimation from 'react-animate-on-scroll';
 export default function Accomodation() {
   return (
     <div className="accomodationContainer">
-      <ScrollAnimation animateIn="swing">
+      <ScrollAnimation animateIn="backInUp">
         <h1>Accomodation</h1>
         </ScrollAnimation>
 
-        <ScrollAnimation animateIn="slideInLeft">
+        <ScrollAnimation animateIn="backInUp">
         <p>Explore nearby hotels for convenient lodging options.</p>
         </ScrollAnimation>
         <div className="accomodationBoxWrapper">

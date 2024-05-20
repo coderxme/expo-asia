@@ -11,7 +11,7 @@
 
     .expoHeader h1{
         @apply text-[#27638D] border-[#27638D] border-4
-        p-1 font-montserrat font-semibold text-xl lg:text-[2rem] 
+        p-2 font-montserrat font-semibold text-xl lg:text-[2rem] 
     }
 
     .expoHeader p{
@@ -189,33 +189,71 @@
     }
 
     .officialWrapper{
-        @apply flex lg:w-[70%] mt-10
+        @apply flex lg:w-[70%] mt-10 flex-col md:flex-row
     }
 
-    .officialBox {
-        @apply flex flex-col  
+
+    .officialBox1 {
+        @apply flex flex-col 
     }
 
-    .officialImg{
-        @apply h-[400px] overflow-hidden
+    .officialBox1 .officialImg{
+        @apply h-[300px] md:h-[400px] overflow-hidden
+        
     }
 
-    .officialImg .ant-image{
-        @apply h-[400px] 
+    .officialBox1 .officialImg .ant-image{
+        @apply h-[300px]  md:h-[400px] 
     }
 
+    .officialBox1 .officialImg .ant-image-mask{
+        @apply h-[300px]  md:h-[400px] 
+    }
    
-    .officialDetail{
+    .officialBox1 .officialDetail{
         @apply flex flex-col font-opensans p-5 lg:p-20
-        h-[400px] 
+        md:h-[400px] 
     }
 
-    .officialDetail h1{
-        @apply text-[#27638D] text-2xl font-bold
+    .officialBox1 .officialDetail h1{
+        @apply text-[#27638D] text-[1.3rem] font-bold
         font-montserrat
     }
 
-    .officialDetail p{
+    .officialBox1 .officialDetail p{
+        @apply text-justify text-xs lg:text-sm
+    }
+
+
+
+    .officialBox2 {
+        @apply flex flex-col-reverse md:flex-col
+    }
+
+    .officialBox2 .officialImg{
+        @apply h-[300px] md:h-[400px] overflow-hidden
+    }
+
+    .officialBox2 .officialImg .ant-image{
+        @apply h-[300px]  md:h-[400px] 
+    }
+
+    .officialBox2 .officialImg .ant-image-mask{
+        @apply h-[300px]  md:h-[400px] 
+    }
+
+   
+    .officialBox2 .officialDetail{
+        @apply flex flex-col font-opensans p-5 lg:p-20
+        md:h-[400px] 
+    }
+
+    .officialBox2 .officialDetail h1{
+        @apply text-[#27638D] text-[1.3rem] font-bold
+        font-montserrat
+    }
+
+    .officialBox2 .officialDetail p{
         @apply text-justify text-xs lg:text-sm
     }
 }

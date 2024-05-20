@@ -4,7 +4,7 @@ import ScrollAnimation from 'react-animate-on-scroll';
 export default function Featured() {
   return (
     <div className="featuredContainer">
-      <ScrollAnimation animateIn="swing">
+      <ScrollAnimation animateIn="backInUp">
         <h1>Featured Sponsors</h1>
       </ScrollAnimation>
 

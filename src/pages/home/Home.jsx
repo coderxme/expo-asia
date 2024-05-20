@@ -3,6 +3,7 @@ import Carousel from './Carousel'
 import Details from './Details'
 import "./Home.css"
 import {motion as m} from "framer-motion"
+import { FloatButton } from 'antd';
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <Carousel />
       <Details />
       <Footer />
+      <FloatButton.BackTop />
     </m.div>
   )
 }

@@ -10,14 +10,14 @@ export default function Program() {
     <div className="programContainer" id="program">
       <img src={BlueWave1} alt=""  className='blueWave1'/>
       <img src={BlueWave2} alt=""  className='blueWave2'/>
-      <ScrollAnimation animateIn="swing">
+      <ScrollAnimation animateIn="backInUp">
       <h1>Program</h1>
       </ScrollAnimation>
       <div className="programImageBox">
-      <ScrollAnimation animateIn="fadeInLeft">
+      <ScrollAnimation animateIn="backInUp">
          <Image src={image1} alt="image1" className='image' />
         </ScrollAnimation>
-      <ScrollAnimation animateIn="fadeInRight">
+      <ScrollAnimation animateIn="backInUp">
          <Image src={image2} alt="image2"  className='image'/>
          </ScrollAnimation>
       </div>
