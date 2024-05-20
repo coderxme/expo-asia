@@ -1,10 +1,10 @@
 import { Image } from 'antd'
-import image1 from '../../assets/expo/building/image1.svg'
-import image2 from '../../assets/expo/building/image2.svg'
-import image3 from '../../assets/expo/building/image3.svg'
-import image4 from '../../assets/expo/building/image4.svg'
-import image5 from '../../assets/expo/building/image5.svg'
-import image6 from '../../assets/expo/building/image6.svg'
+import image1 from '../../assets/expo/building/image1.png'
+import image2 from '../../assets/expo/building/image2.png'
+import image3 from '../../assets/expo/building/image3.png'
+import image4 from '../../assets/expo/building/image4.png'
+import image5 from '../../assets/expo/building/image5.png'
+import image6 from '../../assets/expo/building/image6.png'
 import { FaStar, FaRegStar } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import { GrNext } from "react-icons/gr";

@@ -1,5 +1,5 @@
-import Event from '../../assets/events.svg'
-import EventBackground from '../../assets/event-background.svg'
+import Event from '../../assets/events.png'
+import EventBackground from '../../assets/event-background.png'
 import ScrollAnimation from 'react-animate-on-scroll';
 
 export default function Speakers() {

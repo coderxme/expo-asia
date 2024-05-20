@@ -6,7 +6,7 @@ import {
   VideoCameraOutlined,
 } from '@ant-design/icons';
 import { Button, Layout, Menu, theme } from 'antd';
-import Logo from '../../assets/logo.svg'
+import Logo from '../../assets/logo.png'
 import "./Admin.css"
 import ButtonLogout from './ButtonLogout'
 import Booth from './booth/Booth';

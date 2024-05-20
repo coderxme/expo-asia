@@ -1,6 +1,6 @@
 import { GrNext } from "react-icons/gr";
 import {  Link } from 'react-router-dom'
-import linestreamImage from '../../assets/livestream-image.svg'
+import linestreamImage from '../../assets/livestream-image.png'
 import CountDown from './CountDown'
 import ScrollAnimation from 'react-animate-on-scroll';
 
@@ -14,7 +14,7 @@ export default function OnlineStreaming() {
             Air Force Symposium Live</h2>
             <p>Access to live stream is restricted. <br />
               Please register to watch the event.</p>
-            <Link onClick={() => { window.scroll(0, 0) }} to={"/expo-asia/home"} className="registerLink">Register for access <GrNext /> </Link>
+            <Link onClick={() => { window.scroll(0, 0) }} to={"/"} className="registerLink">Register for access <GrNext /> </Link>
          </span>
          </ScrollAnimation>
        </div>

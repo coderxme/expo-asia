@@ -1,4 +1,4 @@
-import Logo from '../../assets/footer-logo.svg'
+import Logo from '../../assets/footer-logo.png'
 import './Footer.css'
 import { BsTelephoneFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";

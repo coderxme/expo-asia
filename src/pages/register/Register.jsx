@@ -1,5 +1,5 @@
 import RegisterForm from './forms/RegisterForm'
-import image from '../../assets/carouselImage.svg'
+import image from '../../assets/carouselImage.png'
 import './Register.css'
 import Footer from '../footer/Footer'
 

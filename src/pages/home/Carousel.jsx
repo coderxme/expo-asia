@@ -1,6 +1,6 @@
 /* eslint-disable no-irregular-whitespace */
 import {  Carousel } from 'antd';
-import image from '../../assets/carouselImage.svg'
+import image from '../../assets/carouselImage.png'
 import { GrNext } from "react-icons/gr";
 import { Link } from 'react-router-dom';
 import {motion as m} from "framer-motion"

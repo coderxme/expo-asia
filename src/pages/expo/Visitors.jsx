@@ -1,5 +1,5 @@
 import { Image } from 'antd'
-import image from '../../assets/expo/visitor.svg'
+import image from '../../assets/expo/visitors.png'
 import ScrollAnimation from 'react-animate-on-scroll';
 
 export default function Visitors() {

@@ -1,5 +1,5 @@
 import { Image } from 'antd'
-import image from '../../assets/expo/blue.svg'
+import image from '../../assets/expo/blue.png'
 export default function Official() {
   return (
     <div className='officialContainer'>

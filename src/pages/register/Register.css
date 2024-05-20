@@ -5,7 +5,7 @@
     .registerHeader{
         background-image: url("../../assets/background.png");
         background-size:cover;
-        @apply flex flex-col items-center h-[50vh]
+        @apply flex flex-col items-center 
     }
 
     .registerHeader img{
@@ -25,9 +25,13 @@
         @apply relative  w-full flex items-center justify-center px-2 md:px-10 lg:px-0
     }
 
+    .registerContainer .footerContainer{
+        @apply mt-32
+    }
+
     .registerForm{
         @apply border w-[600px] flex flex-col 
-        p-5 md:p-10 rounded-lg bg-white 
+        p-5 md:p-10 rounded-lg bg-white relative
     }
 
 
@@ -52,32 +56,20 @@
         font-semibold h-[40px] 
     }
 
-    .registerForm .ant-btn{
-        @apply bg-[#11385D] w-full font-opensans mt-10
-        h-[40px] text-sm font-semibold tracking-wide hover:bg-gray-400
+   
+
+
+    .waveBackground{
+        @apply absolute
     }
 
+    
 
-    .registerForm .ant-btn:hover{
-        background-color: #F1F5F9 !important;
-        color: #11385D !important;
-        border: 1px solid #11385D !important ;
-    }
-
-    .waveBackground1{
-        @apply absolute left-0 mt-40  -z-10
-    }
-
-    .waveBackground2{
-        @apply absolute right-0  -z-10 
-    } 
-
-  
 
     .emailForm{
         @apply border w-[600px] flex flex-col 
         p-10 rounded-lg bg-white font-opensans
-        text-center my-20
+        text-center  absolute top-0 left-0 z-10  shadow-xl
     }
 
     .emailForm .ant-input{
@@ -99,7 +91,7 @@
     }
 
     .emailFormBtn{
-        @apply flex flex-col gap-2 w-full
+        @apply flex flex-col gap-2 w-full 
     }
 
 
@@ -126,7 +118,7 @@
     .congratsForm{
         @apply border w-[700px] flex flex-col 
         p-10 rounded-lg bg-white font-opensans
-        text-center my-20 items-center gap-5
+        text-center my-20 items-center gap-5 absolute top-0 left-0 z-10 -mt-20 
     }
 
     .congratsForm .check{
@@ -162,18 +154,9 @@
     }
 
 
-    .congratsForm .btn2:hover{
-        background-color: #F1F5F9 !important;
-        color: #11385D !important;
-        border: 1px solid #11385D !important ;
-    }
+ 
 
-    .submitting {
-        background-color: #F1F5F9 !important;
-        color: #11385D !important;
-
-      }
-      
+  
 
 
 }

@@ -1,7 +1,7 @@
 import { Image } from 'antd';
-import image1 from '../../assets/blue-image1.svg';
-import image2 from '../../assets/blue-image2.svg';
-import image3 from '../../assets/page2/image1.svg';
+import image1 from '../../assets/blue-image1.png';
+import image2 from '../../assets/blue-image2.png';
+import image3 from '../../assets/page2/image1.png';
 import CountDown from './CountDown';
 import {motion as m} from "framer-motion"
 

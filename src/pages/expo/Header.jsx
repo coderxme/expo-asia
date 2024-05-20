@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import Logo from '../../assets/logo.svg'
+import Logo from '../../assets/logo.png'
 import { Link } from 'react-router-dom'
 import { GrNext } from "react-icons/gr";
 import {motion as m} from "framer-motion"

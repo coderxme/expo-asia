@@ -1,7 +1,7 @@
 import image from '../../assets/expo/test.png'
 import ScrollAnimation from 'react-animate-on-scroll';
-import image1 from '../../assets/blue-image1.svg';
-import image2 from '../../assets/blue-image2.svg';
+import image1 from '../../assets/blue-image1.png';
+import image2 from '../../assets/blue-image2.png';
 
 export default function Sponsors() {
   return (

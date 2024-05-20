@@ -1,10 +1,9 @@
 import { Image } from "antd"
-import image1 from '../../assets/home/image1.svg'
-import image2 from '../../assets/home/image2.svg'
-import image3 from '../../assets/home/image3.svg'
+import image1 from '../../assets/home/image1.png'
+import image2 from '../../assets/home/image2.png'
+import image3 from '../../assets/home/image3.png'
 import dot from '../../assets/dot.svg'
-import waveL from '../../assets/waves-l.svg'
-import waveR from '../../assets/waves-r.svg'
+import WaveBackground from '../../assets/home-wave-background.png'
 import ScrollAnimation from 'react-animate-on-scroll';
 
 export default function Details() {
@@ -28,7 +27,7 @@ export default function Details() {
           <ScrollAnimation animateIn="bounceIn">
              <Image  src={image1} alt="image" className="image1" />
             </ScrollAnimation>
-             <img  src={waveL} alt="image" className="wave1" />
+             <img  src={WaveBackground} alt="image" className="homeWaveBackground" />
              <div className="detailBox">
                   <ScrollAnimation animateIn="backInRight">
                  <h3>Why be part of this event?</h3>
@@ -65,7 +64,6 @@ export default function Details() {
             Air Force.</p>
          </ScrollAnimation>
             <div className="homeContext2BoxImg">
-             <img  src={waveR} alt="image" className="wave2" />
              <ScrollAnimation animateIn="flipInX">
              <Image  src={image2} alt="image" className="image1" />
              </ScrollAnimation>

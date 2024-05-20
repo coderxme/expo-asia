@@ -10,7 +10,7 @@
     
         -webkit-animation: AnimationName 18s ease infinite;
         animation: AnimationName 18s ease infinite;
-        @apply lg:h-[90vh] flex flex-col items-center p-10 text-white  
+        @apply relative flex flex-col items-center p-10 text-white  
     }
 
     @-webkit-keyframes AnimationName {
@@ -24,7 +24,7 @@
         100%{background-position:0% 77%}
     }
     .airForceHeaderContainer .image1{
-        @apply absolute right-0 top-0
+        @apply absolute right-0 top-0 -mt-32
     }
 
     .airForceHeaderContainer .image2{
@@ -113,7 +113,7 @@
     }
 
     .programContainer .blueWave1{
-        @apply absolute right-0 top-0 -mt-20
+        @apply absolute right-0 top-0 -mt-32
     }
 
     .programContainer .blueWave2{

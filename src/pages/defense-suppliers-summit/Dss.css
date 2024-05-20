@@ -9,7 +9,7 @@
     
         -webkit-animation: AnimationName 18s ease infinite;
         animation: AnimationName 18s ease infinite;
-        @apply lg:h-[90vh] flex flex-col items-center p-10 text-white  
+        @apply  flex flex-col items-center p-10 text-white  relative
     }
 
     @-webkit-keyframes AnimationName {
@@ -24,11 +24,11 @@
     }
 
     .dssHeaderContainer .image1{
-        @apply absolute right-0 top-0
+        @apply absolute right-0 top-0 -mt-32
     }
 
     .dssHeaderContainer .image2{
-        @apply absolute left-0 bottom-0
+        @apply absolute left-0 bottom-0 
     }
 
     .dssHeaderContainer .image3{

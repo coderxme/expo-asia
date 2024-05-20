@@ -3,7 +3,7 @@ import {  NavLink } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/logo.png';
 import "./Navbar.css";
 import { useState } from 'react';
 import { FaAngleDown } from "react-icons/fa6";
@@ -42,8 +42,8 @@ function BasicExample() {
    <div className='w-full sticky top-0 z-30 bg-white'>
        <Navbar expand="lg" >
       <Container>
-        <Navbar.Brand as={NavLink} to="/" className=''>
-            <img src={logo} alt="logo" />
+        <Navbar.Brand as={NavLink} to="/" className='logo'>
+            <img src={logo} alt="logo" className='w-[150px]' />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" >

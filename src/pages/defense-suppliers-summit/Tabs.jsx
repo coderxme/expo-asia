@@ -1,6 +1,6 @@
 import { Image } from 'antd';
 import  { useState } from 'react';
-import Event from '../../assets/events.svg'
+import Event from '../../assets/events.png'
 
 const TwoButtonTabs = () => {
   const [activeTab, setActiveTab] = useState('tab1');
