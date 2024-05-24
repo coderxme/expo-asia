@@ -1,6 +1,6 @@
 import { Image } from 'antd';
-import image1 from '../../assets/Artboard1.png'
-import image2 from '../../assets/Artboard2.png'
+import image1 from '../../assets/page3/def-1.png'
+import image2 from '../../assets/page3/def-2.png'
 import BlueWave1 from '../../assets/blue-image1.png';
 import BlueWave2 from '../../assets/blue-image2.png';
 import ScrollAnimation from 'react-animate-on-scroll';

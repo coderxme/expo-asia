@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
-import { Button, Form, Input, message } from 'antd';
+import { Button, Form, Input, message, Modal } from 'antd';
 import { apiEmailConfirmation,  apiRegisterCompany, apiQRCode} from '../../../../api/api';
 import axios from 'axios';
 import Congrats from './Congrats';
+import GetToken from '../../../../context/GetToken';
 
-export default function EmailForm({ email, csrfToken, hashedCode, formDataReg, captchaValue }) {
+export default function EmailForm({ email, hashedCode, formDataReg, captchaValue, sendEmailConfirmation }) {
+  const csrfToken = GetToken();
   const [otp, setOTP] = useState('');
   const [isResendOTP, setIsResendOTP] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
@@ -13,6 +15,9 @@ export default function EmailForm({ email, csrfToken, hashedCode, formDataReg, c
   const [successInvite, setSuccessInvite] = useState(false); 
   const [uniqueID, setUniqueID] = useState("");
   const [qrCode, setQrCode] = useState("");
+  const [errorModalVisible, setErrorModalVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
 
   const [formData] = useState({
     SendEmailConfirmation: {
@@ -72,23 +77,23 @@ export default function EmailForm({ email, csrfToken, hashedCode, formDataReg, c
     }
   }, [handleSubmitQRCode]);
 
-  const handleSubmitOTP = async () => {
-    setIsResendOTP(true);
-    try {
-      const response = await axios.post(apiEmailConfirmation, formData, {
-        headers: {
-          'X-CSRFToken': csrfToken
-        }
-      });
-      console.log("test:", response);
-      message.success("OTP Sent to your email");
-    } catch (error) {
-      console.error('Error adding register:', error);
-      message.error("Failed to register");
-    } finally {
-      setIsResendOTP(false);
-    }
-  };
+  // const handleSubmitOTP = async () => {
+  //   setIsResendOTP(true);
+  //   try {
+  //     const response = await axios.post(apiEmailConfirmation, formData, {
+  //       headers: {
+  //         'X-CSRFToken': csrfToken
+  //       }
+  //     });
+  //     console.log("test:", response);
+  //     message.success("OTP Sent to your email");
+  //   } catch (error) {
+  //     console.error('Error adding register:', error);
+  //     message.error("Failed to register");
+  //   } finally {
+  //     setIsResendOTP(false);
+  //   }
+  // };
 
  
 
@@ -110,11 +115,7 @@ export default function EmailForm({ email, csrfToken, hashedCode, formDataReg, c
       handleCompanySubmit()
   
     } catch (error) {
-      if (error.response && error.response.status === 400) {
         message.error("Incorrect OTP");
-      } else {
-        message.error("Failed to verify");
-      }
     } 
   };
 
@@ -135,7 +136,8 @@ export default function EmailForm({ email, csrfToken, hashedCode, formDataReg, c
         setSuccessInvite(true)
 
     } catch (error) {
-      message.error("Failed to invite");
+      setErrorMessage(`${error.response.data.error.company_details.email} Please refresh the page to register again!`);
+      setErrorModalVisible(true);
     }  finally {
       setIsVerifying(false);
     }
@@ -157,9 +159,29 @@ export default function EmailForm({ email, csrfToken, hashedCode, formDataReg, c
   }
 
   return (
+ <>
+    <Modal
+    title="Error"
+    visible={errorModalVisible}
+    onCancel={() => setErrorModalVisible(false)}
+    footer={[
+      <Button key="close" onClick={() => setErrorModalVisible(false)}>
+        Close
+      </Button>
+    ]}
+  >
+    <p>{errorMessage}</p>
+    <Button type="primary" onClick={() => window.location.reload()}>
+      Refresh Page
+    </Button>
+  </Modal>
     <div className="emailForm">
       <h2>Verify your Email Address</h2>
       <p>An email with a verification code was just sent to your email address.</p>
+      <p><b>Note:</b> If you do not see an email from us in your inbox, please check <br />
+      your junk or spam folder. Sometimes, emails may be filtered incorrectly. <br />
+        Thank you!
+      </p>
       <Form layout="vertical" className='emailFormBox'>
         <Input.OTP length={6} {...sharedProps}
           placeholder="Enter OTP"
@@ -167,14 +189,15 @@ export default function EmailForm({ email, csrfToken, hashedCode, formDataReg, c
           onChange={handleChangeOTP}
         />
         <div className="emailFormBtn">
-          <Button className="btn1" type="text" onClick={handleSubmitOTP} disabled={isResendOTP}>
+          <Button className="btn1" type="text" onClick={sendEmailConfirmation} disabled={isResendOTP}>
             {isResendOTP ? "Resending..." : "Resend again"}
           </Button>
-          <Button className='btn2' type="primary" onClick={handleVerify}>
+          <Button loading={isVerifying} className='btn2' type="primary" onClick={handleVerify}>
             {isVerifying ? "Verifying..." : "Verify"}
           </Button>
         </div>
       </Form>
     </div>
+ </>
   );
 }

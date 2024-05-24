@@ -14,12 +14,14 @@
     
         -webkit-animation: AnimationName 18s ease infinite;
         animation: AnimationName 18s ease infinite;
-        @apply h-[60vh] flex flex-col items-center text-white w-full
+        @apply h-[60vh] flex flex-col
+         items-center text-white w-full pt-10
     }
 
     .contactHeader h1{
         @apply border-4 p-3  font-montserrat font-bold
-        md:mt-10 border-[#fff] text-white text-base md:text-2xl lg:text-3xl
+        md:mt-10 border-[#fff] text-white text-base 
+        md:text-2xl lg:text-3xl lg:mt-0 
     }
 
     .contactHeader p{
@@ -28,39 +30,62 @@
 
 
     .contactWrapper{
-        @apply bg-white  w-full flex items-center justify-center pb-20
+        @apply bg-white 
+         w-full flex items-center justify-center pb-20 
+        
     }
 
+    .contactBoxWrapper{
+        @apply bg-white  w-[85%] flex flex-col justify-center 
+        -mt-40   shadow-lg xl:h-[450px] lg:flex-row
+    }
 
     .contactBox{
-        box-shadow:0px 0px 10px #00000037;
-        @apply bg-white h-[400px] w-[70%] flex -mt-40 justify-between p-5
+        @apply  lg:w-[30%] h-full p-10
+    }
+
+    .contactBoxMap{
+        @apply  lg:w-[50%] h-full p-5
+    }
+
+    .contactBoxTitle{
+        @apply text-[#27638D] text-xl font-bold
     }
 
 
-    .contactBox .ant-image-img{
-        @apply h-full
-    }
-    .contactDetails{
-        @apply flex flex-col justify-between text-[#27638D] p-10
+    .contactCard{
+        @apply mt-10
     }
 
-    .contactDetails span{
-        @apply leading-3
+    .contactCard h4{
+        @apply text-[#27638D] text-sm font-bold
     }
 
-    .contactDetails span h3{
-        @apply text-[1.5rem] font-semibold
+    .contactCard p{
+        @apply flex text-xs items-center gap-2 text-[#334155]
     }
 
-    .contactDetails span p{
-        @apply flex items-center text-sm gap-2 
+    .contactCard svg{
+        @apply text-[#27638D]
     }
 
 
-    .contactDetails span p a{
-        @apply text-[#27638D] text-xl
+    .contactCardDetail{
+        @apply flex flex-col gap-1 mb-3
     }
+
+    .contactCardDetail span{
+        @apply flex text-xs items-center gap-2
+    }
+
+    .socialBox {
+        @apply flex gap-2
+    }
+
+    .socialBox a{
+        @apply  text-[#27638D] text-lg font-bold
+    }
+
 
     @-webkit-keyframes AnimationName {
         0%{background-position:0% 77%}

@@ -4,7 +4,10 @@ import { Button, Form, Input, message, Modal } from 'antd';
 import { apiEmailConfirmation,  apiRegisterParticipant, apiQRCode} from '../../../../api/api';
 import axios from 'axios';
 import Congrats from './Congrats';
-export default function EmailForm({ email, csrfToken, hashedCode, formDataReg, captchaValue }) {
+import GetToken from '../../../../context/GetToken';
+
+export default function EmailForm({ email,  hashedCode, formDataReg, captchaValue, sendEmailConfirmation }) {
+  const csrfToken = GetToken()
   const [otp, setOTP] = useState('');
   const [isResendOTP, setIsResendOTP] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
@@ -28,6 +31,7 @@ export default function EmailForm({ email, csrfToken, hashedCode, formDataReg, c
     },
     g_recaptcha_response: captchaValue,
     participant_details: {
+      forum: formDataReg?.participant_details?.forum || null,
       first_name: formDataReg?.participant_details?.first_name || "",
       last_name: formDataReg?.participant_details?.last_name || "",
       middle_name: formDataReg?.participant_details?.middle_name || "",
@@ -36,8 +40,6 @@ export default function EmailForm({ email, csrfToken, hashedCode, formDataReg, c
       company_org_other: formDataReg?.participant_details?.company_org_other || "",
       military_branch: formDataReg?.participant_details?.military_branch || "",
       phone_no: formDataReg?.participant_details?.phone_no || "",
-      viber_no: formDataReg?.participant_details?.viber_no || "",
-      whatsapp_no: formDataReg?.participant_details?.whatsapp_no || "",
     }
   });
 
@@ -75,23 +77,23 @@ export default function EmailForm({ email, csrfToken, hashedCode, formDataReg, c
     }
   }, [handleSubmitQRCode]);
 
-  const handleSubmitOTP = async () => {
-    setIsResendOTP(true);
-    try {
-      const response = await axios.post(apiEmailConfirmation, formData, {
-        headers: {
-          'X-CSRFToken': csrfToken
-        }
-      });
-      console.log("test:", response);
-      message.success("OTP Sent to your email");
-    } catch (error) {
-      console.error('Error adding register:', error);
-      message.error("Failed to register");
-    } finally {
-      setIsResendOTP(false);
-    }
-  };
+  // const handleSubmitOTP = async () => {
+  //   setIsResendOTP(true);
+  //   try {
+  //     const response = await axios.post(apiEmailConfirmation, formData, {
+  //       headers: {
+  //         'X-CSRFToken': csrfToken
+  //       }
+  //     });
+  //     console.log("test:", response);
+  //     message.success("OTP Sent to your email");
+  //   } catch (error) {
+  //     console.error('Error adding register:', error);
+  //     message.error("Failed to register");
+  //   } finally {
+  //     setIsResendOTP(false);
+  //   }
+  // };
 
  
 
@@ -174,6 +176,10 @@ export default function EmailForm({ email, csrfToken, hashedCode, formDataReg, c
     <div className="emailForm">
       <h2>Verify your Email Address</h2>
       <p>An email with a verification code was just sent to your email address.</p>
+      <p><b>Note:</b> If you do not see an email from us in your inbox, please check <br />
+      your junk or spam folder. Sometimes, emails may be filtered incorrectly. <br />
+        Thank you!
+      </p>
       <Form layout="vertical" className='emailFormBox'>
         <Input.OTP length={6} {...sharedProps}
           placeholder="Enter OTP"
@@ -181,10 +187,10 @@ export default function EmailForm({ email, csrfToken, hashedCode, formDataReg, c
           onChange={handleChangeOTP}
         />
         <div className="emailFormBtn">
-          <Button className="btn1" type="text" onClick={handleSubmitOTP} disabled={isResendOTP}>
+          <Button className="btn1" type="text" onClick={sendEmailConfirmation} disabled={isResendOTP}>
             {isResendOTP ? "Resending..." : "Resend again"}
           </Button>
-          <Button className='btn2' type="primary" onClick={handleVerify}>
+          <Button loading={isVerifying} className='btn2' type="primary" onClick={handleVerify}>
             {isVerifying ? "Verifying..." : "Verify"}
           </Button>
         </div>

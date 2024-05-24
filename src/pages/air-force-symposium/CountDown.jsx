@@ -1,8 +1,16 @@
 /* eslint-disable react/prop-types */
 import  { useState, useEffect } from 'react';
 
+// import useAdminStore from '../../store/adminStore';
+
+
 function DateTimeConverter({ dateString }) {
   const [timeRemaining, setTimeRemaining] = useState(null);
+  // const { eventData, fetchEvent } = useAdminStore();
+
+  // useEffect(() => {
+  //   fetchEvent()
+  // },[fetchEvent])
 
   useEffect(() => {
     const countdownDate = new Date(dateString);
@@ -62,7 +70,7 @@ function DateTimeConverter({ dateString }) {
 // Usage
 function App() {
   return (
-      <DateTimeConverter dateString="2024-08-24T14:15:22Z" />
+      <DateTimeConverter dateString="2024-06-14T09:00:00+08:00" />
   );
 }
 

@@ -36,7 +36,7 @@ export default function Login() {
         const { token } = response.data;
         dispatch({ type: 'LOGIN', payload: { user: formData.username, token } });
         setTimeout(() => {
-          navigate('/expo-asia-admin/admin');
+          navigate('/expo-asia-admin/dashboard');
         },2000)
       }
     } catch (error) {
@@ -78,11 +78,11 @@ export default function Login() {
           <Input.Password />
         </Form.Item>
         <Form.Item>
-          <Button className='w-full' htmlType="submit" loading={loading} type='primary'>
+          <Button className='loginButton' htmlType="submit" loading={loading} type='primary'>
             {loading ? 'Signing In...' : 'Sign In'}
           </Button>
           <Link to={"/"}>
-           <Button  className='mt-2'>Go to Home</Button>
+           <Button  className='loginButtonHome'>Go to Home</Button>
           </Link>
         </Form.Item>
       </Form>

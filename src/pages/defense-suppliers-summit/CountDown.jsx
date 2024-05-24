@@ -63,7 +63,7 @@ function DateTimeConverter({ dateString }) {
 // Usage
 function App() {
   return (
-      <DateTimeConverter dateString="2024-08-24T14:15:22Z" />
+      <DateTimeConverter dateString="2024-06-13T09:00:00+08:00" />
   );
 }
 

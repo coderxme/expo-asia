@@ -1,0 +1,25 @@
+@tailwind components;
+
+
+@layer components{
+    .accountContainer{
+        @apply font-opensans p-5
+    }
+
+    .accountTitle{
+        @apply font-montserrat uppercase text-sm text-gray-700
+        font-bold 
+    }
+
+    .accountDetails{
+        @apply flex flex-col items-start
+    }
+
+    .accountText{
+        @apply border rounded-lg p-2 px-4 text-xs
+    }
+
+    .accountText b{
+        @apply text-teal-500 font-semibold
+    }
+}

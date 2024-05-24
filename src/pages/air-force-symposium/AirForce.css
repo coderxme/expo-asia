@@ -127,6 +127,7 @@
 
     .programImageBox{
         @apply flex w-full items-center justify-center flex-col lg:flex-row
+        gap-5
     }
 
     .programImageBox .image{

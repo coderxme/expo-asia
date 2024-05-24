@@ -90,5 +90,29 @@
       .linkMenu a:hover {
         background-color: #f1f1f1;
       }
+
+
+      .navbarRight{
+        @apply flex items-center gap-2 p-1
+       
+      }
       
+      
+}
+
+
+.navbarRight .ant-menu{
+  @apply text-base  
+}
+
+
+.navbarRight .ant-menu-light .ant-menu-item{
+  @apply bg-white text-teal-500  font-opensans rounded-full
+  flex items-center justify-center   text-xs font-medium
+}
+
+
+.navbarRight .ant-menu-light .ant-menu-item-selected{
+  @apply bg-teal-500 text-white font-opensans rounded-full
+  flex items-center justify-center
 }

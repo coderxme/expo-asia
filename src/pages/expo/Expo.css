@@ -6,12 +6,12 @@
     .expoHeader{
         background-image: url("../../assets/expo/expo-header-background.png");
         @apply  bg-cover
-        flex flex-col items-center  text-[#334155] py-10 lg:h-[80vh] 
+        flex flex-col items-center   text-[#334155]  py-10 lg:h-[80vh] 
     }
 
     .expoHeader h1{
         @apply text-[#27638D] border-[#27638D] border-4
-        p-2 font-montserrat font-semibold text-xl lg:text-[2rem] 
+        p-2 font-montserrat font-semibold text-xl lg:text-[2rem]  
     }
 
     .expoHeader p{

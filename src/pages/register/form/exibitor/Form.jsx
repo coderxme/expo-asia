@@ -28,7 +28,7 @@ export default function RegisterForm() {
         email: "",
         website: "",
         is_exhibitor: true,
-        company_org_type: 1,
+        company_org_type: null,
       }
     });
 
@@ -134,31 +134,32 @@ export default function RegisterForm() {
     
      <div className="registerForm">
         <div className="registerFormHeader">
-        <h1>Register as Sponsor/exhibitor</h1>
-         <Link to={'/expo-asia/visitors'}>
-           <Button className='mb-4'>Click to register as visitor</Button>
+        <h1>Register as Sponsor/Exhibitor</h1>
+         <Link className='buttonLink' to={'/expo-asia/participant'}>
+           <Button className='buttonLinkRegister'>Register as Participant instead</Button>
          </Link>
         </div>
          <Form layout="vertical">
-            <Form.Item label="Name">
+     
+            <Form.Item label="Name" required>
               <Input placeholder="Enter Name" value={companyFormData.company_details.name} name="company_details.name" onChange={handleFormChangeCompany} />
             </Form.Item>
-            <Form.Item label="Address">
+            <Form.Item label="Address" required>
               <Input placeholder="Enter Address" value={companyFormData.company_details.address} name="company_details.address" onChange={handleFormChangeCompany} />
             </Form.Item>
-            <Form.Item label="Phone">
+            <Form.Item label="Phone" required>
               <Input placeholder="Enter Phone" value={companyFormData.company_details.phone} name="company_details.phone" onChange={handleFormChangeCompany} />
             </Form.Item>
             <Form.Item label="Telephone">
               <Input placeholder="Enter Telephone" value={companyFormData.company_details.telephone} name="company_details.telephone" onChange={handleFormChangeCompany} />
             </Form.Item>
-            <Form.Item label="Email">
+            <Form.Item label="Email" required>
               <Input placeholder="Enter Email" value={companyFormData.company_details.email} name="company_details.email" onChange={handleFormChangeCompany} />
             </Form.Item>
-            <Form.Item label="Website">
+            <Form.Item label="Website" >
               <Input placeholder="Enter Website" value={companyFormData.company_details.website} name="company_details.website" onChange={handleFormChangeCompany} />
             </Form.Item>
-            <Form.Item label="Unit/Organization/Company Type" hidden>
+            <Form.Item label="Company Type" required>
                     <Select defaultValue={companyFormData.company_details.company_org_type} onChange={(value) => handleFormChangeCompany({ target: { name: 'company_details.company_org_type', value } })}>
                        {companyOrgDataType.map((item, index) => (
                          <Option key={index} value={item.id}>{item.name}</Option>
@@ -180,9 +181,9 @@ export default function RegisterForm() {
 
        {registrationSuccess && !isSendingEmail && 
         <EmailForm 
+        sendEmailConfirmation={sendEmailConfirmation}
           hashedCode={hashedCode} 
           email={companyFormData.company_details.email} 
-          csrfToken={csrfToken}
           formDataReg={companyFormData}
           captchaValue={captchaValue}
 

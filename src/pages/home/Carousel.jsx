@@ -23,10 +23,10 @@ const App = () => (
         </p>
 
         <div className='carouselBtn'>
-           <Link to={'/expo-asia/visitors'}  state={{ user: "visitor" }}>
-              <button>Register as Visitor <GrNext/> </button>
+           <Link to={'/expo-asia/participant'}  >
+              <button>Register as Participant <GrNext/> </button>
            </Link>
-           <Link to={'/expo-asia/exhibitor'}  state={{ user: "exhibitor" }}>
+           <Link to={'/expo-asia/exhibitor'}  >
             <button>Register as Sponsor/Exhibitor <GrNext/></button>
            </Link>
 
@@ -40,10 +40,10 @@ const App = () => (
         </p>
 
         <div className='carouselBtn'>
-           <Link to={'/expo-asia/visitors'} state={{ user: "visitor" }}>
-            <button>Register as Visitor <GrNext/> </button>
+           <Link to={'/expo-asia/participant'} >
+            <button>Register as Participant <GrNext/> </button>
             </Link>
-            <Link to={'/expo-asia/exhibitor'} state={{ user: "exhibitor" }}>
+            <Link to={'/expo-asia/exhibitor'} >
               <button>Register as Sponsor/Exhibitor <GrNext/></button>
             </Link>
         </div>
@@ -56,10 +56,10 @@ const App = () => (
         </p>
 
         <div className='carouselBtn'>
-           <Link to={'/expo-asia/visitors'} state={{ user: "visitor" }}>
-              <button>Register as Visitor <GrNext/> </button>
+           <Link to={'/expo-asia/participant'} >
+              <button>Register as Participant <GrNext/> </button>
             </Link>
-            <Link to={'/expo-asia/exhibitor'}  state={{ user: "exhibitor" }}>
+            <Link to={'/expo-asia/exhibitor'}  >
               <button>Register as Sponsor/Exhibitor <GrNext/></button>
             </Link>
         </div>

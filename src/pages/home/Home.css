@@ -100,7 +100,7 @@
 
 
     .homeWaveBackground{
-        @apply absolute
+        @apply absolute -z-10
     }
 
 

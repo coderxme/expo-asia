@@ -4,7 +4,7 @@ import ScrollAnimation from 'react-animate-on-scroll';
 
 export default function Visitors() {
   return (
-    <div className="visitorsContainer">
+    <div className="visitorsContainer" id='visitors'>
       <ScrollAnimation animateIn="backInUp">
         <h1>Visitors</h1>
       </ScrollAnimation>

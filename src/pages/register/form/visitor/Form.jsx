@@ -9,11 +9,13 @@ import EmailForm from './EmailForm';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import ReCAPTCHA from "react-google-recaptcha";
+import useAdminStore from '../../../../store/adminStore';
 
 const recaptchaKey = import.meta.env.VITE_RECAPTCHAKEY
 
 export default function RegisterForm() {
     const csrfToken = GetToken();
+    const { forumData, fetchForum } = useAdminStore()
     const [formData, setFormData] = useState({
         invite_details: {
           custom_msg: "This is a test",
@@ -28,8 +30,7 @@ export default function RegisterForm() {
           company_org_other: "",
           military_branch: "",
           phone_no: "",
-          viber_no: "",
-          whatsapp_no: "",
+          forum:null,
         }
       });  
 
@@ -38,6 +39,10 @@ export default function RegisterForm() {
       const [isSendingEmail, setIsSendingEmail] = useState(false);
       const [hashedCode, setHashedCode] = useState("");
       const [captchaValue, setCaptchaValue] = useState(null);
+
+      useEffect(() => {
+        fetchForum()
+      },[fetchForum])
 
 
 
@@ -59,22 +64,19 @@ export default function RegisterForm() {
             }
         
             if (formData.participant_details.phone_no === '') {
-              message.error("Mobile No field cannot be empty");
+              message.error("Contact Number field cannot be empty");
               return;
             }
         
-            if (formData.participant_details.viber_no === '') {
-              message.error("Viber No field cannot be empty");
-              return;
-            }
         
-            if (formData.participant_details.whatsapp_no === '') {
-              message.error("WhatsApp No field cannot be empty");
-              return;
-            }
         
             if (formData.participant_details.email === '') {
               message.error("Email address field cannot be empty");
+              return;
+            }
+
+            if (formData.participant_details.forum === '') {
+              message.error("Please select forum");
               return;
             }
             
@@ -150,12 +152,19 @@ export default function RegisterForm() {
     
      <div className="registerForm">
          <div className="registerFormHeader">
-         <h1>Register as Visitor</h1>
-         <Link to={'/expo-asia/exhibitor'}>
-           <Button className='mb-4'>Click to register as sponsor/exhibitor</Button>
+         <h1>Register as Participant</h1>
+         <Link className='buttonLink' to={'/expo-asia/exhibitor'}>
+           <Button className='buttonLinkRegister'>Register as Sponsor/Exhibitor instead</Button>
          </Link>
          </div>
          <Form layout="vertical">
+             <Form.Item label="Which forum will you be attending?" required className='mt-3'>
+                    <Select defaultValue={formData.participant_details.forum} onChange={(value) => handleFormChangeParticipant({ target: { name: 'participant_details.forum', value } })}>
+                       {forumData.map((item, index) => (
+                         <Option key={index} value={item.id}>{item.name}</Option>
+                       ))}
+                    </Select>
+                </Form.Item>
               <Form.Item label="Last Name" required>
                 <Input placeholder="Enter Last Name" value={formData.participant_details.last_name} name="participant_details.last_name" onChange={handleFormChangeParticipant} />
               </Form.Item>
@@ -171,23 +180,18 @@ export default function RegisterForm() {
               <Form.Item label="Unit/Organization/Company Name" required>
                 <Input placeholder="Enter Organization/Company Name" value={formData.participant_details.company_org_other} name="participant_details.company_org_other" onChange={handleFormChangeParticipant} />
               </Form.Item>
-              <Form.Item label="Military Branch of Service">
+              <Form.Item label="Military Branch of Service ">
                 <Input placeholder="Enter Military Branch of Service" value={formData.participant_details.military_branch} name="participant_details.military_branch" onChange={handleFormChangeParticipant} />
               </Form.Item>
-              <Form.Item label="Mobile No" required>
-                <Input placeholder="Enter Mobile No" value={formData.participant_details.phone_no} name="participant_details.phone_no" onChange={handleFormChangeParticipant} />
+              <Form.Item label="Contact Number" required>
+                <Input placeholder="Enter Contact Number" value={formData.participant_details.phone_no} name="participant_details.phone_no" onChange={handleFormChangeParticipant} />
               </Form.Item>
-              <Form.Item label="Viber No" required>
-                <Input placeholder="Enter Viber No" value={formData.participant_details.viber_no} name="participant_details.viber_no" onChange={handleFormChangeParticipant} />
-              </Form.Item>
-              <Form.Item label="WhatsApp No" required>
-                <Input placeholder="Enter WhatsApp No" value={formData.participant_details.whatsapp_no} name="participant_details.whatsapp_no" onChange={handleFormChangeParticipant} />
-              </Form.Item>
+          
               <Form.Item label="Email address" required>
                 <Input placeholder="Enter Email address" value={formData.participant_details.email} name="participant_details.email" onChange={handleFormChangeParticipant} />
               </Form.Item>
               <Form.Item>
-                <Button type="primary" className='w-full bg-[#11385D] text-white font-opensans' onClick={handleRegisterParticipantSubmit} disabled={isSubmitting}>
+                <Button loading={isSubmitting} type="primary" className='w-full bg-[#11385D] text-white font-opensans' onClick={handleRegisterParticipantSubmit} disabled={isSubmitting}>
                   {isSubmitting ? "Submitting..." : "Register"}
                 </Button>
               </Form.Item>
@@ -198,9 +202,9 @@ export default function RegisterForm() {
 
        {registrationSuccess && !isSendingEmail && 
         <EmailForm 
+        sendEmailConfirmation={sendEmailConfirmation}
           hashedCode={hashedCode} 
           email={formData.participant_details.email} 
-          csrfToken={csrfToken}
           formDataReg={formData}
           captchaValue={captchaValue}
         />}

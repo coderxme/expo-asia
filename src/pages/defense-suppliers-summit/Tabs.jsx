@@ -1,4 +1,3 @@
-import { Image } from 'antd';
 import  { useState } from 'react';
 import Event from '../../assets/events.png'
 
@@ -20,8 +19,8 @@ const TwoButtonTabs = () => {
         </button>
      </div>
       <div className='flex flex-col items-center '>
-        {activeTab === 'tab1' && <Image src={Event} width={"75%"} />}
-        {activeTab === 'tab2' && <Image src={Event} width={"75%"} />}
+        {activeTab === 'tab1' && <img src={Event} width={"75%"} />}
+        {activeTab === 'tab2' && <img src={Event} width={"75%"} />}
 
       </div>
     </div>

@@ -11,4 +11,19 @@
         @apply border w-[400px] p-5 rounded-lg bg-white
         shadow-lg 
     }
+
+    .loginButton{
+        @apply bg-teal-500 rounded-md font-opensans text-xs
+        font-medium  w-full
+    }
+
+    .loginButtonHome{
+        @apply  rounded-md font-opensans text-xs
+          mt-5 border-2 border-teal-500  text-teal-500
+        font-bold 
+    }
+}
+
+.ant-form label{
+    @apply font-opensans text-sm font-medium 
 }

@@ -12,7 +12,6 @@ export const apiRegisterParticipantNoCaptcha = `${baseUrl}/api/public_register_p
 
 export const apiQRCode = `${baseUrl}/api/generate_a_qrcode/`;
 
-export const apiEvent = `${baseUrl}/api/event/`;
 
 export const apiEmailConfirmation = `${baseUrl}/api/email_confirmation/`;
 
@@ -20,12 +19,19 @@ export const apiCompanyOrgType = `${baseUrl}/api/company_org_type/`;
 
 
 
-export const apiAllParticipant = `${baseUrl}/api/participant/`;
-export const apiParticipant = `${baseUrl}/api/participant`;
+export const apiParticipant = `${baseUrl}/api/participant/`;
 
-export const apiAllBooth = `${baseUrl}/api/booth/`;
-export const apiBooth = `${baseUrl}/api/booth`;
+export const apiBooth = `${baseUrl}/api/booth/`;
+export const apiBoothAttendee = `${baseUrl}/api/booth_attendee/`;
 
-
+export const apiCompanyOrg= `${baseUrl}/api/company_org/`
 export const apiCompanOrgType = `${baseUrl}/api/company_org_type/`
 
+export const apiEvent = `${baseUrl}/api/event/`;
+export const apiEventAttendee = `${baseUrl}/api/event_attendee/`;
+
+export const apiInvite = `${baseUrl}/api/invite/`;
+
+export const apiMyAccount = `${baseUrl}/api/my_account`
+
+export const apiForum = `${baseUrl}/api/forum/`

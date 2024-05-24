@@ -9,3 +9,14 @@
 }
 
 
+.ant-image-preview-operations-operation-flipY,
+.ant-image-preview-operations-operation-flipX,
+.ant-image-preview-operations-operation-rotateLeft,
+.ant-image-preview-operations-operation-rotateRight{
+   display: none !important;
+}
+
+.ant-image-preview-operations{
+  background-color: #4545459f;
+  color: #ffffff !important;
+}

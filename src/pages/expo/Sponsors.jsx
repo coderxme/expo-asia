@@ -5,7 +5,7 @@ import image2 from '../../assets/blue-image2.png';
 
 export default function Sponsors() {
   return (
-    <div className="sponsorsContainer">
+    <div className="sponsorsContainer" id='sponsors'>
        <img src={image1} alt="" className='image1'/>
       <img src={image2} alt=""   className='image2'/>
       <ScrollAnimation animateIn="backInUp">

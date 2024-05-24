@@ -1,0 +1,118 @@
+@tailwind components;
+
+
+@layer components {
+    .dashboardContainer{
+        /* background-image: url("../../../../assets/background.png");
+        background-size: cover; */
+        @apply font-opensans  p-3 rounded-lg 
+    }
+
+    .dashboardHeader{
+        @apply flex
+    }
+
+    .dashboardTitle{
+        @apply font-montserrat uppercase text-xl 
+        font-bold text-gray-700 p-2 rounded
+    }
+
+
+    .dashboardContent{
+        @apply flex items-start gap-5 flex-col
+    }
+
+    .cardContainer{
+        @apply flex  gap-3 font-opensans  
+         rounded-lg flex-wrap
+    }
+
+   
+
+    .cardContainer .card{
+        background: linear-gradient(318deg, #14b8a6, #2fc8b8, #077c6f);
+        background-size: 600% 600%;
+
+        -webkit-animation: AnimationName 14s ease infinite;
+        -moz-animation: AnimationName 14s ease infinite;
+        animation: AnimationName 14s ease infinite;
+
+        @apply w-full  lg:w-[400px] h-[150px] bg-teal-500 border-2 border-teal-100 p-1
+        rounded-3xl items-center shadow-md flex justify-between
+    }
+
+    @-webkit-keyframes AnimationName {
+        0%{background-position:69% 0%}
+        50%{background-position:32% 100%}
+        100%{background-position:69% 0%}
+    }
+    @-moz-keyframes AnimationName {
+        0%{background-position:69% 0%}
+        50%{background-position:32% 100%}
+        100%{background-position:69% 0%}
+    }
+    @keyframes AnimationName {
+        0%{background-position:69% 0%}
+        50%{background-position:32% 100%}
+        100%{background-position:69% 0%}
+    }
+
+    .cardContainer .card p{
+        @apply text-[3rem] text-white font-bold
+    }
+
+    .cardContainer .card span{
+        @apply flex items-center justify-center mt-5 gap-3
+    }
+
+    .cardContainer .card span h3{
+        @apply uppercase text-sm font-bold 
+        text-teal-50  
+    }
+
+    .cardContainer .card span svg{
+        @apply text-3xl  text-white
+    }
+
+
+    .chartContainer{
+        @apply  flex  gap-5  flex-wrap
+       
+    }
+
+
+    .chartTitle{
+        @apply font-montserrat uppercase text-lg 
+        font-bold text-gray-700 p-2 rounded
+    }
+
+    .lineChartBox{
+        @apply w-[615px]
+    }
+
+
+    .lineChart{
+        @apply bg-white rounded-md p-5  
+        border
+    }
+
+
+    .barChartBox{
+        @apply w-[615px]
+    }
+
+
+    .barChart{
+        @apply bg-white rounded-md p-5  
+        border
+    }
+
+
+    .donutChartBox{
+        @apply   bg-white rounded-md  border
+        flex flex-col items-center justify-center 
+        w-[600px]  p-20
+    }
+
+ 
+}

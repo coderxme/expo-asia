@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import { apiLogout, getCsrfToken } from '../../api/api';
 import { Button } from 'antd';
+import { RiLogoutCircleLine } from "react-icons/ri";
 
 
 
@@ -47,6 +48,7 @@ export default function btnLogout() {
     
 
   return (
-    <Button  onClick={handleLogout}>Logout</Button>
+    <Button className='rounded-full bg-teal-600' type='primary' icon={<RiLogoutCircleLine/>}  onClick={handleLogout} />
+      
   )
 }

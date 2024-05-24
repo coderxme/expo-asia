@@ -25,7 +25,7 @@ export default function Details() {
 
         <div className="homeContext2Box1">
           <ScrollAnimation animateIn="backInUp">
-             <Image  src={image1} alt="image" className="image1" />
+             <Image  src={image1} alt="image" className="image1 " />
             </ScrollAnimation>
              <img  src={WaveBackground} alt="image" className="homeWaveBackground" />
              <div className="detailBox">

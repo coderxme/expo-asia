@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
 import Home from '../pages/home/Home'
-import Register from '../pages/register/Register'
 import Speakers from '../pages/air-force-symposium/Speakers'
 import Program from '../pages/air-force-symposium/Program'
 import OnlineStreaming from '../pages/air-force-symposium/OnlineStreaming'
@@ -17,7 +16,6 @@ export default function App() {
     <Routes>
       <Route index element={<Home />} />
       <Route path='' element={<Home />} />
-      <Route path='/register' element={<Register />} />
       <Route path='/speakers' element={<Speakers />} />
       <Route path='/program' element={<Program />} />
       <Route path='/online-streaming' element={<OnlineStreaming />} />
@@ -25,7 +23,7 @@ export default function App() {
       <Route path='/expo' element={<Expo/>} />
       <Route path='/air-force-symposium' element={<Index1/>} />
       <Route path='/defense-suppliers-summit' element={<Index2/>} />
-      <Route path='/visitors'  element={<VisitorRegister/>} />
+      <Route path='/participant'  element={<VisitorRegister/>} />
       <Route path='/exhibitor'  element={<ExhibitorRegister/>} />
     </Routes>
   )
