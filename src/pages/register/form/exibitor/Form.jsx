@@ -9,17 +9,15 @@ import EmailForm from './EmailForm';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import ReCAPTCHA from "react-google-recaptcha";
+import useAdminStore from '../../../../store/adminStore';
 
 const recaptchaKey = import.meta.env.VITE_RECAPTCHAKEY
 
 
 export default function RegisterForm() {
     const csrfToken = GetToken();
+    const {  eventData, fetchEvent  } = useAdminStore()
     const [companyFormData, setCompanyFormData] = useState({
-      invite_details: {
-        custom_msg: "This is a test",
-        event: 1
-      },    
       company_details: {
         name: "",
         address: "",
@@ -48,7 +46,8 @@ export default function RegisterForm() {
 
       useEffect(() => {
          fetchCompanyOrgData()
-      },[])
+         fetchEvent()
+      },[fetchEvent])
 
 
         const handleCompanyRegister = () => {
@@ -186,6 +185,7 @@ export default function RegisterForm() {
           email={companyFormData.company_details.email} 
           formDataReg={companyFormData}
           captchaValue={captchaValue}
+          eventData={eventData}
 
         />}
   </m.div>

@@ -6,7 +6,7 @@ import axios from 'axios';
 import Congrats from './Congrats';
 import GetToken from '../../../../context/GetToken';
 
-export default function EmailForm({ email,  hashedCode, formDataReg, captchaValue, sendEmailConfirmation }) {
+export default function EmailForm({ email,  hashedCode, formDataReg, captchaValue, sendEmailConfirmation, eventData }) {
   const csrfToken = GetToken()
   const [otp, setOTP] = useState('');
   const [isResendOTP, setIsResendOTP] = useState(false);
@@ -23,11 +23,13 @@ export default function EmailForm({ email,  hashedCode, formDataReg, captchaValu
       email_to_send: email
     }
   });
+  const firstEventId = eventData.map((item) => item.id)[0];
 
   const [formInviteData, setFormInviteData] = useState({
     invite_details: {
-      custom_msg: "This is a test",
-      event: 1
+      custom_msg: "This is the event",
+      event: firstEventId
+      
     },
     g_recaptcha_response: captchaValue,
     participant_details: {
@@ -38,8 +40,11 @@ export default function EmailForm({ email,  hashedCode, formDataReg, captchaValu
       email: formDataReg?.participant_details?.email || "",
       designation: formDataReg?.participant_details?.designation || "",
       company_org_other: formDataReg?.participant_details?.company_org_other || "",
+      company_org: formDataReg?.participant_details?.company_org || "",
       military_branch: formDataReg?.participant_details?.military_branch || "",
+      military_branch2: formDataReg?.participant_details?.military_branch2 || "",
       phone_no: formDataReg?.participant_details?.phone_no || "",
+      preferred_attendance: formDataReg?.participant_details?.preferred_attendance || "",
     }
   });
 

@@ -3,9 +3,24 @@
 
 @layer components {
     .dashboardContainer{
-        /* background-image: url("../../../../assets/background.png");
-        background-size: cover; */
-        @apply font-opensans  p-3 rounded-lg 
+        @apply font-opensans  p-3 rounded-lg  bg-zinc-100
+        overflow-y-auto h-[100vh] pb-24
+    }
+
+    .dashboardContainer::-webkit-scrollbar {
+        width: 10px; /* Width of the scrollbar */
+    }
+    
+    .dashboardContainer::-webkit-scrollbar-track {
+        @apply bg-slate-50 /* Color of the track */
+    }
+    
+    .dashboardContainer::-webkit-scrollbar-thumb {
+        @apply bg-teal-500
+    }
+    
+    .dashboardContainer::-webkit-scrollbar-thumb:hover {
+        @apply bg-teal-900 /* Color of the thumb on hover */
     }
 
     .dashboardHeader{
@@ -19,64 +34,113 @@
 
 
     .dashboardContent{
-        @apply flex items-start gap-5 flex-col
+        @apply flex items-start gap-5 
     }
 
     .cardContainer{
-        @apply flex  gap-3 font-opensans  
-         rounded-lg flex-wrap
+        @apply flex flex-col gap-3
     }
 
+
+    .flexCard{
+        @apply flex gap-3
+    }
+
+    .militaryCardWrapper h3{
+        @apply  uppercase text-xs lg:text-sm font-bold 
+        text-gray-800  mt-5
+    }
+
+    .militaryCardBox{
+        @apply bg-white rounded-lg border shadow-md p-10
+        flex gap-4 flex-wrap 
+    }
+
+    .militaryCard{
+        @apply flex border items-center justify-between p-5 
+        shadow-md  relative rounded-md  w-[48%] bg-gray-100
+    }
    
 
+    .militaryCard span{
+        @apply  p-2 rounded-md shadow-md bg-white w-[70%]
+    }
+
+    .militaryCard span p{
+        @apply  font-bold text-base h-3 text-gray-600 font-montserrat
+    }
+
+    .militaryCard span small{
+        @apply font-medium text-gray-400 
+    }
+
+    .militaryCard .militaryTotal{
+        @apply text-xl font-bold bg-white text-amber-500 
+         shadow-md rounded-full  w-[50px] h-[50px] text-center
+         flex items-center justify-center
+    }
+
+
+    
+
     .cardContainer .card{
-        background: linear-gradient(318deg, #14b8a6, #2fc8b8, #077c6f);
-        background-size: 600% 600%;
-
-        -webkit-animation: AnimationName 14s ease infinite;
-        -moz-animation: AnimationName 14s ease infinite;
-        animation: AnimationName 14s ease infinite;
-
-        @apply w-full  lg:w-[400px] h-[150px] bg-teal-500 border-2 border-teal-100 p-1
-        rounded-3xl items-center shadow-md flex justify-between
+        @apply w-[200px]  lg:w-[250px] h-[150px] bg-white p-5
+        rounded-md shadow-md flex  
     }
 
-    @-webkit-keyframes AnimationName {
-        0%{background-position:69% 0%}
-        50%{background-position:32% 100%}
-        100%{background-position:69% 0%}
-    }
-    @-moz-keyframes AnimationName {
-        0%{background-position:69% 0%}
-        50%{background-position:32% 100%}
-        100%{background-position:69% 0%}
-    }
-    @keyframes AnimationName {
-        0%{background-position:69% 0%}
-        50%{background-position:32% 100%}
-        100%{background-position:69% 0%}
-    }
+
 
     .cardContainer .card p{
-        @apply text-[3rem] text-white font-bold
+        @apply text-2xl lg:text-[3rem] text-gray-800 font-bold
+        mt-3
     }
 
     .cardContainer .card span{
-        @apply flex items-center justify-center mt-5 gap-3
+        @apply flex items-center gap-3
     }
 
-    .cardContainer .card span h3{
-        @apply uppercase text-sm font-bold 
-        text-teal-50  
+    .cardContainer .card h3{
+        @apply uppercase text-xs lg:text-sm font-bold 
+        text-gray-800  
     }
 
     .cardContainer .card span svg{
-        @apply text-3xl  text-white
+        @apply text-3xl  text-white   w-[50px] h-[50px] p-2 rounded-md
+    }
+
+    .cardContainer .card span .icon1{
+        @apply bg-blue-400
+    }
+
+    .cardContainer .card span .icon2{
+        @apply bg-orange-400
+    }
+    
+    .cardContainer .card span .icon3{
+        @apply bg-red-400
+    }
+
+    .cardContainer .card span .icon4{
+        @apply bg-amber-400
+    }
+
+    .cardContainer .card span .icon4{
+        @apply bg-lime-400
+    }
+
+    .cardContainer .card span .icon5{
+        @apply bg-emerald-400
+    }
+
+    .cardContainer .card span .icon6{
+        @apply bg-violet-400
     }
 
 
     .chartContainer{
-        @apply  flex  gap-5  flex-wrap
+        @apply  flex  gap-5  flex-col 
+         rounded-lg  w-full
+        
        
     }
 
@@ -87,32 +151,36 @@
     }
 
     .lineChartBox{
-        @apply w-[615px]
+        @apply w-full 
     }
 
 
     .lineChart{
         @apply bg-white rounded-md p-5  
-        border
+        border 
     }
 
 
     .barChartBox{
-        @apply w-[615px]
+        @apply w-full  
     }
 
 
     .barChart{
-        @apply bg-white rounded-md p-5  
-        border
+        @apply rounded-md p-5  
+        border  bg-white
     }
 
 
     .donutChartBox{
-        @apply   bg-white rounded-md  border
+        @apply bg-white border rounded-md  
         flex flex-col items-center justify-center 
-        w-[600px]  p-20
+        w-full  h-[400px]
     }
 
- 
+    .polarChartBox{
+        @apply bg-white border rounded-md  
+        flex flex-col items-center justify-center 
+        w-full  h-[400px]
+    }
 }

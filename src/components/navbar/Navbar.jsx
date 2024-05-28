@@ -36,9 +36,9 @@ function BasicExample() {
                   <span>Defense Suppliers Summit <FaAngleDown /></span>
                 </Nav.Link>
                 <div className='linkMenu'>
-                  <HashLink to="/expo-asia/defense-suppliers-summit#speakers">Speakers</HashLink>
+                  {/* <HashLink to="/expo-asia/defense-suppliers-summit#speakers">Speakers</HashLink> */}
                   <HashLink to="/expo-asia/defense-suppliers-summit#program">Program</HashLink>
-                  <HashLink to="/expo-asia/defense-suppliers-summit#meetings">Meetings</HashLink>
+                  {/* <HashLink to="/expo-asia/defense-suppliers-summit#meetings">Meetings</HashLink> */}
                 </div>
               </div>
 
@@ -53,7 +53,21 @@ function BasicExample() {
               </div>
 
               <Nav.Link onClick={() => { window.scroll(0, 0) }} as={NavLink} to="/expo-asia/contact-us" activeClassName="active">Contact Us</Nav.Link>
-            </Nav>
+           
+           
+              <div className='linkMenuBox'>
+                <div
+                className='registerbtn'
+                as={NavLink} to="/expo-asia/expo" activeClassName="active">
+                  <span>Register Now </span>
+                </div>
+                <div className='linkMenu'>
+                  <HashLink to="/expo-asia/participant">Participant</HashLink>
+                  <HashLink to="/expo-asia/exhibitor">Sponsor/Exhibitor</HashLink>
+                </div>
+              </div>
+         
+           </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>

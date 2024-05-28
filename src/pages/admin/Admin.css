@@ -4,7 +4,7 @@
 @layer components {
   
     .sidebar {
-        @apply flex flex-col items-center 
+        @apply flex flex-col items-center fixed
     }
 
     .sidebar img{

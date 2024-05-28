@@ -3,37 +3,37 @@ import { Table, Button, Popconfirm, message, Modal, Form, Input, Select } from '
 import { EditOutlined, DeleteOutlined, ReloadOutlined, PlusOutlined  } from '@ant-design/icons';
 import GetToken from '../../../../context/GetToken'
 import useAdminStore from '../../../../store/adminStore';
+import { useFetchData } from '../../../../hooks/participantHook'; 
+import CreateForm from './form/CreateForm';
+import UpdateForm from './form/UpdateForm';
 
 const Participant = () => {
   const { 
       participantData,
-      fetchParticipants, 
+      militaryBranchData,
       deleteParticipant, 
       updateParticipant,
       createParticipant,
-      fetchCompany, 
       companyData,
-      setCsrfToken 
+      forumData,
+      fetchParticipants
   } = useAdminStore();
 
-  const csrfToken = GetToken();
+  useFetchData()
+
   const [visible, setVisible] = useState(false);
   const [createVisible, setCreateVisible] = useState(false);
   const [updatingParticipant, setUpdatingParticipant] = useState(null);
-  const [form] = Form.useForm();
+  const [updateForm] = Form.useForm();
   const [createForm] = Form.useForm()
+  const csrfToken = GetToken();
 
-  useEffect(() => {
-    fetchParticipants();
-    fetchCompany();
-    setCsrfToken(csrfToken);
-  }, [fetchParticipants, fetchCompany, setCsrfToken, csrfToken]);
 
   useEffect(() => {
     if (updatingParticipant) {
-      form.setFieldsValue(updatingParticipant);
+      updateForm.setFieldsValue(updatingParticipant);
     }
-  }, [updatingParticipant, form]);
+  }, [updatingParticipant, updateForm]);
 
 
   const totalCount = participantData.length;
@@ -48,26 +48,34 @@ const Participant = () => {
         const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
         return date.toLocaleString('en-US', options);
       },
+      width:"200px"
+
     },
     {
       title: 'First Name',
       dataIndex: 'first_name',
+      key: 'first_name',
+      sorter: (a, b) => a.first_name.localeCompare(b.first_name),
       filters: Array.from(new Set(participantData.map(item => item.first_name))).map(first_name => ({
         text: first_name,
         value: first_name,
       })),
       onFilter: (value, record) => record.first_name.includes(value),
       filterSearch: true,
+      width:"150px"
     },
     {
       title: 'Last Name',
       dataIndex: 'last_name',
+      sorter: (a, b) => a.last_name.localeCompare(b.last_name),
       filters: Array.from(new Set(participantData.map(item => item.last_name))).map(last_name => ({
         text: last_name,
         value: last_name,
       })),
       onFilter: (value, record) => record.last_name.includes(value),
       filterSearch: true,
+      width:"150px"
+
     },
     {
       title: 'Email',
@@ -78,6 +86,8 @@ const Participant = () => {
       })),
       onFilter: (value, record) => record.email.includes(value),
       filterSearch: true,
+      width:"200px"
+
     },
     {
       title: 'Designation',
@@ -88,10 +98,14 @@ const Participant = () => {
       })),
       onFilter: (value, record) => record.designation.includes(value),
       filterSearch: true,
+      width:"200px"
+
     },
     {
       title: 'Unit/Organization/Company',
-      dataIndex: 'company_org_other',
+      render: (text, record) => record.company_org_details?.name || record?.company_org_other || ""  ,
+
+      width:"200px"
     },
     {
       title: 'Military Branch',
@@ -102,25 +116,23 @@ const Participant = () => {
       })),
       onFilter: (value, record) => record.military_branch.includes(value),
       filterSearch: true,
+      width:"200px"
+
     },
     {
-      title: 'Mobile No',
+      title: 'Contact Number',
       dataIndex: 'phone_no',
+      width:"200px"
+
     },
+   
     {
-      title: 'Viber No',
-      dataIndex: 'viber_no',
-    },
-    {
-      title: 'Whatsapp No',
-      dataIndex: 'whatsapp_no',
-    },
-    {
+      width:"200px",
       title: 'Action',
       dataIndex: 'action',
       fixed: 'right',
       render: (_, record) => (
-        <span className='flex gap-3 flex-col items-center'>
+        <span className='flex gap-2 flex-col items-center'>
           <Button
             icon={<EditOutlined />}
             size='small'
@@ -142,6 +154,9 @@ const Participant = () => {
       ),
     },
   ];
+
+
+
 
   const handleEdit = (participant) => {
     setUpdatingParticipant(participant);
@@ -168,9 +183,9 @@ const Participant = () => {
       company_org_other,
       company_org,
       military_branch,
+      military_branch2,
       phone_no,
-      viber_no,
-      whatsapp_no,
+
     } = values;
 
     if (
@@ -179,11 +194,7 @@ const Participant = () => {
       !middle_name ||
       !email ||
       !designation ||
-      !company_org ||
-      !military_branch ||
-      !phone_no ||
-      !viber_no ||
-      !whatsapp_no
+      !phone_no 
     ) {
       message.error('Please fill in all required fields.');
       return;
@@ -198,9 +209,8 @@ const Participant = () => {
       company_org_other,
       company_org,
       military_branch,
+      military_branch2,
       phone_no,
-      viber_no,
-      whatsapp_no,
     };
 
     const isChanged = Object.keys(updatedData).some(
@@ -233,22 +243,19 @@ const Participant = () => {
       company_org_other,
       company_org,
       military_branch,
+      military_branch2,
       phone_no,
-      viber_no,
-      whatsapp_no,
+      preferred_attendance,
+      forum
+ 
     } = values;
 
     if (
       !first_name ||
       !last_name ||
-      !middle_name ||
       !email ||
       !designation ||
-      !company_org ||
-      !military_branch ||
-      !phone_no ||
-      !viber_no ||
-      !whatsapp_no
+      !phone_no
     ) {
       message.error('Please fill in all required fields.');
       return;
@@ -263,9 +270,10 @@ const Participant = () => {
       company_org_other,
       company_org,
       military_branch,
+      military_branch2,
       phone_no,
-      viber_no,
-      whatsapp_no,
+      preferred_attendance,
+      forum
      };
 
     try {
@@ -323,106 +331,15 @@ const Participant = () => {
         onCancel={() => setVisible(false)}
         footer={null}
       >
-        <Form
-          form={form}
-          className='mt-10'
-          onFinish={handleUpdate}
-          initialValues={{
-            first_name: updatingParticipant ? updatingParticipant.first_name : '',
-            last_name: updatingParticipant ? updatingParticipant.last_name : '',
-            middle_name: updatingParticipant ? updatingParticipant.middle_name : '',
-            email: updatingParticipant ? updatingParticipant.email : '',
-            designation: updatingParticipant ? updatingParticipant.designation : '',
-            company_org_other: updatingParticipant
-              ? updatingParticipant.company_org_other
-              : '',
-              company_org: updatingParticipant
-              ? updatingParticipant.company_org
-              : '',
-            military_branch: updatingParticipant
-              ? updatingParticipant.military_branch
-              : '',
-            phone_no: updatingParticipant ? updatingParticipant.phone_no : '',
-            viber_no: updatingParticipant ? updatingParticipant.viber_no : '',
-            whatsapp_no: updatingParticipant ? updatingParticipant.whatsapp_no : '',
-          }}
-        >
-          <Form.Item
-            label='First Name'
-            name='first_name'
-            rules={[{ required: true, message: 'Please input first name!' }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label='Last Name'
-            name='last_name'
-            rules={[{ required: true, message: 'Please input last name!' }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item label='Middle Name' name='middle_name'>
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label='Email'
-            name='email'
-            rules={[
-              { required: true, message: 'Please input email!' },
-              { type: 'email', message: 'Invalid email format!' },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label='Designation'
-            name='designation'
-            rules={[{ required: true, message: 'Please input designation!' }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label='Unit/Organization/Company Name'
-            name='company_org'
-            rules={[{ required: true, message: 'Please input Unit/Organization/Company Name!' }]}
+       <UpdateForm
+          updateForm={updateForm}
+          handleUpdate={handleUpdate}
+          updatingParticipant={updatingParticipant}
+          companyData={companyData}
+          militaryBranchData={militaryBranchData}
+          forumData={forumData}
 
-          >
-              <Select placeholder="Select a company ">
-              {companyData.map((type) => (
-                <Select.Option key={type.id} value={type.id}>
-                  {type.name}
-                </Select.Option>
-              ))}
-            </Select>
-          </Form.Item>
-          <Form.Item
-            label='Other Company'
-            name='company_org_other'
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item label='Military Branch' name='military_branch'>
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label='Mobile No'
-            name='phone_no'
-            rules={[{ required: true, message: 'Please input Mobile Number!' }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item label='Viber Number' name='viber_no'>
-            <Input />
-          </Form.Item>
-          <Form.Item label='WhatsApp Number' name='whatsapp_no'>
-            <Input />
-          </Form.Item>
-          <Form.Item>
-            <Button className='buttonCreate' type='primary' htmlType='submit'>
-              Update
-            </Button>
-          </Form.Item>
-        </Form>
+       />
       </Modal>
 
 
@@ -433,112 +350,14 @@ const Participant = () => {
         onCancel={() => setCreateVisible(false)}
         footer={null}
       >
-        <Form
-           form={createForm}
-          className='mt-10'
-          onFinish={handleCreate}
-        >
-          <Form.Item
-            label='First Name'
-            name='first_name'
-            rules={[{ required: true, message: 'Please input first name!' }]}
-          >
-            <Input />
-          </Form.Item>
+       <CreateForm  
+        onFinish={handleCreate} 
+        companyData={companyData}  
+        createForm={createForm}
+        militaryBranchData={militaryBranchData}
+        forumData={forumData}
 
-          <Form.Item
-            label='Last Name'
-            name='last_name'
-            rules={[{ required: true, message: 'Please input last name!' }]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            label='Middle Name'
-            name='middle_name'
-            rules={[{  message: 'Please input middle name!' }]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            label='Email'
-            name='email'
-            rules={[
-              { required: true, message: 'Please input email!' },
-              { type: 'email', message: 'Invalid email format!' },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label='Designation'
-            name='designation'
-            rules={[{ required: true, message: 'Please input designation!' }]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            label='Military Branch of Service (if applicable)'
-            name='military_branch'
-            rules={[{  message: 'Please input military branch of service!' }]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            label='Phone No'
-            name='phone_no'
-            rules={[{ required: true, message: 'Please input phone number!' }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label='Viber No'
-            name='viber_no'
-            rules={[{ required: true, message: 'Please input viber number!' }]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            label='Whatsapp No'
-            name='whatsapp_no'
-            rules={[{ required: true, message: 'Please input whatsapp number!' }]}
-          >
-            <Input />
-          </Form.Item>
-        
-          <Form.Item label='Website' name='website'>
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label='Company'
-            name='company_org'
-            rules={[{ required: true, message: 'Please select company ' }]}
-          >
-            <Select placeholder="Select a company ">
-              {companyData.map((type) => (
-                <Select.Option key={type.id} value={type.id}>
-                  {type.name}
-                </Select.Option>
-              ))}
-            </Select>
-          </Form.Item>
-          <Form.Item
-            label='Other Company'
-            name='company_org_other'
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item>
-            <Button className='buttonCreate' type='primary' htmlType='submit'>
-              Create
-            </Button>
-          </Form.Item>
-        </Form>
+        />
       </Modal>
     </div>
   );

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import axios from 'axios';
-import { apiParticipant, apiBooth,  apiCompanyOrg, apiCompanyOrgType, apiEvent, apiBoothAttendee, apiEventAttendee, apiMyAccount, apiInvite, apiForum} from '../api/api';
+import { apiMilitaryBranch, apiParticipant, apiBooth,  apiCompanyOrg, apiCompanyOrgType, apiEvent, apiBoothAttendee, apiEventAttendee, apiMyAccount, apiInvite, apiForum, apiUsers} from '../api/api';
 
 const useAdminStore = create((set) => ({
   participantData: [],
@@ -13,8 +13,38 @@ const useAdminStore = create((set) => ({
   myAccountData: [],
   inviteData: [],
   forumData:[],
+  usersData:[],
+  militaryBranchData:[],
   csrfToken: '',
 
+
+  fetchMilitaryBranch: async () => {
+    try {
+      const res = await axios.get(apiMilitaryBranch);
+      const formattedData = res.data.success.map((item, index) => ({
+        key: index,
+        ...item,
+      }));
+      set({ militaryBranchData: formattedData });
+      console.log('Military Branch Data:', formattedData);
+    } catch (error) {
+      console.error('Error fetching military branch:', error);
+    }
+  },
+
+  fetchUsers: async () => {
+    try {
+      const res = await axios.get(apiUsers);
+      const formattedData = res.data.success.map((item, index) => ({
+        key: index,
+        ...item,
+      }));
+      set({ usersData: formattedData });
+      console.log('users Data:', formattedData);
+    } catch (error) {
+      console.error('Error fetching Forum:', error);
+    }
+  },
 
   fetchForum: async () => {
     try {
@@ -156,6 +186,46 @@ const useAdminStore = create((set) => ({
       console.error('Error fetching My Account:', error);
     }
   },
+
+
+
+  createMilitaryBranch: async (newMilitaryBranch, csrfToken) => {
+    try {
+      const res = await axios.post(apiMilitaryBranch, newMilitaryBranch, {
+        headers: {
+          'X-CSRFToken': csrfToken,
+        },
+      });
+      const createdMilitaryBranch = { key: res.data.id, ...res.data };
+      set((state) => ({
+        militaryBranchData: [...state.militaryBranchData, createdMilitaryBranch],
+      }));
+      console.log('Created Military Branch:', createdMilitaryBranch);
+    } catch (error) {
+      console.error('Error creating military branch:', error);
+      throw error; // Rethrow the error to handle it in the component
+    }
+  },
+
+
+  createUsers: async (newForum, csrfToken) => {
+    try {
+      const res = await axios.post(apiUsers, newForum, {
+        headers: {
+          'X-CSRFToken': csrfToken,
+        },
+      });
+      const createdUser = { key: res.data.id, ...res.data };
+      set((state) => ({
+        usersData: [...state.usersData, createdUser],
+      }));
+      console.log('Created Users:', createdUser);
+    } catch (error) {
+      console.error('Error creating user:', error);
+      throw error; // Rethrow the error to handle it in the component
+    }
+  },
+
   
 
   createForum: async (newForum, csrfToken) => {
@@ -282,7 +352,39 @@ const useAdminStore = create((set) => ({
   },
 
 
-   
+    
+  deleteMilitaryBranch: async (id, csrfToken) => {
+    try {
+      await axios.delete(`${apiMilitaryBranch}${id}`, {
+        headers: {
+          'X-CSRFToken': csrfToken,
+        },
+      });
+      set((state) => ({
+        militaryBranchData: state.militaryBranchData.filter((item) => item.id !== id),
+      }));
+    } catch (error) {
+      console.error('Error deleting military branch:', error);
+    }
+  },
+
+    
+  deleteUsers: async (id, csrfToken) => {
+    try {
+      await axios.delete(`${apiUsers}${id}`, {
+        headers: {
+          'X-CSRFToken': csrfToken,
+        },
+      });
+      set((state) => ({
+        usersData: state.usersData.filter((item) => item.id !== id),
+      }));
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  },
+
+
   deleteForum: async (id, csrfToken) => {
     try {
       await axios.delete(`${apiForum}${id}`, {
@@ -425,6 +527,42 @@ const useAdminStore = create((set) => ({
     }
   },
 
+
+  
+  updateMilitaryBranch: async (id, updatedData, csrfToken) => {
+    try {
+      await axios.put(`${apiMilitaryBranch}${id}`, updatedData, {
+        headers: {
+          'X-CSRFToken': csrfToken,
+        },
+      });
+      set((state) => ({
+        militaryBranchData: state.militaryBranchData.map((militaryBranch) =>
+          militaryBranch.id === id ? { ...militaryBranch, ...updatedData } : militaryBranch
+        ),
+      }));
+    } catch (error) {
+      console.error('Error updating military Branch:', error);
+    }
+  },
+
+
+  updateUsers: async (id, updatedData, csrfToken) => {
+    try {
+      await axios.put(`${apiUsers}${id}`, updatedData, {
+        headers: {
+          'X-CSRFToken': csrfToken,
+        },
+      });
+      set((state) => ({
+        usersData: state.usersData.map((user) =>
+          user.id === id ? { ...user, ...updatedData } : user
+        ),
+      }));
+    } catch (error) {
+      console.error('Error updating user:', error);
+    }
+  },
 
   updateForum: async (id, updatedData, csrfToken) => {
     try {

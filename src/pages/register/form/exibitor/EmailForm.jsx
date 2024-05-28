@@ -6,7 +6,7 @@ import axios from 'axios';
 import Congrats from './Congrats';
 import GetToken from '../../../../context/GetToken';
 
-export default function EmailForm({ email, hashedCode, formDataReg, captchaValue, sendEmailConfirmation }) {
+export default function EmailForm({ email, hashedCode, formDataReg, captchaValue, sendEmailConfirmation, eventData }) {
   const csrfToken = GetToken();
   const [otp, setOTP] = useState('');
   const [isResendOTP, setIsResendOTP] = useState(false);
@@ -25,10 +25,13 @@ export default function EmailForm({ email, hashedCode, formDataReg, captchaValue
     }
   });
 
+  const firstEventId = eventData.map((item) => item.id)[0];
+
+
   const [formInviteData, setFormInviteData] = useState({
     invite_details: {
-      custom_msg: "This is a test",
-      event: 1
+      custom_msg: "This is the event",
+      event: firstEventId
     },
     g_recaptcha_response: captchaValue,
     company_details: {
@@ -39,7 +42,7 @@ export default function EmailForm({ email, hashedCode, formDataReg, captchaValue
       email:formDataReg?.company_details?.email ||  "",
       website:formDataReg?.company_details?.website || "",
       is_exhibitor: true,
-      company_org_type:1,
+      company_org_type:null,
     }
   });
 

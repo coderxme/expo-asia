@@ -3,7 +3,7 @@ import BarChart from './BarChart';
 import useAdminStore from '../../../../../store/adminStore';
 import DonutChart from './DonutChart';
 import LineChart from './LineChart';
-// import PolarAreaChart from './PolarAreaChart';
+import PolarAreaChart from './PolarAreaChart';
 
 export default function ChartComponent() {
   const { participantData, fetchParticipants } = useAdminStore();
@@ -40,10 +40,10 @@ export default function ChartComponent() {
 
   return (
     <div className="chartContainer">
-      <LineChart data={weeklyData} />
-      <BarChart data={weeklyData} />
+      {/* <LineChart data={weeklyData} />
+      <BarChart data={weeklyData} /> */}
       <DonutChart data={weeklyData} />
-      {/* <PolarAreaChart data={weeklyData} /> */}
+      <PolarAreaChart data={weeklyData} />
     </div>
   );
 }

@@ -2,8 +2,7 @@
 
 @layer components{
     .carouselBox{
-        background-image:url("../../assets/carouselBackground.png");
-        background-size: cover;
+    
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
@@ -13,6 +12,23 @@
     .carouselBox img{
         @apply  w-[60%] lg:h-[400px] mt-16
     }
+
+    .carouselBox1{
+        background-image:url("../../assets/home/carousel1.png");
+        background-size: cover;
+    }
+
+    .carouselBox2{
+        background-image:url("../../assets/home/carousel2.png");
+        background-size: cover;
+    }
+
+
+    .carouselBox3{
+        background-image:url("../../assets/home/carousel3.png");
+        background-size: cover;
+    }
+
 
     .carouselBox a{
         text-decoration: none;
@@ -30,7 +46,7 @@
     .carouselBox button{
         @apply border p-2 md:p-3 border-[#11385D] font-bold text-xs sm:text-sm 
         text-[#11385D] w-[200px]  md:w-[250px] hover:bg-[#11385D] hover:text-white 
-        flex items-center justify-center gap-1 h-[50px] duration-200
+        flex items-center justify-center gap-1 h-[50px] duration-200 focus:bg-white focus:text-[#11385D]
     }
 
     .homeContext2{
@@ -72,14 +88,12 @@
     }
 
     .homeContext2Box1 .image1{
-        box-shadow:-10px 10px #11385D;
         @apply lg:w-[600px] 
         
     }
 
     .homeContext2Box1 .ant-image-mask{
-        @apply lg:w-[600px] 
-
+        @apply lg:w-[600px] hidden
     }
 
     .homeContext2Box1 .wave1{
@@ -105,19 +119,22 @@
 
 
     .homeContext2BoxImg{
-        @apply flex gap-10 flex-col lg:flex-row
+        @apply flex gap-10 flex-col lg:flex-row 
     }
 
     .homeContext2BoxImg .wave2{
         @apply absolute right-0
     }
 
-    .homeContext2BoxImg .image1{
-        box-shadow:-10px 10px #11385D;
-        @apply w-[600px]
+    .homeContext2Box2 .image1{
+        @apply lg:w-[900px]
         
     }
-   
+
+    
+    .homeContext2Box2 .ant-image-mask{
+        @apply hidden
+    }
 
 }
 

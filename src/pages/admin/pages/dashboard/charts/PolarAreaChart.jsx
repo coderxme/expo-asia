@@ -9,27 +9,18 @@ const PolarAreaChart = ({ data }) => {
     labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
     datasets: [
       {
-        label: 'Data Registered',
+        label: 'Registered Participant',
         data: data,
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
+          '#4ade80',
+          '#fbbf24',
+          '#2dd4bf',
+          '#3b82f6',
+          '#6366f1',
+          '#A1DD70',
+          '#BFF6C3',
         ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-          'rgba(255, 99, 132, 1)',
-        ],
-        borderWidth: 1,
+      
       },
     ],
   };
@@ -48,7 +39,11 @@ const PolarAreaChart = ({ data }) => {
     },
   };
 
-  return <PolarArea data={chartData} options={options} />;
+  return (
+    <div className="polarChartBox">
+      <PolarArea className='p-5' data={chartData} options={options} />
+    </div>
+  );
 };
 
 export default PolarAreaChart;

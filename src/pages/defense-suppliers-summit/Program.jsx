@@ -1,15 +1,11 @@
 import { Image } from 'antd';
 import image1 from '../../assets/page3/def-1.png'
 import image2 from '../../assets/page3/def-2.png'
-import BlueWave1 from '../../assets/blue-image1.png';
-import BlueWave2 from '../../assets/blue-image2.png';
 import ScrollAnimation from 'react-animate-on-scroll';
 
 export default function Program() {
   return (
-    <div className="programContainer" id="program">
-      <img src={BlueWave1} alt=""  className='blueWave1'/>
-      <img src={BlueWave2} alt=""  className='blueWave2'/>
+    <div className="programContainer2" id="program">
       <ScrollAnimation animateIn="backInUp">
       <h1>Program</h1>
       </ScrollAnimation>

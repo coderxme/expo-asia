@@ -10,27 +10,37 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import ReCAPTCHA from "react-google-recaptcha";
 import useAdminStore from '../../../../store/adminStore';
-
+const { Option } = Select; 
 const recaptchaKey = import.meta.env.VITE_RECAPTCHAKEY
 
 export default function RegisterForm() {
     const csrfToken = GetToken();
-    const { forumData, fetchForum } = useAdminStore()
+   
+    const { 
+       forumData,
+       fetchForum, 
+       fetchEvent,
+       fetchMilitaryBranch,
+       fetchCompany,
+
+       companyData,
+       eventData,
+       militaryBranchData
+        } = useAdminStore()
     const [formData, setFormData] = useState({
-        invite_details: {
-          custom_msg: "This is a test",
-          event: 1
-        },
         participant_details: {
           first_name: "",
           last_name: "",
           middle_name: "",
           email: "",
           designation: "",
+          company_org:"",
           company_org_other: "",
           military_branch: "",
+          military_branch2: null,
           phone_no: "",
           forum:null,
+          preferred_attendance:""
         }
       });  
 
@@ -39,15 +49,36 @@ export default function RegisterForm() {
       const [isSendingEmail, setIsSendingEmail] = useState(false);
       const [hashedCode, setHashedCode] = useState("");
       const [captchaValue, setCaptchaValue] = useState(null);
-
+      const [showOtherInput, setShowOtherInput] = useState({
+        company: false,
+        military: false
+    });
       useEffect(() => {
         fetchForum()
-      },[fetchForum])
+        fetchEvent()
+        fetchMilitaryBranch()
+        fetchCompany()
+      },[fetchForum, fetchEvent, fetchMilitaryBranch, fetchCompany])
+
+    
+     
 
 
 
         const handleRegisterParticipantSubmit = () => {
             // Perform client-side validation
+
+            if (formData.participant_details.forum === null) {
+              message.error("Please select Forum Attending");
+              return;
+            }
+
+            if (formData.participant_details.preferred_attendance === '') {
+              message.error("Please select Preferred Attendance");
+              return;
+            }
+
+
             if (formData.participant_details.last_name === '') {
               message.error("Last Name field cannot be empty");
               return;
@@ -62,6 +93,12 @@ export default function RegisterForm() {
               message.error("Designation field cannot be empty");
               return;
             }
+
+            
+            if (formData.participant_details.company_org === '' && formData.participant_details.company_org_other === '') {
+              message.error("Please select Unit/Organization/Company Name or specify it if 'Others'");
+              return;
+          }
         
             if (formData.participant_details.phone_no === '') {
               message.error("Contact Number field cannot be empty");
@@ -69,17 +106,22 @@ export default function RegisterForm() {
             }
         
         
+          
         
             if (formData.participant_details.email === '') {
               message.error("Email address field cannot be empty");
               return;
             }
 
+
+           
+
             if (formData.participant_details.forum === '') {
               message.error("Please select forum");
               return;
             }
-            
+
+        
             // If the validation passes, just log the formData
             console.log('Form Data:', formData);
             setRegistrationSuccess(true);
@@ -112,8 +154,17 @@ export default function RegisterForm() {
           };
         
         
-        
-        
+          const handleSelectChange = (name, value) => {
+            const updatedFormData = { ...formData };
+            if (name === 'military_branch2') {
+                setShowOtherInput((prevState) => ({ ...prevState, military: value === "others" }));
+                updatedFormData.participant_details[name] = value === "others" ? "" : value;
+            } else if (name === 'company_org') {
+                setShowOtherInput((prevState) => ({ ...prevState, company: value === "others" }));
+                updatedFormData.participant_details[name] = value === "others" ? "" : value;
+            }
+            setFormData(updatedFormData);
+        };
         
           const handleFormChangeParticipant = (e) => {
             const { name, value } = e.target;
@@ -149,8 +200,7 @@ export default function RegisterForm() {
       <img src={WaveBackground} className='waveBackground' alt="wave background" />
     
       {!isSendingEmail && !registrationSuccess && (
-    
-     <div className="registerForm">
+      <div className="registerForm">
          <div className="registerFormHeader">
          <h1>Register as Participant</h1>
          <Link className='buttonLink' to={'/expo-asia/exhibitor'}>
@@ -165,6 +215,14 @@ export default function RegisterForm() {
                        ))}
                     </Select>
                 </Form.Item>
+
+                <Form.Item label="What is your preferred mode of attendance for the event?" required className='mt-3'>
+                    <Select defaultValue={formData.participant_details.preferred_attendance} onChange={(value) => handleFormChangeParticipant({ target: { name: 'participant_details.preferred_attendance', value } })}>
+                         <Option  value="online">Online</Option>
+                         <Option  value="f2f">Face-to-Face (F2F)</Option>
+                    </Select>
+                </Form.Item>  
+                
               <Form.Item label="Last Name" required>
                 <Input placeholder="Enter Last Name" value={formData.participant_details.last_name} name="participant_details.last_name" onChange={handleFormChangeParticipant} />
               </Form.Item>
@@ -177,13 +235,54 @@ export default function RegisterForm() {
               <Form.Item label="Designation" required>
                 <Input placeholder="Enter Designation" value={formData.participant_details.designation} name="participant_details.designation" onChange={handleFormChangeParticipant} />
               </Form.Item>
-              <Form.Item label="Unit/Organization/Company Name" required>
+              {/* <Form.Item label="Unit/Organization/Company Name" required>
                 <Input placeholder="Enter Organization/Company Name" value={formData.participant_details.company_org_other} name="participant_details.company_org_other" onChange={handleFormChangeParticipant} />
-              </Form.Item>
-              <Form.Item label="Military Branch of Service ">
-                <Input placeholder="Enter Military Branch of Service" value={formData.participant_details.military_branch} name="participant_details.military_branch" onChange={handleFormChangeParticipant} />
-              </Form.Item>
-              <Form.Item label="Contact Number" required>
+              </Form.Item> */}
+              
+              <Form.Item label="Unit/Organization/Company Name" required>
+                            <Select defaultValue={formData.participant_details.company_org} onChange={(value) => handleSelectChange('company_org', value)}>
+                                {companyData.map((item, index) => (
+                                    <Option key={index} value={item.id}>{item.name}</Option>
+                                ))}
+                                <Option value="others">Others</Option>
+                            </Select>
+                            {showOtherInput.company && (
+                                 <Form.Item  className='mt-1 border rounded-lg p-3 '   label="Please specify your organization">
+                                  <Input 
+                                    placeholder="Enter your organization..." 
+                                    value={formData.participant_details.company_org_other} 
+                                    name="participant_details.company_org_other" 
+                                    onChange={handleFormChangeParticipant} 
+                                />
+                                </Form.Item>
+                            )}
+                        </Form.Item>
+
+              <Form.Item label="Military Branch of Service" className='mt-3'>
+                    <Select defaultValue={formData.participant_details.military_branch2}  onChange={(value) => handleSelectChange('military_branch2', value)}>
+                    <Option  value={null}>Not Applicable</Option>
+                       {militaryBranchData.map((item, index) => (
+                         <Option key={index} value={item.id}>{item.abrv}</Option>
+                       ))}
+                      <Option value="others">Others</Option> 
+                    </Select>
+                    {showOtherInput.military && (
+                              <Form.Item className='mt-1 border rounded-lg p-3' label="Please specify your military branch">
+                                  <Input 
+                                    placeholder="Enter your military branch" 
+                                    value={formData.participant_details.military_branch} 
+                                    name="participant_details.military_branch" 
+                                    onChange={handleFormChangeParticipant} 
+                                />
+                              </Form.Item>
+                            )}
+                </Form.Item>
+
+              <Form.Item label="Contact Number" required
+                  rules={[
+                    { required: true, message: 'Please input Contact Number!' },
+                    { pattern: /^09\d{9}$/, message: 'Contact Number must start with "09" and be 11 digits long!' },
+                  ]}>
                 <Input placeholder="Enter Contact Number" value={formData.participant_details.phone_no} name="participant_details.phone_no" onChange={handleFormChangeParticipant} />
               </Form.Item>
           
@@ -199,7 +298,6 @@ export default function RegisterForm() {
       </div>
       )}
       {isSendingEmail && <Loader />} 
-
        {registrationSuccess && !isSendingEmail && 
         <EmailForm 
         sendEmailConfirmation={sendEmailConfirmation}
@@ -207,6 +305,7 @@ export default function RegisterForm() {
           email={formData.participant_details.email} 
           formDataReg={formData}
           captchaValue={captchaValue}
+          eventData={eventData}
         />}
   </m.div>
   )

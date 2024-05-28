@@ -11,8 +11,15 @@ const LineChart = ({ data }) => {
       {
         label: 'Registered participant base on the day',
         data: data,
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: [
+          '#4ade80',
+          '#fbbf24',
+          '#2dd4bf',
+          '#3b82f6',
+          '#6366f1',
+          '#A1DD70',
+          '#BFF6C3',
+        ],
         borderWidth: 1,
         fill: true,
       },

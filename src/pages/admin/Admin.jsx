@@ -27,6 +27,8 @@ import { CgDetailsMore } from "react-icons/cg";
 import { AiOutlineMail } from "react-icons/ai";
 import Forum from './pages/forum/Forum';
 import EventCalendar from './pages/event/EventCalendar';
+import Users from './pages/users/Users';
+import MilitaryBranch from './pages/participant/military-branch/MilitaryBranch';
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
@@ -47,6 +49,9 @@ const App = () => {
         break;
       case '1':
         updatedBreadcrumbs.push('Participant');
+        break;
+      case '14':
+        updatedBreadcrumbs.push('Military Branch');
         break;
       case '2':
         updatedBreadcrumbs.push('Company');
@@ -78,6 +83,9 @@ const App = () => {
       case '12':
         updatedBreadcrumbs.push('Event', 'Event Calendar');
         break;
+      case '13':
+        updatedBreadcrumbs.push('Users');
+        break;
       default:
         updatedBreadcrumbs.push('Unknown');
         break;
@@ -92,6 +100,9 @@ const App = () => {
       break;
     case '1':
       contentText = <Participant />;
+      break;
+    case '14':
+      contentText = <MilitaryBranch />;
       break;
     case '2':
       contentText = <Company />;
@@ -123,6 +134,9 @@ const App = () => {
     case '12':
       contentText = <EventCalendar />;
       break;
+    case '13':
+      contentText = <Users />;
+        break;
     default:
       contentText = 'Unknown content';
       break;
@@ -144,31 +158,38 @@ const App = () => {
           <Menu.Item key="111" icon={<RxDashboard />}>
             Dashboard
           </Menu.Item>
-          <Menu.Item key="1" icon={<IoPeopleOutline />}>
+          {/* <Menu.Item key="1" icon={<IoPeopleOutline />}>
             Participant
+          </Menu.Item> */}
+          <SubMenu key="sub4" icon={<IoPeopleOutline/>} title="Participant">
+            <Menu.Item key="1">Participant</Menu.Item>
+            <Menu.Item key="11">Forum </Menu.Item>
+            <Menu.Item key="14">Military Branch </Menu.Item>
+          </SubMenu>
+          <Menu.Item key="13" icon={<IoPeopleOutline />}>
+            Users
           </Menu.Item>
-
           <SubMenu key="sub3" icon={<FaRegBuilding />} title="Company">
             <Menu.Item key="2">Company</Menu.Item>
             <Menu.Item key="8">Company Type</Menu.Item>
           </SubMenu>
           <SubMenu key="sub1" icon={<LiaPersonBoothSolid />} title="Booth">
             <Menu.Item key="3">Booth</Menu.Item>
-            <Menu.Item key="4">Booth Attendee</Menu.Item>
+            <Menu.Item key="4">Attendee</Menu.Item>
           </SubMenu>
 
           <SubMenu key="sub2" icon={<MdOutlineEvent />} title="Event">
             <Menu.Item key="6">Event</Menu.Item>
-            <Menu.Item key="7">Event Attendee</Menu.Item>
-            <Menu.Item key="12">Event Calendar</Menu.Item>
+            <Menu.Item key="7">Attendee</Menu.Item>
+            {/* <Menu.Item key="12">Calendar</Menu.Item> */}
           </SubMenu>
 
-          <Menu.Item key="10" icon={<AiOutlineMail />}>
+          {/* <Menu.Item key="10" icon={<AiOutlineMail />}>
             Invite
-          </Menu.Item>
-          <Menu.Item key="11" icon={<CgDetailsMore />}>
+          </Menu.Item> */}
+          {/* <Menu.Item key="11" icon={<CgDetailsMore />}>
             Forum
-          </Menu.Item>
+          </Menu.Item> */}
         </Menu>
       </Sider>
       <Layout>
@@ -209,7 +230,7 @@ const App = () => {
             padding: 10,
             minHeight: 280,
           }}
-          className='bg-white'
+          className='bg-white '
         >
           {contentText}
         </Content>

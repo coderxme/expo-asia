@@ -23,13 +23,10 @@ export default function Account() {
        </div>
 
        <div className='accountDetails'>
-           <p className='accountText'>Full Name: <b> {myAccountData?.participant_details?.name || ""}</b></p>
-           <p className='accountText'>Email Address: <b> {myAccountData?.participant_details?.email || ""}</b></p>
-           <p className='accountText'>Designation: <b> {myAccountData?.participant_details?.designation || ""}</b></p>
-           <p className='accountText'>Company: <b> {myAccountData?.participant_details?.company_org_details?.name || ""}</b></p>
-           <p className='accountText'>Company Type: <b> {myAccountData?.participant_details?.company_org_details?.company_org_type_details?.name || ""}</b></p>
-           <p className='accountText'>Phone No: <b> {myAccountData?.participant_details?.phone_no || ""}</b></p>
-     
+           <p className='accountText'>Username: <b> {myAccountData?.username || ""}</b></p>
+           <p className='accountText'>First Name: <b> {myAccountData?.first_name || ""}</b></p>
+           <p className='accountText'>Last Name: <b> {myAccountData?.last_name || ""}</b></p>
+           <p className='accountText'>Email Address: <b> {myAccountData?.email || ""}</b></p>
      
        </div>
     </div>

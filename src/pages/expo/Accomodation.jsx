@@ -15,7 +15,7 @@ export default function Accomodation() {
   return (
     <div className="accomodationContainer">
       <ScrollAnimation animateIn="backInUp">
-        <h1>Accomodation</h1>
+        <h1>Accommodation</h1>
         </ScrollAnimation>
 
         <ScrollAnimation animateIn="backInUp">

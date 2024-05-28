@@ -10,7 +10,7 @@ export default function index() {
   return (
     <m.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ duration:0.75, ease: "easeOut" }}>
         <Header />
-        <Speakers />
+        {/* <Speakers /> */}
         <Program />
         <Footer />
       <FloatButton.BackTop />

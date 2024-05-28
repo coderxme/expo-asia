@@ -1,7 +1,6 @@
 import { Image } from "antd"
 import image1 from '../../assets/home/image1.png'
 import image2 from '../../assets/home/image2.png'
-import image3 from '../../assets/home/image3.png'
 import dot from '../../assets/dot.svg'
 import WaveBackground from '../../assets/home-wave-background.png'
 import ScrollAnimation from 'react-animate-on-scroll';
@@ -63,14 +62,9 @@ export default function Details() {
             aimed in addressing the modernization requirements of the Philippine
             Air Force.</p>
          </ScrollAnimation>
-            <div className="homeContext2BoxImg">
-             <ScrollAnimation animateIn="backInUp">
+             <ScrollAnimation animateIn="backInUp" className="flex items-center justify-center">
              <Image  src={image2} alt="image" className="image1" />
              </ScrollAnimation>
-             <ScrollAnimation animateIn="backInUp">
-             <Image  src={image3} alt="image" className="image1" />
-             </ScrollAnimation>
-            </div>
         </div>
     </div>
   )

@@ -32,7 +32,7 @@ const App = () => (
 
         </div>
     </m.div>
-    <div className='carouselBox carouselBox1'>
+    <div className='carouselBox carouselBox2'>
         <img src={image} alt="" />
         <p>Join the biggest Pre-Anniversary celebration of the Philippine Air Force <br />
         June 13-14, 2024  | Marriott Grand Ballroom Manila <br />
@@ -48,7 +48,7 @@ const App = () => (
             </Link>
         </div>
     </div>
-    <div className='carouselBox carouselBox1'>
+    <div className='carouselBox carouselBox3'>
         <img src={image} alt="" />
         <p>Join the biggest Pre-Anniversary celebration of the Philippine Air Force <br />
         June 13-14, 2024  | Marriott Grand Ballroom Manila<br />

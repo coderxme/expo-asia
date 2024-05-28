@@ -36,54 +36,67 @@
     }
 
     .contactBoxWrapper{
-        @apply bg-white  w-[85%] flex flex-col justify-center 
-        -mt-40   shadow-lg xl:h-[450px] lg:flex-row
+        @apply bg-white  w-[85%] flex flex-col justify-between
+        -mt-40   shadow-lg xl:h-[450px] lg:flex-row 
+    }
+
+    .contactBoxContainer{
+        @apply flex flex-col   p-10 text-[#334155]
     }
 
     .contactBox{
-        @apply  lg:w-[30%] h-full p-10
+        @apply  w-full 
     }
 
     .contactBoxMap{
-        @apply  lg:w-[50%] h-full p-5
+        @apply  lg:w-[50%] h-full p-5 font-opensans
     }
+
 
     .contactBoxTitle{
-        @apply text-[#27638D] text-xl font-bold
+        @apply text-[#27638D]  text-lg font-bold border-b w-full
     }
 
-
-    .contactCard{
-        @apply mt-10
+    .contactContentWrapper{
+        @apply flex lg:gap-20 flex-col lg:flex-row
     }
 
-    .contactCard h4{
-        @apply text-[#27638D] text-sm font-bold
+    .contactContent{
+        @apply mt-5
     }
 
-    .contactCard p{
-        @apply flex text-xs items-center gap-2 text-[#334155]
+    .contactContent h4{
+        @apply text-[#27638D]  text-sm font-bold mb-5
     }
 
-    .contactCard svg{
+    .contactContent svg{
         @apply text-[#27638D]
     }
 
-
-    .contactCardDetail{
-        @apply flex flex-col gap-1 mb-3
-    }
-
-    .contactCardDetail span{
+    .contactContent p{
         @apply flex text-xs items-center gap-2
     }
 
-    .socialBox {
-        @apply flex gap-2
+
+    .contentText p{
+        @apply leading-none h-1 text-xs
     }
 
-    .socialBox a{
-        @apply  text-[#27638D] text-lg font-bold
+    .contentText .text2{
+        @apply font-bold
+    }
+    
+
+    .emails{
+        @apply flex gap-2  text-xs
+    }
+
+    .social{
+        @apply flex gap-2 text-xl 
+    }
+
+    .social a{
+        @apply text-[#27638D]
     }
 
 
@@ -101,3 +114,5 @@
 
 
 }
+
+

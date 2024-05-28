@@ -122,4 +122,34 @@
         @apply bg-[#E2EEF3]   text-black  
 
     }
+
+
+
+    .programContainer2{
+        background-image: url("../../assets/program.png");
+        background-size: cover;
+        background-position-y:100px;
+        @apply flex flex-col items-center bg-cover pt-20
+        gap-10 pb-20  relative bg-white
+    }
+
+
+    .programContainer2 h1{
+        @apply border-4 p-3  font-montserrat font-bold
+        md:mt-10 border-[#27638D] text-[#27638D] text-base md:text-2xl lg:text-3xl
+    }
+
+    .programContainer2 .programImageBox{
+        @apply flex w-full items-center justify-center flex-col lg:flex-row
+        gap-5
+    }
+
+    .programContainer2 .programImageBox .image{
+        @apply w-[300px] md:w-[600px]
+    }
+
+    
+    .programContainer2 .programImageBox .ant-image-mask{
+        @apply  md:w-[600px]
+    }
 }

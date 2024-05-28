@@ -35,3 +35,8 @@ export const apiInvite = `${baseUrl}/api/invite/`;
 export const apiMyAccount = `${baseUrl}/api/my_account`
 
 export const apiForum = `${baseUrl}/api/forum/`
+
+export const apiUsers = `${baseUrl}/api/admin_users/`
+
+export const apiMilitaryBranch= `${baseUrl}/api/military_branch/`
+

@@ -17,7 +17,7 @@
 
     .footerBox{
         @apply flex lg:gap-10 flex-col  lg:flex-row 
-        px-10
+        px-10 
     }
 
     .footerBox span{
@@ -25,7 +25,7 @@
     }
 
     .footerBox span h3{
-        @apply font-bold text-sm lg:text-lg
+        @apply font-bold text-sm lg:text-lg border-b-2
     }
 
     .footerBox span p{
@@ -51,4 +51,60 @@
     .footerSocial p a svg{
         @apply text-[#27638D] text-xl
     }
+
+
+    .footerContact h3{
+        @apply font-bold text-sm lg:text-lg border-b-2
+    }
+
+    .footerContactBoxWrapper{
+        @apply flex  gap-10 text-[#334155] 
+    }
+
+
+    .footerContactBox2{
+        @apply  lg:w-[300px]
+    }
+
+    .footerContactBox h4{
+        @apply text-sm font-bold mb-5
+    }
+
+    .footerContactBox p{
+        @apply flex items-center gap-2 text-xs font-medium text-[#334155]
+    }
+
+    .footerContactBox p svg{
+        @apply text-[#11385D]
+    }
+
+    .footerContactBox .address{
+        @apply flex gap-2
+    }
+    
+    .footerContactBox .address p{
+        @apply text-xs 
+    }
+
+
+    
+    .footerContactBox2 h4{
+        @apply text-sm font-bold mb-4
+    }
+
+    .footerContactBox2 p{
+        @apply flex items-center gap-2  font-medium text-[#334155]
+    }
+
+
+
+    .footerContactBox2 p svg{
+        @apply text-[#11385D]
+    }
+
+    .footerContactBox2 p{
+        @apply h-3 lg:h-0 text-xs
+    }
+
+
 }

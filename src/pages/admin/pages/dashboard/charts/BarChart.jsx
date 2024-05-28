@@ -11,8 +11,15 @@ const BarChart = ({ data }) => {
       {
         label: 'Registered participant base on the day',
         data: data,
-        backgroundColor: '#14b8a6',
-        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: [
+          '#4ade80',
+          '#fbbf24',
+          '#2dd4bf',
+          '#3b82f6',
+          '#6366f1',
+          '#A1DD70',
+          '#BFF6C3',
+        ],
       },
     ],
   };
@@ -27,9 +34,18 @@ const BarChart = ({ data }) => {
       legend: {
         display: true,
         position: 'top',
+        // labels: {
+        //   color: 'white',  // Set the legend label text color to white
+        // },
+      },
+      tooltip: {
+        bodyColor: 'white',  // Set the tooltip text color to white
+        titleColor: 'white'  // Set the tooltip title color to white
       },
     },
   };
+
+  
 
   return (
     <div className="barChartBox">

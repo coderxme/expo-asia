@@ -14,6 +14,7 @@ export default function Dashboard() {
     eventData,
     eventAttendeeData,
     inviteData,
+    militaryBranchData,
 
     fetchParticipants,
     fetchCompany,
@@ -21,7 +22,8 @@ export default function Dashboard() {
     fetchBoothAttendee,
     fetchEvent,
     fetchEventAttendee,
-    fetchInvite
+    fetchInvite,
+    fetchMilitaryBranch
 
    } = useAdminStore();
 
@@ -34,6 +36,7 @@ export default function Dashboard() {
     fetchEvent()
     fetchEventAttendee()
     fetchInvite()
+    fetchMilitaryBranch()
   }, [  
       fetchParticipants, 
       fetchCompany, 
@@ -42,6 +45,7 @@ export default function Dashboard() {
       fetchEvent,
       fetchEventAttendee,
       fetchInvite,
+      fetchMilitaryBranch
     ]);
 
 
@@ -68,6 +72,8 @@ export default function Dashboard() {
             EventAttendeeTotal={EventAttendeeTotal}
             EventTotal={EventTotal}
             InviteTotal={InviteTotal}
+            militaryBranchData={militaryBranchData}
+            participantData={participantData}
           />
 
           <ChartComponent />

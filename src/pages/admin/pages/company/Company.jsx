@@ -41,6 +41,7 @@ const Company = () => {
     {
       title: 'Name',
       dataIndex: 'name',
+      sorter: (a, b) => a.name.localeCompare(b.name),
       filters: Array.from(new Set(companyData.map(item => item.name))).map(name => ({
         text: name,
         value: name,
