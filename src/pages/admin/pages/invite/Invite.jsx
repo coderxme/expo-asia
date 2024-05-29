@@ -1,18 +1,13 @@
-import React, { useEffect, useState } from 'react';
 import { Table, Button, Popconfirm, message, Modal, Form, Input } from 'antd';
 import { EditOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
 import GetToken from '../../../../context/GetToken'
 import useAdminStore from '../../../../store/adminStore';
 
 const Invite = () => {
-  const { inviteData, fetchInvite, deleteInvite,  setCsrfToken } = useAdminStore();
+  const { inviteData,  deleteInvite } = useAdminStore();
   const csrfToken = GetToken();
 
 
-  useEffect(() => {
-    fetchInvite();
-    setCsrfToken(csrfToken);
-  }, [fetchInvite, setCsrfToken, csrfToken]);
 
   const totalCount = inviteData.length;
 
@@ -107,7 +102,7 @@ const Invite = () => {
         <Button
           icon={<ReloadOutlined />}
           type='primary'
-          onClick={fetchInvite}
+          // onClick={fetchInvite}
           className='buttonTableHeader'
         >
           Refresh

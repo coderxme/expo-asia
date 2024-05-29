@@ -20,6 +20,8 @@ export const apiCompanyOrgType = `${baseUrl}/api/company_org_type/`;
 
 
 export const apiParticipant = `${baseUrl}/api/participant/`;
+export const apiParticipantCategory= `${baseUrl}/api/participant_category/`
+
 
 export const apiBooth = `${baseUrl}/api/booth/`;
 export const apiBoothAttendee = `${baseUrl}/api/booth_attendee/`;
@@ -39,4 +41,8 @@ export const apiForum = `${baseUrl}/api/forum/`
 export const apiUsers = `${baseUrl}/api/admin_users/`
 
 export const apiMilitaryBranch= `${baseUrl}/api/military_branch/`
+
+export const apiRoles= `${baseUrl}/api/groups/`
+
+
 

@@ -1,9 +1,10 @@
 import { create } from 'zustand';
 import axios from 'axios';
-import { apiMilitaryBranch, apiParticipant, apiBooth,  apiCompanyOrg, apiCompanyOrgType, apiEvent, apiBoothAttendee, apiEventAttendee, apiMyAccount, apiInvite, apiForum, apiUsers} from '../api/api';
+import { apiMilitaryBranch, apiParticipant, apiBooth,  apiCompanyOrg, apiCompanyOrgType, apiEvent, apiBoothAttendee, apiEventAttendee, apiMyAccount, apiInvite, apiForum, apiUsers, apiRoles, apiParticipantCategory} from '../api/api';
 
 const useAdminStore = create((set) => ({
   participantData: [],
+  participantCategoryData:[],
   boothData: [],
   boothAttendeeData: [],
   eventData: [],
@@ -15,7 +16,39 @@ const useAdminStore = create((set) => ({
   forumData:[],
   usersData:[],
   militaryBranchData:[],
+  rolesData:[],
   csrfToken: '',
+
+
+
+  fetchParticipantCategory: async () => {
+    try {
+      const res = await axios.get(apiParticipantCategory);
+      const formattedData = res.data.success.map((item, index) => ({
+        key: index,
+        ...item,
+      }));
+      set({ participantCategoryData: formattedData });
+      console.log('Participant Category Data:', formattedData);
+    } catch (error) {
+      console.error('Error fetching Participant Category:', error);
+    }
+  },
+
+
+  fetchRoles: async () => {
+    try {
+      const res = await axios.get(apiRoles);
+      const formattedData = res.data.success.map((item, index) => ({
+        key: index,
+        ...item,
+      }));
+      set({ rolesData: formattedData });
+      console.log('Roles Data:', formattedData);
+    } catch (error) {
+      console.error('Error fetching roles:', error);
+    }
+  },
 
 
   fetchMilitaryBranch: async () => {
@@ -188,6 +221,43 @@ const useAdminStore = create((set) => ({
   },
 
 
+  createParticipantCategory: async (newParticipantCategory, csrfToken) => {
+    try {
+      const res = await axios.post(apiParticipantCategory, newParticipantCategory, {
+        headers: {
+          'X-CSRFToken': csrfToken,
+        },
+      });
+      const createdParticipantCategory = { key: res.data.id, ...res.data };
+      set((state) => ({
+        participantCategoryData: [...state.participantCategoryData, createdParticipantCategory],
+      }));
+      console.log('Created Participant Category:', createdParticipantCategory);
+    } catch (error) {
+      console.error('Error creating Participant Category:', error);
+      throw error; // Rethrow the error to handle it in the component
+    }
+  },
+
+  createRole: async (newRole, csrfToken) => {
+    try {
+      const res = await axios.post(apiRoles, newRole, {
+        headers: {
+          'X-CSRFToken': csrfToken,
+        },
+      });
+      const createdRole = { key: res.data.id, ...res.data };
+      set((state) => ({
+        rolesData: [...state.rolesData, createdRole],
+      }));
+      console.log('Created Role:', createdRole);
+    } catch (error) {
+      console.error('Error creating Role:', error);
+      throw error; // Rethrow the error to handle it in the component
+    }
+  },
+
+
 
   createMilitaryBranch: async (newMilitaryBranch, csrfToken) => {
     try {
@@ -352,6 +422,37 @@ const useAdminStore = create((set) => ({
   },
 
 
+
+  
+  deleteParticipantCategory: async (id, csrfToken) => {
+    try {
+      await axios.delete(`${apiParticipantCategory}${id}`, {
+        headers: {
+          'X-CSRFToken': csrfToken,
+        },
+      });
+      set((state) => ({
+        participantCategoryData: state.participantCategoryData.filter((item) => item.id !== id),
+      }));
+    } catch (error) {
+      console.error('Error deleting participant category:', error);
+    }
+  },
+
+  deleteRole: async (id, csrfToken) => {
+    try {
+      await axios.delete(`${apiRoles}${id}`, {
+        headers: {
+          'X-CSRFToken': csrfToken,
+        },
+      });
+      set((state) => ({
+        rolesData: state.rolesData.filter((item) => item.id !== id),
+      }));
+    } catch (error) {
+      console.error('Error deleting role:', error);
+    }
+  },
     
   deleteMilitaryBranch: async (id, csrfToken) => {
     try {
@@ -526,6 +627,44 @@ const useAdminStore = create((set) => ({
       console.error('Error deleting event attendee:', error);
     }
   },
+
+
+
+  updateParticipantCategory: async (id, updatedData, csrfToken) => {
+    try {
+      await axios.put(`${apiParticipantCategory}${id}`, updatedData, {
+        headers: {
+          'X-CSRFToken': csrfToken,
+        },
+      });
+      set((state) => ({
+        participantCategoryData: state.participantCategoryData.map((category) =>
+          category.id === id ? { ...category, ...updatedData } : category
+        ),
+      }));
+    } catch (error) {
+      console.error('Error updating role:', error);
+    }
+  },
+
+  
+  updateRole: async (id, updatedData, csrfToken) => {
+    try {
+      await axios.put(`${apiRoles}${id}`, updatedData, {
+        headers: {
+          'X-CSRFToken': csrfToken,
+        },
+      });
+      set((state) => ({
+        rolesData: state.rolesData.map((role) =>
+          role.id === id ? { ...role, ...updatedData } : role
+        ),
+      }));
+    } catch (error) {
+      console.error('Error updating role:', error);
+    }
+  },
+
 
 
   

@@ -3,6 +3,9 @@ import { Table, Button, Popconfirm, message, Modal, Form, Input, Select } from '
 import { EditOutlined, DeleteOutlined, ReloadOutlined, PlusOutlined  } from '@ant-design/icons';
 import GetToken from '../../../../context/GetToken'
 import useAdminStore from '../../../../store/adminStore';
+import { apiUsers } from '../../../../api/api';
+import axios from 'axios';
+import CreateForm from './forms/CreateForm';
 
 const Users = () => {
   const { 
@@ -10,10 +13,9 @@ const Users = () => {
       fetchUsers, 
       deleteUsers, 
       updateUsers,
+      rolesData,
       createUsers,
-      fetchCompany, 
-      companyData,
-      setCsrfToken 
+      myAccountData
   } = useAdminStore();
 
   const csrfToken = GetToken();
@@ -22,12 +24,8 @@ const Users = () => {
   const [updatingUsers, setUpdatingUsers] = useState(null);
   const [form] = Form.useForm();
   const [createForm] = Form.useForm()
+  const userRole = myAccountData?.roles[0] || ""
 
-  useEffect(() => {
-    fetchUsers();
-    fetchCompany();
-    setCsrfToken(csrfToken);
-  }, [fetchUsers, fetchCompany, setCsrfToken, csrfToken]);
 
   useEffect(() => {
     if (updatingUsers) {
@@ -37,6 +35,23 @@ const Users = () => {
 
 
   const totalCount = usersData.length;
+
+
+  const handleUpdateRole = async (userId, newRole) => {
+    try {
+      await axios.put(`${apiUsers}${userId}`, { groups: [newRole] }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken
+        }
+      });
+        message.success("User role updated successfully");
+    } catch (error) {
+      // Handle errors
+      console.error('Error updating category:', error.message);
+      message.error("Failed to update User role");
+    }
+  };
 
   const columns = [
     {
@@ -92,6 +107,38 @@ const Users = () => {
       onFilter: (value, record) => record.email.includes(value),
       filterSearch: true,
     },
+
+    {
+      title: 'Role',
+      filters: rolesData.map((item) => ({
+        text: item.name,
+        value: item.name,
+      })),
+      onFilter: (value, record) => {
+        if (record && record.roles && record.roles[0]) {
+          return record.roles[0].includes(value);
+        }
+        return false;
+      },
+      filterSearch: true,
+      render: (value, record) => {
+        const role = record.roles && record?.roles[0] || "N/A" ;
+        return (
+          <Select
+            defaultValue={role}
+            style={{ width: 150 }}
+            onChange={(value) => handleUpdateRole(record.id, value)}
+          >
+            {rolesData.map((item) => (
+              <Option key={item.id} value={item.id}>
+                {item.name}
+              </Option>
+            ))}
+          </Select>
+        );
+      },
+    },
+   
     {
       title: 'Action',
       dataIndex: 'action',
@@ -105,16 +152,18 @@ const Users = () => {
           >
             Update
           </Button>
-          <Popconfirm
-            title='Are you sure to delete this user?'
-            onConfirm={() => handleDelete(record.id)}
-            okText='Yes'
-            cancelText='No'
-          >
-            <Button size='small' icon={<DeleteOutlined />}  danger>
-              Delete
-            </Button>
-          </Popconfirm>
+         {userRole === "Administrator" && (
+           <Popconfirm
+           title='Are you sure to delete this user?'
+           onConfirm={() => handleDelete(record.id)}
+           okText='Yes'
+           cancelText='No'
+         >
+           <Button size='small' icon={<DeleteOutlined />}  danger>
+             Delete
+           </Button>
+         </Popconfirm>
+         )}
         </span>
       ),
     },
@@ -187,6 +236,7 @@ const Users = () => {
       first_name,
       last_name,
       email,
+      groups,
     } = values;
 
     if (
@@ -194,26 +244,28 @@ const Users = () => {
       !username ||
       !first_name ||
       !last_name ||
-      !email 
+      !email ||
+      !groups
+
     ) {
       message.error('Please fill in all required fields.');
       return;
     }
-
     const newUser = { 
       password,
       username,
       first_name,
       last_name,
       email,
+      groups: [groups]
      };
 
     try {
       await createUsers(newUser, csrfToken);
       setCreateVisible(false);
       message.success('User created successfully');
-      fetchUsers()
       createForm.resetFields();
+      fetchUsers()
     } catch (error) {
       console.error('Error creating User:', error);
       message.error('Failed to create User');
@@ -322,64 +374,11 @@ const Users = () => {
         onCancel={() => setCreateVisible(false)}
         footer={null}
       >
-        <Form
-           form={createForm}
-          className='mt-10'
-          onFinish={handleCreate}
-        >
-
-          <Form.Item
-            label='Username'
-            name='username'
-            rules={[{ required: true, message: 'Please input username!' }]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            label='Password'
-            name='password'
-            type='password'
-            rules={[{ required: true, message: 'Please input password!' }]}
-          >
-            <Input.Password/>
-          </Form.Item>
-
-          <Form.Item
-            label='First Name'
-            name='first_name'
-            rules={[{ required: true, message: 'Please input first name!' }]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            label='Last Name'
-            name='last_name'
-            rules={[{ required: true, message: 'Please input last name!' }]}
-          >
-            <Input />
-          </Form.Item>
-
-      
-
-          <Form.Item
-            label='Email'
-            name='email'
-            rules={[
-              { required: true, message: 'Please input email!' },
-              { type: 'email', message: 'Invalid email format!' },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item>
-            <Button className='buttonCreate' type='primary' htmlType='submit'>
-              Create
-            </Button>
-          </Form.Item>
-        </Form>
+        <CreateForm 
+           createForm={createForm}
+           handleCreate={handleCreate}
+           rolesData={rolesData}
+        />
       </Modal>
     </div>
   );

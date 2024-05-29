@@ -3,7 +3,33 @@ import { Button, Form, Input, Select } from 'antd'; // Import Select component f
 const { Option } = Select;
 
 export default function CreateForm({ onFinish, companyData, createForm, militaryBranchData, forumData }) {
+  const [isOtherMilitaryBranch, setIsOtherMilitaryBranch] = useState(false);
 
+  const handleSelectChange = (type, value) => {
+    if (type === 'military') {
+      setIsOtherMilitaryBranch(value === 'others');
+      if (value == 'others') {
+        createForm.setFieldsValue({ military_branch2: "" });
+      }
+    }
+  };
+
+
+
+  // const handleSelectChange = (type, value) => {
+  //   if (type === 'company') {
+  //     setIsOtherCompany(value === 'others');
+  //     if (value === 'others') {
+  //       createForm.setFieldsValue({ company_org: "" });
+  //     }
+  //   } else if (type === 'military') {
+  //     setIsOtherMilitaryBranch(value === 'others');
+  //     if (value == 'others') {
+  //       createForm.setFieldsValue({ military_branch2: "" });
+  //     }
+  //   }
+  // };
+ 
 
   return (
     <Form
@@ -42,27 +68,35 @@ export default function CreateForm({ onFinish, companyData, createForm, military
       <Form.Item label='Designation' name='designation' rules={[{ required: true, message: 'Please input designation!' }]}>
         <Input />
       </Form.Item>
-      
 
-      <Form.Item label="Unit/Organization/Company Name" name="company_org">
+      {/* <Form.Item label="Unit/Organization/Company Name" name="company_org">
         <Select onChange={(value) => handleSelectChange('company', value)}>
-            {companyData.map((item, index) => (
+          {companyData.map((item, index) => (
             <Option key={index} value={item.id}>{item.name}</Option>
-            ))}
+          ))}
+          <Option value="others">Others</Option>
+        </Select>
+      </Form.Item> */}
+
+        <Form.Item label="Unit/Organization/Company Name" name='company_org_other' rules={[{ required: true, message: 'Please specify your company!' }]}>
+          <Input />
+        </Form.Item>
+
+      <Form.Item label="Military Branch of Service" name="military_branch2" className='mt-3'>
+        <Select onChange={(value) => handleSelectChange('military', value)}>
+          <Option value={null}>Not Applicable</Option>
+          {militaryBranchData.map((item, index) => (
+            <Option key={index} value={item.id}>{item.abrv}</Option>
+          ))}
+          <Option value="others">Others</Option>
         </Select>
       </Form.Item>
 
-
-        <Form.Item label="Military Branch of Service" name="military_branch2" className='mt-3'>
-            <Select onChange={(value) => handleSelectChange('military', value)}>
-                <Option value={null}>Not Applicable</Option>
-                {militaryBranchData.map((item, index) => (
-                <Option key={index} value={item.id}>{item.abrv}</Option>
-                ))}
-            </Select>
-       
-            </Form.Item>
-
+      {isOtherMilitaryBranch && (
+        <Form.Item label='Please specify your military branch' name='military_branch' rules={[{ required: true, message: 'Please specify your military branch!' }]}>
+          <Input />
+        </Form.Item>
+      )}
 
       <Form.Item
         label='Contact Number'

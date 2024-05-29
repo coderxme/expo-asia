@@ -6,15 +6,11 @@ import LineChart from './LineChart';
 // import PolarAreaChart from './PolarAreaChart';
 
 export default function ChartComponent() {
-  const { participantData, fetchParticipants } = useAdminStore();
+  const { participantData } = useAdminStore();
   const [weeklyData, setWeeklyData] = useState([0, 0, 0, 0, 0, 0, 0]);
 
 
   console.log("data:", weeklyData)
-
-  useEffect(() => {
-    fetchParticipants();
-  }, [fetchParticipants]);
 
   useEffect(() => {
     const processData = () => {

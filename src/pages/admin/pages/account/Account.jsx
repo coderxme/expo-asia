@@ -1,20 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import GetToken from '../../../../context/GetToken';
 import useAdminStore from '../../../../store/adminStore';
 import "./Account.css"
-import { Image } from 'antd';
-import { baseUrl } from '../../../../api/api';
 
 export default function Account() {
-  const csrfToken = GetToken();
-  const { myAccountData, fetchMyAccount, deleteParticipant, updateParticipant, setCsrfToken } = useAdminStore();
+  const { myAccountData } = useAdminStore();
 
   console.log("my account:", myAccountData)
 
-  useEffect(() => {
-    fetchMyAccount();
-    setCsrfToken(csrfToken);
-  }, [fetchMyAccount, setCsrfToken, csrfToken]);
 
   return (
     <div className='accountContainer'>

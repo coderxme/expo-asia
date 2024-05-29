@@ -5,7 +5,7 @@ import GetToken from '../../../../context/GetToken';
 import useAdminStore from '../../../../store/adminStore';
 
 const Forum = () => {
-  const { forumData, fetchForum, deleteForum, updateForum, setCsrfToken, createForum } = useAdminStore();
+  const { forumData, deleteForum, updateForum,  createForum } = useAdminStore();
   const csrfToken = GetToken();
   const [visible, setVisible] = useState(false);
   const [createVisible, setCreateVisible] = useState(false);
@@ -14,11 +14,6 @@ const Forum = () => {
   const [createForm] = Form.useForm(); 
 
   const totalCount = forumData.length;
-
-  useEffect(() => {
-    fetchForum();
-    setCsrfToken(csrfToken);
-  }, [fetchForum, setCsrfToken, csrfToken]);
 
   useEffect(() => {
     if (updatingForum) {
@@ -129,7 +124,7 @@ const Forum = () => {
       await createForum(newForum, csrfToken);
       setCreateVisible(false);
       message.success('Forum created successfully');
-      fetchForum();
+      // fetchForum();
       createForm.resetFields();
     } catch (error) {
       console.error('Error creating Forum:', error);
@@ -153,7 +148,7 @@ const Forum = () => {
           <Button
             icon={<ReloadOutlined />}
             type='primary'
-            onClick={fetchForum}
+            // onClick={fetchForum}
             className='buttonTableHeader'
           >
             Refresh

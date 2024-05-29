@@ -34,7 +34,7 @@ export default function RegisterForm() {
           middle_name: "",
           email: "",
           designation: "",
-          company_org:"",
+          // company_org:"",
           company_org_other: "",
           military_branch: "",
           military_branch2: null,
@@ -235,11 +235,11 @@ export default function RegisterForm() {
               <Form.Item label="Designation" required>
                 <Input placeholder="Enter Designation" value={formData.participant_details.designation} name="participant_details.designation" onChange={handleFormChangeParticipant} />
               </Form.Item>
-              {/* <Form.Item label="Unit/Organization/Company Name" required>
-                <Input placeholder="Enter Organization/Company Name" value={formData.participant_details.company_org_other} name="participant_details.company_org_other" onChange={handleFormChangeParticipant} />
-              </Form.Item> */}
-              
               <Form.Item label="Unit/Organization/Company Name" required>
+                <Input placeholder="Enter Organization/Company Name" value={formData.participant_details.company_org_other} name="participant_details.company_org_other" onChange={handleFormChangeParticipant} />
+              </Form.Item>
+              
+              {/* <Form.Item label="Unit/Organization/Company Name" required>
                             <Select defaultValue={formData.participant_details.company_org} onChange={(value) => handleSelectChange('company_org', value)}>
                                 {companyData.map((item, index) => (
                                     <Option key={index} value={item.id}>{item.name}</Option>
@@ -256,7 +256,7 @@ export default function RegisterForm() {
                                 />
                                 </Form.Item>
                             )}
-                        </Form.Item>
+                        </Form.Item> */}
 
               <Form.Item label="Military Branch of Service" className='mt-3'>
                     <Select defaultValue={formData.participant_details.military_branch2}  onChange={(value) => handleSelectChange('military_branch2', value)}>

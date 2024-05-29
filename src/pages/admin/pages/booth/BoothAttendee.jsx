@@ -9,31 +9,22 @@ const BoothAttendee = () => {
     boothData,
     boothAttendeeData,
     participantData,
-
     deleteBoothAttendee, 
     updateBoothAttendee,
     createBoothAttendee, 
+    myAccountData,
 
-    fetchBoothAttendee, 
-    fetchBooths, 
-    fetchParticipants,
-
-    setCsrfToken 
+    fetchBoothAttendee
   } = useAdminStore();
-
   const csrfToken = GetToken();
   const [visible, setVisible] = useState(false);
   const [createVisible, setCreateVisible] = useState(false);
   const [updatetingBooth, setUpdatingBooth] = useState(null);
   const [form] = Form.useForm();
 
+  const userRole = myAccountData?.roles[0] || ""
 
-  useEffect(() => {
-    fetchBoothAttendee();
-    fetchParticipants()
-    fetchBooths()
-    setCsrfToken(csrfToken);
-  }, [fetchBoothAttendee, fetchParticipants, fetchBooths, setCsrfToken, csrfToken]);
+
 
   const totalCount = boothAttendeeData.length;
 
@@ -108,6 +99,7 @@ const BoothAttendee = () => {
           >
             Update
           </Button>
+         {userRole === 'Administrator' && (
           <Popconfirm
             title='Are you sure to delete this booth attendee?'
             onConfirm={() => handleDelete(record.id)}
@@ -118,6 +110,7 @@ const BoothAttendee = () => {
               Delete
             </Button>
           </Popconfirm>
+         )}
         </span>
       ),
     },
@@ -170,6 +163,7 @@ const BoothAttendee = () => {
       await updateBoothAttendee(updatetingBooth.id, updatedData, csrfToken);
       setVisible(false);
       message.success('Booth updated successfully');
+      fetchBoothAttendee()
     } catch (error) {
       console.error('Error updating Booth:', error);
       message.error('Failed to update Booth');

@@ -3,7 +3,7 @@
 
 @layer components{
     .registerHeader{
-        background-image: url("../../assets/background.png");
+        background-image: url("../../assets/regBack.png");
         background-size:cover;
         @apply flex flex-col items-center 
     }

@@ -24,6 +24,11 @@ const militaryBranchTotals = militaryBranchData.map(branch => {
 });
 
 
+const totalCountOther = participantData.filter(participant => participant.military_branch ).length;
+const totalCountNA = participantData.filter(participant => 
+    (!participant.military_branch2_details && !participant.military_branch)
+).length;
+
     return (
         <div className='cardContainer'>
             <div className="flexCard">
@@ -76,20 +81,44 @@ const militaryBranchTotals = militaryBranchData.map(branch => {
                 </div>
             </div>
 
-            <div className="militaryCardWrapper">
-                <h3>Military Branch</h3>
-                <div className="militaryCardBox">
-                    {militaryBranchTotals.map(item => (
-                        <div className='militaryCard' key={item.id}>
-                            <span>
-                                <p>{item.abrv}</p>
-                                <small>{item.desc}</small>
-                            </span>
-                            <div className='militaryTotal'>{item.totalCount}</div>
-                        </div>
-                    ))}
+            {militaryBranchData.length === 0 ? (
+                <div className="militaryCardWrapper">
+                    <h3>Military Branch</h3>
+                    <div className="militaryCardBox">
+                     <h3>No Branch Available</h3>
+                    </div>
+
                 </div>
-            </div>
+            ) : (
+                <div className="militaryCardWrapper">
+                    <h3>Military Branch</h3>
+                    <div className="militaryCardBox">
+                        {militaryBranchTotals.map(item => (
+                            <div className='militaryCard' key={item.id}>
+                                <span>
+                                    <p>{item.abrv}</p>
+                                    <small>{item.desc}</small>
+                                </span>
+                                <div className='militaryTotal'>{item.totalCount}</div>
+                            </div>
+                        ))}
+
+                        <div className='militaryCard'>
+                                <span>
+                                    <p>Others</p>
+                                </span>
+                                <div className='militaryTotal'>{totalCountOther}</div>
+                            </div>
+
+                            <div className='militaryCard'>
+                                <span>
+                                    <p>N/A</p>
+                                </span>
+                                <div className='militaryTotal'>{totalCountNA}</div>
+                            </div>
+                    </div>
+                </div>
+            )}
 
 
             <ChartComponent />

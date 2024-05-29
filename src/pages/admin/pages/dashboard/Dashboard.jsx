@@ -1,6 +1,5 @@
 import Cards from "./Cards"
 import "./Dashboard.css"
-import React, { useEffect, useState } from 'react';
 import useAdminStore from "../../../../store/adminStore";
 import ChartComponent from "./charts/ChartComponent";
 
@@ -15,38 +14,7 @@ export default function Dashboard() {
     eventAttendeeData,
     inviteData,
     militaryBranchData,
-
-    fetchParticipants,
-    fetchCompany,
-    fetchBooths,
-    fetchBoothAttendee,
-    fetchEvent,
-    fetchEventAttendee,
-    fetchInvite,
-    fetchMilitaryBranch
-
    } = useAdminStore();
-
-  
-  useEffect(() => {
-    fetchParticipants();
-    fetchCompany();
-    fetchBooths()
-    fetchBoothAttendee()
-    fetchEvent()
-    fetchEventAttendee()
-    fetchInvite()
-    fetchMilitaryBranch()
-  }, [  
-      fetchParticipants, 
-      fetchCompany, 
-      fetchBooths,
-      fetchBoothAttendee,
-      fetchEvent,
-      fetchEventAttendee,
-      fetchInvite,
-      fetchMilitaryBranch
-    ]);
 
 
   const ParticipantsTotal = participantData.length;

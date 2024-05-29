@@ -5,18 +5,16 @@ import GetToken from '../../../../context/GetToken';
 import useAdminStore from '../../../../store/adminStore';
 
 const CompanyType = () => {
-  const { companyTypeData, fetchCompanyType, deleteCompanyType, updateCompanyType, createCompanyType, setCsrfToken } = useAdminStore();
+  const {myAccountData, companyTypeData,  deleteCompanyType, updateCompanyType, createCompanyType, fetchCompanyType } = useAdminStore();
   const csrfToken = GetToken();
   const [visible, setVisible] = useState(false);
   const [createVisible, setCreateVisible] = useState(false);
   const [updatingType, setUpdatingType] = useState(null);
   const [updateForm] = Form.useForm();
   const [createForm] = Form.useForm(); 
+  const userRole = myAccountData?.roles[0] || ""
 
-  useEffect(() => {
-    fetchCompanyType();
-    setCsrfToken(csrfToken);
-  }, [fetchCompanyType, setCsrfToken, csrfToken]);
+
 
   useEffect(() => {
     if (updatingType) {
@@ -72,6 +70,7 @@ const CompanyType = () => {
           >
             Update
           </Button>
+         {userRole === 'Administrator' && (
           <Popconfirm
             title='Are you sure to delete this company type?'
             onConfirm={() => handleDelete(record.id)}
@@ -82,6 +81,7 @@ const CompanyType = () => {
               Delete
             </Button>
           </Popconfirm>
+         )}
         </span>
       ),
     },
@@ -130,6 +130,7 @@ const CompanyType = () => {
       await updateCompanyType(updatingType.id, updatedData, csrfToken);
       setVisible(false);
       message.success('Company type updated successfully');
+      fetchCompanyType()
     } catch (error) {
       console.error('Error updating company type:', error);
       message.error('Failed to update company type');

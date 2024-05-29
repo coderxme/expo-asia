@@ -23,12 +23,20 @@ import Dashboard from './pages/dashboard/Dashboard';
 import { RxDashboard } from "react-icons/rx";
 import Invite from "./pages/invite/Invite"
 import { CgDetailsMore } from "react-icons/cg";
+import { HiOutlineUserGroup } from "react-icons/hi2";
+import { PiPersonThin } from "react-icons/pi";
 
 import { AiOutlineMail } from "react-icons/ai";
 import Forum from './pages/forum/Forum';
 import EventCalendar from './pages/event/EventCalendar';
 import Users from './pages/users/Users';
-import MilitaryBranch from './pages/participant/military-branch/MilitaryBranch';
+// import MilitaryBranch from './pages/participant/military-branch/MilitaryBranch';
+import Roles from './pages/roles/Roles';
+import Registration from './pages/registration/Registration';
+import { FaWpforms } from "react-icons/fa6";
+import useAdminStore from '../../store/adminStore';
+
+
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
@@ -36,6 +44,8 @@ const App = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [selectedMenuKey, setSelectedMenuKey] = useState('111');
   const [breadcrumbs, setBreadcrumbs] = useState(['Dashboard']); // State to keep track of breadcrumbs
+  const { myAccountData } = useAdminStore();
+  const userRole = myAccountData?.roles[0] || ""
 
   const handleMenuClick = (e) => {
     setSelectedMenuKey(e.key);
@@ -85,6 +95,12 @@ const App = () => {
         break;
       case '13':
         updatedBreadcrumbs.push('Users');
+        break;
+      case '15':
+        updatedBreadcrumbs.push('Roles');
+        break;
+      case '16':
+        updatedBreadcrumbs.push('Registration');
         break;
       default:
         updatedBreadcrumbs.push('Unknown');
@@ -137,6 +153,12 @@ const App = () => {
     case '13':
       contentText = <Users />;
         break;
+    case '15':
+      contentText = <Roles />;
+        break;
+    case '16':
+      contentText = <Registration />;
+        break;
     default:
       contentText = 'Unknown content';
       break;
@@ -158,17 +180,35 @@ const App = () => {
           <Menu.Item key="111" icon={<RxDashboard />}>
             Dashboard
           </Menu.Item>
-          {/* <Menu.Item key="1" icon={<IoPeopleOutline />}>
-            Participant
-          </Menu.Item> */}
-          <SubMenu key="sub4" icon={<IoPeopleOutline/>} title="Participant">
-            <Menu.Item key="1">Participant</Menu.Item>
-            <Menu.Item key="11">Forum </Menu.Item>
-            <Menu.Item key="14">Military Branch </Menu.Item>
-          </SubMenu>
+          {userRole === "Administrator" && (
           <Menu.Item key="13" icon={<IoPeopleOutline />}>
             Users
           </Menu.Item>
+          )}
+
+          {userRole === "Administrator" && (
+             <Menu.Item key="15" icon={<PiPersonThin />}>
+             Roles
+           </Menu.Item>
+          )}
+
+          <Menu.Item key="16" icon={<FaWpforms />}>
+            Registration
+          </Menu.Item>
+
+
+          <Menu.Item key="1" icon={<HiOutlineUserGroup />}>
+             Participant
+          </Menu.Item>
+         
+          {/* <SubMenu key="sub4" icon={<HiOutlineUserGroup/>} title="Participant">
+            <Menu.Item key="1">Participant</Menu.Item>
+            <Menu.Item key="11">Forum </Menu.Item>
+            <Menu.Item key="14">Military Branch </Menu.Item>
+          </SubMenu> */}
+
+          
+         
           <SubMenu key="sub3" icon={<FaRegBuilding />} title="Company">
             <Menu.Item key="2">Company</Menu.Item>
             <Menu.Item key="8">Company Type</Menu.Item>

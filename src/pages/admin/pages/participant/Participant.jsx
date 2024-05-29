@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Button, Popconfirm, message, Modal, Form, Input, Select } from 'antd';
+import { Table, Button, Popconfirm, message, Modal, Form, Input, Select, Image } from 'antd';
 import { EditOutlined, DeleteOutlined, ReloadOutlined, PlusOutlined  } from '@ant-design/icons';
 import GetToken from '../../../../context/GetToken'
 import useAdminStore from '../../../../store/adminStore';
-import { useFetchData } from '../../../../hooks/participantHook'; 
 import CreateForm from './form/CreateForm';
 import UpdateForm from './form/UpdateForm';
+import { apiParticipant, apiQRCode } from '../../../../api/api';
+import axios from "axios"
 
 const Participant = () => {
   const { 
@@ -15,11 +16,13 @@ const Participant = () => {
       updateParticipant,
       createParticipant,
       companyData,
+      participantCategoryData,
       forumData,
-      fetchParticipants
+      myAccountData,
+
+      fetchParticipants,
   } = useAdminStore();
 
-  useFetchData()
 
   const [visible, setVisible] = useState(false);
   const [createVisible, setCreateVisible] = useState(false);
@@ -27,6 +30,7 @@ const Participant = () => {
   const [updateForm] = Form.useForm();
   const [createForm] = Form.useForm()
   const csrfToken = GetToken();
+  const userRole = myAccountData?.roles[0] || ""
 
 
   useEffect(() => {
@@ -37,6 +41,27 @@ const Participant = () => {
 
 
   const totalCount = participantData.length;
+
+
+  const handleUpdateCategory = async (participantId, newCategory) => {
+    try {
+      // Perform the PUT request to update the category
+      const response = await axios.put(`${apiParticipant}${participantId}`, { participant_categ: newCategory }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken
+        }
+      });
+        message.success("Participant category updated successfully");
+    } catch (error) {
+      // Handle errors
+      console.error('Error updating category:', error.message);
+      message.error("Failed to update participant category");
+    }
+  };
+  
+  
+  
 
   const columns = [
     {
@@ -89,6 +114,80 @@ const Participant = () => {
       width:"200px"
 
     },
+
+    {
+      title: 'Preffered Attendance',
+      render: (text, record) => record?.preferred_attendance || "N/A",
+      filters: Array.from(new Set(participantData.map(item => item.preferred_attendance))).map(attendance => ({
+        text: attendance,
+        value: attendance,
+      })),
+      onFilter: (value, record) => record.preferred_attendance.includes(value),
+      filterSearch: true,
+      width:"200px"
+    },
+
+    {
+      title: 'Forum',
+      render: (text, record) => record?.forum_details?.name || "N/A",
+      filters: Array.from(new Set(participantData.map(item => item?.forum_details?.name || ""))).map(forum => ({
+        text: forum,
+        value: forum,
+      })),
+      onFilter: (value, record) => record.forum_details?.name.includes(value),
+      filterSearch: true,
+      width:"200px"
+    },
+
+    {
+      title: 'Category',
+      dataIndex: 'participant_categ_details',
+      render: (text, record) => record?.participant_categ_details?.name || "N/A",
+      filters: Array.from(new Set(participantCategoryData.map(item => item?.name || ""))).map(name => ({
+        text: name,
+        value: name,
+      })),
+      onFilter: (value, record) => {
+        if (record && record.participant_categ_details) {
+          return record.participant_categ_details.name.includes(value);
+        }
+        return false;
+      },
+      width: '200px'
+    },
+
+    // {
+    //   title: 'Category',
+    //   dataIndex: 'participant_categ_details',
+    //   render: (participantCategoryDetails, record) => {
+    //     return (
+    //       <Select
+    //         defaultValue={participantCategoryDetails?.name}
+    //         style={{ width: 150 }}
+    //         onChange={(value) => handleUpdateCategory(record.id, value)}
+    //       >
+    //         {participantCategoryData.map((category) => (
+    //           <Option key={category.id} value={category.id}>
+    //             {category.name}
+    //           </Option>
+    //         ))}
+    //       </Select>
+    //     );
+    //   },
+    //   filters: Array.from(new Set(participantCategoryData.map(item => item?.name || ""))).map(name => ({
+    //     text: name,
+    //     value: name,
+    //   })),
+    //   onFilter: (value, record) => {
+    //     if (record && record.participant_categ_details) {
+    //       return record.participant_categ_details.name.includes(value);
+    //     }
+    //     return false;
+    //   },
+    //   width: '200px'
+    // },
+    
+
     {
       title: 'Designation',
       dataIndex: 'designation',
@@ -99,31 +198,48 @@ const Participant = () => {
       onFilter: (value, record) => record.designation.includes(value),
       filterSearch: true,
       width:"200px"
-
     },
     {
       title: 'Unit/Organization/Company',
-      render: (text, record) => record.company_org_details?.name || record?.company_org_other || ""  ,
+      render: (text, record) => record.company_org_details?.name || record?.company_org_other || "N/A"  ,
 
       width:"200px"
     },
     {
       title: 'Military Branch',
       dataIndex: 'military_branch',
-      filters: Array.from(new Set(participantData.map(item => item.military_branch))).map(military_branch => ({
+      render: (text, record) => record.military_branch || record?.military_branch2_details?.abrv || "N/A",
+      filters: Array.from(new Set(participantData.map(item => item.military_branch || item.military_branch2_details?.abrv))).map(military_branch => ({
         text: military_branch,
         value: military_branch,
       })),
-      onFilter: (value, record) => record.military_branch.includes(value),
+      onFilter: (value, record) => {
+        const branch = record.military_branch || record?.military_branch2_details?.abrv || "";
+        return branch.includes(value);
+      },
       filterSearch: true,
-      width:"200px"
-
+      width: "200px"
     },
+    
     {
       title: 'Contact Number',
       dataIndex: 'phone_no',
       width:"200px"
 
+    },
+
+    {
+      title: 'QR Code',
+      dataIndex: 'unique_id',
+      key: 'unique_id',
+      render: (unique_id) => (
+        <Image
+          src={`${apiQRCode}${unique_id}`}
+          width={50}
+          className='border-2'
+        />
+      ),
+      width: '200px',
     },
    
     {
@@ -140,7 +256,8 @@ const Participant = () => {
           >
             Update
           </Button>
-          <Popconfirm
+          {userRole === "Administrator" && (
+            <Popconfirm
             title='Are you sure to delete this participant?'
             onConfirm={() => handleDelete(record.id)}
             okText='Yes'
@@ -150,6 +267,7 @@ const Participant = () => {
               Delete
             </Button>
           </Popconfirm>
+          )}
         </span>
       ),
     },
@@ -185,13 +303,15 @@ const Participant = () => {
       military_branch,
       military_branch2,
       phone_no,
+      preferred_attendance,
+      forum,
+      participant_categ
 
     } = values;
 
     if (
       !first_name ||
       !last_name ||
-      !middle_name ||
       !email ||
       !designation ||
       !phone_no 
@@ -211,6 +331,9 @@ const Participant = () => {
       military_branch,
       military_branch2,
       phone_no,
+      preferred_attendance,
+      forum,
+      participant_categ
     };
 
     const isChanged = Object.keys(updatedData).some(
@@ -226,6 +349,8 @@ const Participant = () => {
       await updateParticipant(updatingParticipant.id, updatedData, csrfToken);
       setVisible(false);
       message.success('Participant updated successfully');
+      fetchParticipants()
+
     } catch (error) {
       console.error('Error updating participant:', error);
       message.error('Failed to update participant');
@@ -338,6 +463,7 @@ const Participant = () => {
           companyData={companyData}
           militaryBranchData={militaryBranchData}
           forumData={forumData}
+          category={participantCategoryData}
 
        />
       </Modal>

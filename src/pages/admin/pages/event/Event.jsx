@@ -12,9 +12,9 @@ const Event = () => {
     deleteEvent, 
     updateEvent, 
     createEvent, 
-    fetchEvent,
-    fetchCompany, 
-    setCsrfToken
+    myAccountData,
+
+    fetchEvent
   } = useAdminStore();
 
   const csrfToken = GetToken();
@@ -24,12 +24,8 @@ const Event = () => {
   const [updateForm] = Form.useForm();
   const [createForm] = Form.useForm(); 
   const totalCount = eventData.length;
+  const userRole = myAccountData?.roles[0] || ""
 
-  useEffect(() => {
-    fetchEvent();
-    fetchCompany();
-    setCsrfToken(csrfToken);
-  }, [fetchEvent, setCsrfToken, fetchCompany, csrfToken]);
 
   useEffect(() => {
     if (updatingEvent) {
@@ -111,6 +107,7 @@ const Event = () => {
           >
             Update
           </Button>
+         {userRole === 'Administrator' && (
           <Popconfirm
             title='Are you sure to delete this event?'
             onConfirm={() => handleDelete(record.id)}
@@ -121,6 +118,7 @@ const Event = () => {
               Delete
             </Button>
           </Popconfirm>
+         )}
         </span>
       ),
     },
@@ -183,6 +181,7 @@ const Event = () => {
       await updateEvent(updatingEvent.id, updatedData, csrfToken);
       setVisible(false);
       message.success('Event updated successfully');
+      fetchEvent();
     } catch (error) {
       console.error('Error updating event:', error);
       message.error('Failed to update event');
@@ -234,7 +233,7 @@ const Event = () => {
           <Button
             icon={<ReloadOutlined />}
             type='primary'
-            onClick={fetchEvent}
+            // onClick={fetchEvent}
             className='buttonTableHeader'
           >
             Refresh

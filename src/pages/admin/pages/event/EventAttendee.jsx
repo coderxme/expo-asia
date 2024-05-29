@@ -5,18 +5,13 @@ import GetToken from '../../../../context/GetToken'
 import useAdminStore from '../../../../store/adminStore';
 
 const EventAttendee = () => {
-  const { eventAttendeeData, fetchEventAttendee, deleteEventAttendee, updateEventAttendee, setCsrfToken } = useAdminStore();
+  const { myAccountData, eventAttendeeData,  deleteEventAttendee, updateEventAttendee } = useAdminStore();
   const csrfToken = GetToken();
   const [visible, setVisible] = useState(false);
   const [updatetingEventAttendee, setUpdatingEventAttendee] = useState(null);
 
-
-  useEffect(() => {
-    fetchEventAttendee();
-    setCsrfToken(csrfToken);
-  }, [fetchEventAttendee, setCsrfToken, csrfToken]);
-
   const totalCount = eventAttendeeData.length;
+  const userRole = myAccountData?.roles[0] || ""
 
   const columns = [
     {
@@ -81,7 +76,8 @@ const EventAttendee = () => {
           >
             Update
           </Button>
-          <Popconfirm
+       {userRole === "Administrator" && (
+            <Popconfirm
             title='Are you sure to delete this event attendee?'
             onConfirm={() => handleDelete(record.id)}
             okText='Yes'
@@ -91,6 +87,7 @@ const EventAttendee = () => {
               Delete
             </Button>
           </Popconfirm>
+       )}
         </span>
       ),
     },
@@ -156,7 +153,7 @@ const EventAttendee = () => {
         <Button
           icon={<ReloadOutlined />}
           type='primary'
-          onClick={fetchEventAttendee}
+          // onClick={fetchEventAttendee}
           className='buttonTableHeader'
         >
           Refresh

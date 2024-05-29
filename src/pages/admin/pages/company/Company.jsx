@@ -5,19 +5,15 @@ import GetToken from '../../../../context/GetToken';
 import useAdminStore from '../../../../store/adminStore';
 
 const Company = () => {
-  const { companyData, fetchCompany, deleteCompany, updateCompany, createCompany, setCsrfToken, fetchCompanyType, companyTypeData } = useAdminStore();
+  const {  myAccountData, companyData,  deleteCompany, updateCompany, createCompany, companyTypeData, fetchCompany } = useAdminStore();
   const csrfToken = GetToken();
   const [visible, setVisible] = useState(false);
   const [createVisible, setCreateVisible] = useState(false);
   const [updatingCompany, setUpdatingCompany] = useState(null);
   const [updateForm] = Form.useForm();
   const [createForm] = Form.useForm(); 
+  const userRole = myAccountData?.roles[0] || ""
 
-  useEffect(() => {
-    fetchCompany();
-    fetchCompanyType()
-    setCsrfToken(csrfToken);
-  }, [fetchCompany, fetchCompanyType, setCsrfToken, csrfToken]);
 
   useEffect(() => {
     if (updatingCompany) {
@@ -62,7 +58,7 @@ const Company = () => {
     {
       title: 'Type Name',
       dataIndex: 'company_org_type_details.name',
-      render: (text, record) => record.company_org_type_details?.name || "",
+      render: (text, record) => record.company_org_type_details?.name || "N/A",
       filters: companyData.map((item) => ({
         text: item.company_org_type_details?.name || "",
         value: item.company_org_type_details?.name || "",
@@ -99,16 +95,18 @@ const Company = () => {
           >
             Update
           </Button>
-          <Popconfirm
-            title='Are you sure to delete this company?'
-            onConfirm={() => handleDelete(record.id)}
-            okText='Yes'
-            cancelText='No'
-          >
-            <Button size='small' icon={<DeleteOutlined />} danger>
-              Delete
-            </Button>
-          </Popconfirm>
+         {userRole === 'Administrator' && (
+           <Popconfirm
+           title='Are you sure to delete this company?'
+           onConfirm={() => handleDelete(record.id)}
+           okText='Yes'
+           cancelText='No'
+         >
+           <Button size='small' icon={<DeleteOutlined />} danger>
+             Delete
+           </Button>
+         </Popconfirm>
+         )}
         </span>
       ),
     },
@@ -166,6 +164,7 @@ const Company = () => {
       await updateCompany(updatingCompany.id, updatedData, csrfToken);
       setVisible(false);
       message.success('Company updated successfully');
+      fetchCompany()
     } catch (error) {
       console.error('Error updating company:', error);
       message.error('Failed to update company');

@@ -40,7 +40,7 @@ export default function EmailForm({ email,  hashedCode, formDataReg, captchaValu
       email: formDataReg?.participant_details?.email || "",
       designation: formDataReg?.participant_details?.designation || "",
       company_org_other: formDataReg?.participant_details?.company_org_other || "",
-      company_org: formDataReg?.participant_details?.company_org || "",
+      // company_org: formDataReg?.participant_details?.company_org || "",
       military_branch: formDataReg?.participant_details?.military_branch || "",
       military_branch2: formDataReg?.participant_details?.military_branch2 || "",
       phone_no: formDataReg?.participant_details?.phone_no || "",
