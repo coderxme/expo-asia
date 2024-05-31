@@ -16,6 +16,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const { authState, dispatch } = useAuth();
   const [form] = Form.useForm();
+  
 
   const navigate = useNavigate();
 
@@ -30,14 +31,18 @@ export default function Login() {
 
       message.success("Login success!")
 
+      const userRole = response.data.user.roles[0]
+
       if (response.data.error) {
         message.error(response.data.error);
       } else {
         const { token } = response.data;
         dispatch({ type: 'LOGIN', payload: { user: formData.username, token } });
-        setTimeout(() => {
-          navigate('/expo-asia-admin/dashboard');
-        },2000)
+          if (userRole !== "Administrator") {
+            return navigate('/expo-asia-admin/dashboard-2');
+          } else {
+            navigate('/expo-asia-admin/dashboard')
+          }
       }
     } catch (error) {
       console.error('Login error:', error);

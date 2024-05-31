@@ -1,0 +1,122 @@
+@tailwind components;
+
+
+@layer components {
+  
+    .sidebar {
+        @apply flex flex-col items-center fixed
+    }
+
+    .sidebar img{
+        @apply  bg-gray-100 rounded-lg mt-1 p-2 border
+    }
+
+
+    .tableContainer{
+        @apply flex flex-col
+    }
+  
+    .tableHeader{
+        @apply flex justify-between items-center 
+        bg-gray-100 p-3 rounded-md mb-2
+    }
+
+    .tableTitle{
+        @apply font-montserrat uppercase text-sm text-gray-700
+        font-bold 
+    } 
+
+    .buttonTableHeader{
+        @apply bg-teal-500 rounded-full font-opensans text-xs
+        font-medium 
+    }
+
+    .total{
+        @apply text-sm font-opensans 
+        text-teal-500 font-bold
+    }
+
+
+    .buttonCreate{
+        @apply bg-teal-500 rounded-md font-opensans text-xs
+        font-medium  w-full
+    }
+
+    .navbarRight{
+        @apply flex  gap-2 items-center
+       
+      }
+
+    .navbarRight .greet{
+        @apply mt-4 font-opensans tracking-tight text-gray-500
+        text-xs capitalize   mr-10
+    }
+
+    .greet b{
+        @apply text-teal-500
+    }
+
+    .buttonAccount{
+        @apply border-teal-500 
+    }
+
+}
+
+
+.ant-layout-sider-children{
+    @apply flex flex-col items-center 
+}
+
+.ant-layout-sider{
+    border-right: 1px solid #f1f1f1;
+}
+
+.ant-layout-sider-collapsed{
+    min-width: 110px !important;
+    padding:10px;
+}
+
+
+.ant-layout .ant-layout-sider-children .ant-menu.ant-menu-inline-collapsed {
+    @apply w-[100px]
+}
+
+
+.ant-table-thead .ant-table-cell{
+    background-color: #f6f6f6 !important;
+    color: #393939 !important;
+}
+
+.ant-table-cell{
+    @apply font-opensans text-xs
+}
+
+.ant-table-cell .ant-btn{
+    @apply font-opensans text-xs rounded-full
+}
+
+.ant-layout-sider .ant-menu{
+    @apply font-opensans text-xs font-semibold
+}
+
+.ant-menu-light .ant-menu-item-selected{
+    @apply bg-teal-500 text-white font-opensans
+}
+
+.ant-menu-light .ant-menu-submenu-selected >.ant-menu-submenu-title{
+    @apply text-teal-500 font-opensans
+}
+
+
+
+
+
+.ant-pagination .ant-pagination-item-active{
+    @apply border-2 border-teal-500 bg-teal-500 text-white
+    rounded-full
+}
+
+
+.ant-pagination svg{
+    @apply text-teal-500 font-bold
+}

@@ -44,6 +44,8 @@ const Event = () => {
       title: 'Date/Time',
       dataIndex: 'created_at',
       key: 'created_at',
+      width:"200px",
+      sorter: (a, b) => new Date(a.created_at) - new Date(b.created_at),
       render: (text, record) => {
         const date = new Date(record.created_at);
         const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
@@ -52,10 +54,12 @@ const Event = () => {
       filters: generateMonthFilters(),
       onFilter: (value, record) => new Date(record.created_at).getMonth() === value,
     },
-    {
-      title: 'Key',
-      dataIndex: 'key',
-    },
+    // {
+    //   title: 'Key',
+    //   dataIndex: 'key',
+    //   width:"200px",
+
+    // },
     {
       title: 'Name',
       dataIndex: 'name',
@@ -65,10 +69,13 @@ const Event = () => {
       })),
       onFilter: (value, record) => record.name.includes(value),
       filterSearch: true,
+      width:"200px",
+
     },
     {
       title: 'Description',
       dataIndex: 'description',
+      width:"200px",
     },
     {
       title: 'Event Start',
@@ -78,6 +85,7 @@ const Event = () => {
         return date.toLocaleString('en-US', options);
       },
       filters: generateMonthFilters(),
+      width:"200px",
       onFilter: (value, record) => new Date(record.start_date_time).getMonth() === value,
     },
     {
@@ -88,16 +96,19 @@ const Event = () => {
         return date.toLocaleString('en-US', options);
       },
       filters: generateMonthFilters(),
+      width:"200px",
       onFilter: (value, record) => new Date(record.end_date_time).getMonth() === value,
     },
     {
       title: 'Venue',
       dataIndex: 'venue',
+      width:"200px",
     },
     {
       title: 'Action',
       dataIndex: 'action',
       fixed: 'right',
+      width:"200px",
       render: (_, record) => (
         <span className='flex gap-3 flex-col items-center'>
           <Button

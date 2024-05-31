@@ -63,7 +63,8 @@ export default function Footer() {
           </div>
         </div>
         </ScrollAnimation>
-        <p className='footerDetail'>Copyright 2024 | All Rights Reserved | ExpoAsia</p>
+        {/* <p className='footerDetail'>Copyright 2024 | All Rights Reserved | ExpoAsia</p> */}
+        <p className='footerDetail'></p>
     </div>
   )
 }

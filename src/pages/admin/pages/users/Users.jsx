@@ -58,6 +58,7 @@ const Users = () => {
       title: 'Date/Time',
       dataIndex: 'date_joined',
       key: 'date_joined',
+      sorter: (a, b) => new Date(a.date_joined) - new Date(b.date_joined),
       render: (text, record) => {
         const date = new Date(record.date_joined);
         const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };

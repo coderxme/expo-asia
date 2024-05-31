@@ -221,6 +221,24 @@ const useAdminStore = create((set) => ({
   },
 
 
+  createMyAccount: async (newMyAccount, csrfToken) => {
+    try {
+      const res = await axios.post(apiMyAccount, newMyAccount, {
+        headers: {
+          'X-CSRFToken': csrfToken,
+        },
+      });
+      const CreatedMyAccount = { key: res.data.id, ...res.data };
+      set((state) => ({
+        myAccountData: [...state.myAccountData, CreatedMyAccount],
+      }));
+      console.log('Created my account:', CreatedMyAccount);
+    } catch (error) {
+      console.error('Error creating my account:', error);
+      throw error; // Rethrow the error to handle it in the component
+    }
+  },
+
   createParticipantCategory: async (newParticipantCategory, csrfToken) => {
     try {
       const res = await axios.post(apiParticipantCategory, newParticipantCategory, {
@@ -629,6 +647,23 @@ const useAdminStore = create((set) => ({
   },
 
 
+
+  updateMyAccount: async (updatedData, csrfToken) => {
+    try {
+      await axios.put(`${apiMyAccount}`, updatedData, {
+        headers: {
+          'X-CSRFToken': csrfToken,
+        },
+      });
+      set((state) => ({
+        myAccountData: state.myAccountData.map((account) =>
+          account ? { ...account, ...updatedData } : account
+        ),
+      }));
+    } catch (error) {
+      console.error('Error updating my account:', error);
+    }
+  },
 
   updateParticipantCategory: async (id, updatedData, csrfToken) => {
     try {

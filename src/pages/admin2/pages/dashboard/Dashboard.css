@@ -1,0 +1,186 @@
+@tailwind components;
+
+
+@layer components {
+    .dashboardContainer{
+        @apply font-opensans  p-3 rounded-lg  bg-zinc-100
+        overflow-y-auto h-[100vh] pb-24
+    }
+
+    .dashboardContainer::-webkit-scrollbar {
+        width: 10px; /* Width of the scrollbar */
+    }
+    
+    .dashboardContainer::-webkit-scrollbar-track {
+        @apply bg-slate-50 /* Color of the track */
+    }
+    
+    .dashboardContainer::-webkit-scrollbar-thumb {
+        @apply bg-teal-500
+    }
+    
+    .dashboardContainer::-webkit-scrollbar-thumb:hover {
+        @apply bg-teal-900 /* Color of the thumb on hover */
+    }
+
+    .dashboardHeader{
+        @apply flex
+    }
+
+    .dashboardTitle{
+        @apply font-montserrat uppercase text-xl 
+        font-bold text-gray-700 p-2 rounded
+    }
+
+
+    .dashboardContent{
+        @apply flex items-start gap-5 
+    }
+
+    .cardContainer{
+        @apply flex flex-col gap-3
+    }
+
+
+    .flexCard{
+        @apply flex gap-3
+    }
+
+    .militaryCardWrapper h3{
+        @apply  uppercase text-xs lg:text-sm font-bold 
+        text-gray-800  mt-5
+    }
+
+    .militaryCardBox{
+        @apply bg-white rounded-lg border shadow-md p-10
+        flex gap-4 flex-wrap 
+    }
+
+    .militaryCard{
+        @apply flex border items-center justify-between p-5 
+        shadow-md  relative rounded-md  w-[48%] bg-gray-100
+    }
+   
+
+    .militaryCard span{
+        @apply  p-2 rounded-md shadow-md bg-white w-[70%]
+    }
+
+    .militaryCard span p{
+        @apply  font-bold text-base h-3 text-gray-600 font-montserrat
+    }
+
+    .militaryCard span small{
+        @apply font-medium text-gray-400 
+    }
+
+    .militaryCard .militaryTotal{
+        @apply text-xl font-bold bg-white text-amber-500 
+         shadow-md rounded-full  w-[50px] h-[50px] text-center
+         flex items-center justify-center
+    }
+
+
+    
+
+    .cardContainer .card{
+        @apply w-[200px]  lg:w-[250px] h-[150px] bg-white p-5
+        rounded-md shadow-md flex  
+    }
+
+
+
+    .cardContainer .card p{
+        @apply text-2xl lg:text-[3rem] text-gray-800 font-bold
+        mt-3
+    }
+
+    .cardContainer .card span{
+        @apply flex items-center gap-3
+    }
+
+    .cardContainer .card h3{
+        @apply uppercase text-xs lg:text-sm font-bold 
+        text-gray-800  
+    }
+
+    .cardContainer .card span svg{
+        @apply text-3xl  text-white   w-[50px] h-[50px] p-2 rounded-md
+    }
+
+    .cardContainer .card span .icon1{
+        @apply bg-blue-400
+    }
+
+    .cardContainer .card span .icon2{
+        @apply bg-orange-400
+    }
+    
+    .cardContainer .card span .icon3{
+        @apply bg-red-400
+    }
+
+    .cardContainer .card span .icon4{
+        @apply bg-amber-400
+    }
+
+    .cardContainer .card span .icon4{
+        @apply bg-lime-400
+    }
+
+    .cardContainer .card span .icon5{
+        @apply bg-emerald-400
+    }
+
+    .cardContainer .card span .icon6{
+        @apply bg-violet-400
+    }
+
+
+    .chartContainer{
+        @apply  flex  gap-5  flex-col 
+         rounded-lg  w-full
+        
+       
+    }
+
+
+    .chartTitle{
+        @apply font-montserrat uppercase text-lg 
+        font-bold text-gray-700 p-2 rounded
+    }
+
+    .lineChartBox{
+        @apply w-full 
+    }
+
+
+    .lineChart{
+        @apply bg-white rounded-md p-5  
+        border 
+    }
+
+
+    .barChartBox{
+        @apply w-full  
+    }
+
+
+    .barChart{
+        @apply rounded-md p-5  
+        border  bg-white
+    }
+
+
+    .donutChartBox{
+        @apply bg-white border rounded-md  
+        flex flex-col items-center justify-center 
+        w-full  h-[400px]
+    }
+
+    .polarChartBox{
+        @apply bg-white border rounded-md  
+        flex flex-col items-center justify-center 
+        w-full  h-[400px]
+    }
+}

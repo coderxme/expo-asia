@@ -68,6 +68,7 @@ const Participant = () => {
       title: 'Date/Time',
       dataIndex: 'created_at',
       key: 'created_at',
+      sorter: (a, b) => new Date(a.created_at) - new Date(b.created_at),
       render: (text, record) => {
         const date = new Date(record.created_at);
         const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
@@ -208,7 +209,7 @@ const Participant = () => {
     {
       title: 'Military Branch',
       dataIndex: 'military_branch',
-      render: (text, record) => record.military_branch || record?.military_branch2_details?.abrv || "N/A",
+      render: (text, record) => record.military_branch || record?.military_branch2_details?.abrv || "Not Applicable",
       filters: Array.from(new Set(participantData.map(item => item.military_branch || item.military_branch2_details?.abrv))).map(military_branch => ({
         text: military_branch,
         value: military_branch,

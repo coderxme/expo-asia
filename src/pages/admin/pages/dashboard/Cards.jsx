@@ -112,7 +112,7 @@ const totalCountNA = participantData.filter(participant =>
 
                             <div className='militaryCard'>
                                 <span>
-                                    <p>N/A</p>
+                                    <p>Not Applicable</p>
                                 </span>
                                 <div className='militaryTotal'>{totalCountNA}</div>
                             </div>

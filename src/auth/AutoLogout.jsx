@@ -70,7 +70,7 @@ const AutoLogout = ({ children }) => {
   const handleConfirmLogout = () => {
     setShowModal(false);
     clearTimeout(timerRef.current);
-    setCountdown(10); // Reset countdown to initial value
+    setCountdown(60); // Reset countdown to initial value
   };
 
   useEffect(() => {

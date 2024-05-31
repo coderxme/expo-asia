@@ -32,6 +32,7 @@ const BoothAttendee = () => {
     {
       title: 'Date/Time',
       dataIndex: 'created_at',
+      sorter: (a, b) => new Date(a.created_at) - new Date(b.created_at),
       key: 'created_at',
       render: (text, record) => {
         const date = new Date(record.created_at);
@@ -194,11 +195,10 @@ const BoothAttendee = () => {
     }
   };
 
-
   return (
     <div className='tableContainer'>
       <div className="tableHeader">
-        <h1 className='tableTitle'>Booth</h1>
+        <h1 className='tableTitle'>Booth Attendee</h1>
         <div className="flex gap-2">
          <Button
             hidden

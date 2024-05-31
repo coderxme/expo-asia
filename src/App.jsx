@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Login from './pages/login/Login'
 import LayoutPage from './layout/LayoutPage'
 import RoutePage from './routes/RoutePage'
@@ -9,7 +9,8 @@ import 'animate.css';
 
 export default function App() {
   return (
-    <Routes>
+   <Router>
+     <Routes>
       <Route path='/login' element={<Login />} />
       <Route element={<LayoutPage />} >
          <Route path='/expo-asia/*' element={
@@ -31,5 +32,6 @@ export default function App() {
          } />
       </Route>
     </Routes>
+   </Router>
   )
 }

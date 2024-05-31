@@ -3,7 +3,7 @@
 
 @layer components{
     .accountContainer{
-        @apply font-opensans p-5
+        @apply font-opensans p-5 flex gap-5 flex-col
     }
 
     .accountTitle{
@@ -12,14 +12,26 @@
     }
 
     .accountDetails{
-        @apply flex flex-col items-start
+        @apply flex flex-col items-start border rounded-md
+        p-3
     }
 
     .accountText{
-        @apply border rounded-lg p-2 px-4 text-xs
+        @apply rounded-lg p-2 px-4 text-xs
     }
 
     .accountText b{
         @apply text-teal-500 font-semibold
     }
+
+    .accountBtnBox{
+        @apply flex gap-2 mt-2 
+    }
+
+
+    .formInput{
+        @apply p-3 border-teal-500  w-[300px]
+        font-opensans rounded-md
+    }
+ 
 }

@@ -260,7 +260,7 @@ export default function RegisterForm() {
 
               <Form.Item label="Military Branch of Service" className='mt-3'>
                     <Select defaultValue={formData.participant_details.military_branch2}  onChange={(value) => handleSelectChange('military_branch2', value)}>
-                    <Option  value={null}>Not Applicable</Option>
+                    <Option  value={''}>Not Applicable</Option>
                        {militaryBranchData.map((item, index) => (
                          <Option key={index} value={item.id}>{item.abrv}</Option>
                        ))}

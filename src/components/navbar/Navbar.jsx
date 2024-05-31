@@ -18,10 +18,10 @@ function BasicExample() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="navbarLinkBox">
-              <Nav.Link as={NavLink} onClick={() => { window.scroll(0, 0) }} to="/" activeClassName="active">Home</Nav.Link>
+              <Nav.Link as={NavLink} onClick={() => { window.scroll(0, 0) }} to="/" activeclassname="active">Home</Nav.Link>
 
               <div className='linkMenuBox'>
-                <Nav.Link as={NavLink} onClick={() => { window.scroll(0, 0) }} to="/expo-asia/air-force-symposium" activeClassName="active">
+                <Nav.Link as={NavLink} onClick={() => { window.scroll(0, 0) }} to="/expo-asia/air-force-symposium" activeclassname="active">
                   <span> Air Force Symposium <FaAngleDown /></span>
                 </Nav.Link>
                 <div className='linkMenu'>
@@ -32,7 +32,7 @@ function BasicExample() {
               </div>
 
               <div className='linkMenuBox'>
-                <Nav.Link onClick={() => { window.scroll(0, 0) }}  as={NavLink} to="/expo-asia/defense-suppliers-summit" activeClassName="active">
+                <Nav.Link onClick={() => { window.scroll(0, 0) }}  as={NavLink} to="/expo-asia/defense-suppliers-summit" activeclassname="active">
                   <span>Defense Suppliers Summit <FaAngleDown /></span>
                 </Nav.Link>
                 <div className='linkMenu'>
@@ -43,7 +43,7 @@ function BasicExample() {
               </div>
 
               <div className='linkMenuBox'>
-                <Nav.Link onClick={() => { window.scroll(0, 0) }} as={NavLink} to="/expo-asia/expo" activeClassName="active">
+                <Nav.Link onClick={() => { window.scroll(0, 0) }} as={NavLink} to="/expo-asia/expo" activeclassname="active">
                   <span>Expo <FaAngleDown /></span>
                 </Nav.Link>
                 <div className='linkMenu'>
@@ -52,13 +52,13 @@ function BasicExample() {
                 </div>
               </div>
 
-              <Nav.Link onClick={() => { window.scroll(0, 0) }} as={NavLink} to="/expo-asia/contact-us" activeClassName="active">Contact Us</Nav.Link>
+              <Nav.Link onClick={() => { window.scroll(0, 0) }} as={NavLink} to="/expo-asia/contact-us" activeclassname="active">Contact Us</Nav.Link>
            
            
               <div className='linkMenuBox'>
                 <div
                 className='registerbtn'
-                as={NavLink} to="/expo-asia/expo" activeClassName="active">
+                as={NavLink} to="/expo-asia/expo" activeclassname="active">
                   <span>Register Now </span>
                 </div>
                 <div className='linkMenu'>

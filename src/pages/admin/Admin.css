@@ -42,6 +42,29 @@
         font-medium  w-full
     }
 
+    .navbarRight{
+        @apply flex  gap-2 items-center
+       
+      }
+
+    .navbarRight .greet{
+        @apply mt-4 font-opensans tracking-tight text-gray-500
+        text-xs capitalize   mr-10
+    }
+
+    .greet b{
+        @apply text-teal-500
+    }
+
+    .buttonAccount{
+        @apply border-teal-500 
+    }
+
+}
+
+
+.ant-layout-sider-children{
+    @apply flex flex-col items-center 
 }
 
 .ant-layout-sider{
@@ -53,6 +76,10 @@
     padding:10px;
 }
 
+
+.ant-layout .ant-layout-sider-children .ant-menu.ant-menu-inline-collapsed {
+    @apply w-[100px]
+}
 
 
 .ant-table-thead .ant-table-cell{

@@ -28,11 +28,14 @@ const Company = () => {
       title: 'Date/Time',
       dataIndex: 'created_at',
       key: 'created_at',
+      sorter: (a, b) => new Date(a.created_at) - new Date(b.created_at),
       render: (text, record) => {
         const date = new Date(record.created_at);
         const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
         return date.toLocaleString('en-US', options);
       },
+      width:"200px"
+
     },
     {
       title: 'Name',
@@ -44,7 +47,10 @@ const Company = () => {
       })),
       onFilter: (value, record) => record.name.includes(value),
       filterSearch: true,
+      width:"200px"
+
     },
+    
     {
       title: 'Email',
       dataIndex: 'email',
@@ -54,37 +60,49 @@ const Company = () => {
       })),
       onFilter: (value, record) => record.email.includes(value),
       filterSearch: true,
+      width:"200px"
+
     },
     {
       title: 'Type Name',
       dataIndex: 'company_org_type_details.name',
       render: (text, record) => record.company_org_type_details?.name || "N/A",
-      filters: companyData.map((item) => ({
-        text: item.company_org_type_details?.name || "",
-        value: item.company_org_type_details?.name || "",
+      filters: Array.from(new Set(companyData.map(item => item.company_org_type_details?.name))).map(name => ({
+        text: name,
+        value: name,
       })),
-      onFilter: (value, record) => record.company_org_type_details.name.includes(value),
+      onFilter: (value, record) => {
+        const name = record.company_org_type_details?.name;
+        return name ? name.includes(value) : false;
+      },
       filterSearch: true,
+      width: "200px"
     },
+    
     {
       title: 'Address',
       dataIndex: 'address',
+      width:"200px"
     },
     {
       title: 'Phone',
       dataIndex: 'phone',
+      width:"200px"
     },
     {
       title: 'Telephone No',
       dataIndex: 'telephone',
+      width:"200px"
     },
     {
       title: 'Website',
       dataIndex: 'website',
+      width:"200px"
     },
     {
       title: 'Action',
       dataIndex: 'action',
+      width:"200px",
       fixed: 'right',
       render: (_, record) => (
         <span className='flex gap-3 flex-col items-center'>

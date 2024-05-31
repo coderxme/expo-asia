@@ -17,7 +17,7 @@ const EventAttendee = () => {
     {
       title: 'Date/Time',
       dataIndex: 'created_at',
-      key: 'created_at',
+      sorter: (a, b) => new Date(a.created_at) - new Date(b.created_at),
       render: (text, record) => {
         const date = new Date(record.created_at);
         const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
@@ -149,7 +149,7 @@ const EventAttendee = () => {
   return (
     <div className='tableContainer'>
       <div className="tableHeader">
-        <h1 className='tableTitle'>Booth</h1>
+        <h1 className='tableTitle'>Event Attendee</h1>
         <Button
           icon={<ReloadOutlined />}
           type='primary'

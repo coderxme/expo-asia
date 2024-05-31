@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import { apiLogout, getCsrfToken } from '../../api/api';
-import { Button } from 'antd';
+import { Button, Tooltip } from 'antd';
 import { RiLogoutCircleLine } from "react-icons/ri";
 
 
@@ -48,7 +48,9 @@ export default function btnLogout() {
     
 
   return (
-    <Button className='rounded-full bg-teal-600' type='primary' icon={<RiLogoutCircleLine/>}  onClick={handleLogout} />
+    <Tooltip title="Logout">
+      <Button className='rounded-full' danger type='primary' icon={<RiLogoutCircleLine/>}  onClick={handleLogout} />
+    </Tooltip>
       
   )
 }

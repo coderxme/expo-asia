@@ -64,7 +64,7 @@ const App = () => {
         updatedBreadcrumbs.push('Military Branch');
         break;
       case '2':
-        updatedBreadcrumbs.push('Company');
+        updatedBreadcrumbs.push('Sponsor/Exhibitor');
         break;
       case '3':
         updatedBreadcrumbs.push('Booth');
@@ -79,7 +79,7 @@ const App = () => {
         updatedBreadcrumbs.push('Event', 'Event Attendee');
         break;
       case '8':
-        updatedBreadcrumbs.push('Company', 'Company Type');
+        updatedBreadcrumbs.push('Sponsor/Exhibitor', 'Sponsor/Exhibitor Type');
         break;
       case '9':
         updatedBreadcrumbs.push('Account');
@@ -177,20 +177,28 @@ const App = () => {
           onClick={handleMenuClick}
           selectedKeys={[selectedMenuKey]}
         >
+
+        {/* {userRole !== "Administrator" ? (
+          <Menu.Item key="112" icon={<RxDashboard />}>
+            Dashboard
+          </Menu.Item>
+        ) : (
+          null
+        ) } */}
+
+        {userRole === "Administrator" && (
+          <>
           <Menu.Item key="111" icon={<RxDashboard />}>
             Dashboard
           </Menu.Item>
-          {userRole === "Administrator" && (
+
           <Menu.Item key="13" icon={<IoPeopleOutline />}>
             Users
           </Menu.Item>
-          )}
 
-          {userRole === "Administrator" && (
              <Menu.Item key="15" icon={<PiPersonThin />}>
              Roles
            </Menu.Item>
-          )}
 
           <Menu.Item key="16" icon={<FaWpforms />}>
             Registration
@@ -200,6 +208,13 @@ const App = () => {
           <Menu.Item key="1" icon={<HiOutlineUserGroup />}>
              Participant
           </Menu.Item>
+
+          <SubMenu key="sub3" icon={<FaRegBuilding />} title="Sponsor/Exhibitor">
+          <Menu.Item key="2">Sponsor/Exhibitor</Menu.Item>
+          <Menu.Item key="8">Sponsor/Exhibitor Type</Menu.Item>
+          </SubMenu>
+          </>
+          )}
          
           {/* <SubMenu key="sub4" icon={<HiOutlineUserGroup/>} title="Participant">
             <Menu.Item key="1">Participant</Menu.Item>
@@ -209,10 +224,7 @@ const App = () => {
 
           
          
-          <SubMenu key="sub3" icon={<FaRegBuilding />} title="Company">
-            <Menu.Item key="2">Company</Menu.Item>
-            <Menu.Item key="8">Company Type</Menu.Item>
-          </SubMenu>
+          
           <SubMenu key="sub1" icon={<LiaPersonBoothSolid />} title="Booth">
             <Menu.Item key="3">Booth</Menu.Item>
             <Menu.Item key="4">Attendee</Menu.Item>
@@ -252,11 +264,13 @@ const App = () => {
           />
           <Breadcrumb style={{ margin: '16px' }}>
             {breadcrumbs.map((breadcrumb, index) => (
-              <Breadcrumb.Item className=' uppercase font-bold text-xs text-gray-700' key={index}>{breadcrumb}</Breadcrumb.Item>
+              <Breadcrumb.Item className=' uppercase font-bold text-xs text-gray-500' key={index}>{breadcrumb}</Breadcrumb.Item>
             ))}
           </Breadcrumb>
         </div>
+
           <div className="navbarRight">
+           <p className='greet'>Hello, <b>{myAccountData.username}</b>!</p>
             <Menu onClick={handleMenuClick} selectedKeys={[selectedMenuKey]} >
               <Menu.Item key="9" className='buttonAccount' icon={<IoPeopleOutline />}>
                 Account

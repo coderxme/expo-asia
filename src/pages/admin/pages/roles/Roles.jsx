@@ -49,7 +49,7 @@ const Roles = () => {
     {
       title: 'Action',
       dataIndex: 'action',
-      fixed: 'right',
+      // fixed: 'right',
       render: (_, record) => (
         <span className='flex gap-3 flex-col items-center'>
           <Button

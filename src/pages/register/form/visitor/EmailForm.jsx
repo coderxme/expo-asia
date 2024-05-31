@@ -25,6 +25,8 @@ export default function EmailForm({ email,  hashedCode, formDataReg, captchaValu
   });
   const firstEventId = eventData.map((item) => item.id)[0];
 
+  console.log("test:", firstEventId)
+
   const [formInviteData, setFormInviteData] = useState({
     invite_details: {
       custom_msg: "This is the event",
