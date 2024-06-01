@@ -22,8 +22,6 @@ export default function RegisterForm() {
        fetchEvent,
        fetchMilitaryBranch,
        fetchCompany,
-
-       companyData,
        eventData,
        militaryBranchData
         } = useAdminStore()
@@ -44,7 +42,6 @@ export default function RegisterForm() {
         }
       });  
 
-      const [isSubmitting, setIsSubmitting] = useState(false);
       const [registrationSuccess, setRegistrationSuccess] = useState(false);
       const [isSendingEmail, setIsSendingEmail] = useState(false);
       const [hashedCode, setHashedCode] = useState("");
@@ -290,8 +287,8 @@ export default function RegisterForm() {
                 <Input placeholder="Enter Email address" value={formData.participant_details.email} name="participant_details.email" onChange={handleFormChangeParticipant} />
               </Form.Item>
               <Form.Item>
-                <Button loading={isSubmitting} type="primary" className='w-full bg-[#11385D] text-white font-opensans' onClick={handleRegisterParticipantSubmit} disabled={isSubmitting}>
-                  {isSubmitting ? "Submitting..." : "Register"}
+                <Button type="primary" className='w-full bg-[#11385D] text-white font-opensans' onClick={handleRegisterParticipantSubmit} >
+                  Register
                 </Button>
               </Form.Item>
             </Form>

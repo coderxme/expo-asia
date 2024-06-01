@@ -233,7 +233,7 @@ const App = () => {
           <SubMenu key="sub2" icon={<MdOutlineEvent />} title="Event">
             <Menu.Item key="6">Event</Menu.Item>
             <Menu.Item key="7">Attendee</Menu.Item>
-            {/* <Menu.Item key="12">Calendar</Menu.Item> */}
+            <Menu.Item key="12">Calendar</Menu.Item>
           </SubMenu>
 
           {/* <Menu.Item key="10" icon={<AiOutlineMail />}>

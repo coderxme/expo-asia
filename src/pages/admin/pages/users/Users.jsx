@@ -5,7 +5,10 @@ import GetToken from '../../../../context/GetToken'
 import useAdminStore from '../../../../store/adminStore';
 import { apiUsers } from '../../../../api/api';
 import axios from 'axios';
+import { PiFilesDuotone } from "react-icons/pi";
 import CreateForm from './forms/CreateForm';
+import ExportFiles from './export/ExportFiles';
+const { Option } = Select;
 
 const Users = () => {
   const { 
@@ -303,9 +306,18 @@ const Users = () => {
         dataSource={usersData}
         scroll={{ x: 1300, y:450 }}
         footer={() => (
-          <div style={{ textAlign: 'left' }}>
+          <div className='totalBox'>
             <p className='total'>
               Total: <b>{totalCount}</b>
+            </p>
+            <p className="exportWrapper">
+               <span className="exportText">
+                   <PiFilesDuotone/> Export:
+               </span>
+               <ExportFiles 
+                 totalOfUsers={totalCount}
+                 usersData={usersData}
+               />
             </p>
           </div>
         )}

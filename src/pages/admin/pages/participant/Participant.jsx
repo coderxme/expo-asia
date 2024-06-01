@@ -7,6 +7,8 @@ import CreateForm from './form/CreateForm';
 import UpdateForm from './form/UpdateForm';
 import { apiParticipant, apiQRCode } from '../../../../api/api';
 import axios from "axios"
+import ExportFiles from './export/ExportFiles';
+import { PiFilesDuotone } from "react-icons/pi";
 
 const Participant = () => {
   const { 
@@ -203,7 +205,6 @@ const Participant = () => {
     {
       title: 'Unit/Organization/Company',
       render: (text, record) => record.company_org_details?.name || record?.company_org_other || "N/A"  ,
-
       width:"200px"
     },
     {
@@ -444,9 +445,17 @@ const Participant = () => {
         dataSource={participantData}
         scroll={{ x: 1300, y:450 }}
         footer={() => (
-          <div style={{ textAlign: 'left' }}>
+          <div className='totalBox'>
             <p className='total'>
               Total: <b>{totalCount}</b>
+            </p>
+            <p className='exportWrapper'>
+              <span className='exportText'>
+                <PiFilesDuotone /> Export:</span>
+            <ExportFiles 
+              totalOfParticipant={totalCount} 
+              participantData={participantData} 
+            />
             </p>
           </div>
         )}

@@ -3,6 +3,9 @@ import { Table, Button, Popconfirm, message, Modal, Form, Input } from 'antd';
 import { EditOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
 import GetToken from '../../../../context/GetToken'
 import useAdminStore from '../../../../store/adminStore';
+import { PiFilesDuotone } from "react-icons/pi";
+import ExportFilesEvent from './export/ExportFilesEvent';
+import ExportFilesAttendee from './export/ExportFilesAttendee';
 
 const EventAttendee = () => {
   const { myAccountData, eventAttendeeData,  deleteEventAttendee, updateEventAttendee } = useAdminStore();
@@ -165,9 +168,19 @@ const EventAttendee = () => {
         dataSource={eventAttendeeData}
         scroll={{ x: 1300, y:450 }}
         footer={() => (
-          <div style={{ textAlign: 'left' }}>
+          <div className='totalBox'>
             <p className='total'>
               Total: <b>{totalCount}</b>
+            </p>
+
+            <p className="exportWrapper">
+               <span className="exportText">
+                  <PiFilesDuotone /> Export:
+               </span>
+               <ExportFilesAttendee 
+                 totalOfAttendee={totalCount}
+                 eventAttendeeData={eventAttendeeData}
+               />
             </p>
           </div>
         )}

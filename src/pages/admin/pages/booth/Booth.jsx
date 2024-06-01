@@ -7,6 +7,8 @@ import CreateForm from './form/CreateForm';
 import UpdateForm from './form/UpdateForm';
 import CreateButton from './button/CreateButton';
 import RefreshButton from './button/RefreshButton'
+import ExportFiles from './export/ExportFilesBooth';
+import { PiFilesDuotone } from "react-icons/pi";
 
 const { Option } = Select; 
 
@@ -204,9 +206,19 @@ const Booth = () => {
         dataSource={boothData}
         scroll={{ x: 1300, y: 450 }}
         footer={() => (
-          <div style={{ textAlign: 'left' }}>
+          <div className='totalBox'>
             <p className='total'>
               Total: <b>{totalCount}</b>
+            </p>
+
+            <p className="exportWrapper">
+               <span className="exportText">
+                <PiFilesDuotone /> Export:   </span>
+                <ExportFiles 
+                  totalOfBooth={totalCount}
+                  boothData={boothData}
+                />
+             
             </p>
           </div>
         )}

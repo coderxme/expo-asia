@@ -4,6 +4,8 @@ import { EditOutlined, DeleteOutlined, ReloadOutlined, PlusOutlined } from '@ant
 import GetToken from '../../../../context/GetToken';
 import useAdminStore from '../../../../store/adminStore';
 import moment from 'moment';
+import { PiFilesDuotone } from "react-icons/pi";
+import ExportFilesEvent from './export/ExportFilesEvent';
 
 const Event = () => {
   const { 
@@ -257,9 +259,18 @@ const Event = () => {
         dataSource={eventData}
         scroll={{ x: 1300, y: 450 }}
         footer={() => (
-          <div style={{ textAlign: 'left' }}>
+          <div className='totalBox'>
             <p className='total'>
               Total: <b>{totalCount}</b>
+            </p>
+            <p className="exportWrapper">
+               <span className="exportText">
+                  <PiFilesDuotone /> Export:
+               </span>
+               <ExportFilesEvent
+                  totalOfEvent={totalCount}
+                  eventData={eventData}
+               />
             </p>
           </div>
         )}

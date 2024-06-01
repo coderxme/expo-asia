@@ -3,6 +3,8 @@ import { Table, Button, Popconfirm, message, Modal, Form, Input, Select } from '
 import { EditOutlined, DeleteOutlined, ReloadOutlined, PlusOutlined } from '@ant-design/icons';
 import GetToken from '../../../../context/GetToken';
 import useAdminStore from '../../../../store/adminStore';
+import { PiFilesDuotone } from "react-icons/pi";
+import ExportFiles from './export/ExportFiles';
 
 const Company = () => {
   const {  myAccountData, companyData,  deleteCompany, updateCompany, createCompany, companyTypeData, fetchCompany } = useAdminStore();
@@ -246,6 +248,15 @@ const Company = () => {
           <div className='totalBox'>
             <p className='total'>
               Total: <b>{totalCount}</b>
+            </p>
+
+            <p className='exportWrapper'>
+              <span className='exportText'>
+                <PiFilesDuotone /> Export:</span>
+            <ExportFiles 
+              totalOfCompany={totalCount} 
+              companyData={companyData} 
+            />
             </p>
           </div>
         )}

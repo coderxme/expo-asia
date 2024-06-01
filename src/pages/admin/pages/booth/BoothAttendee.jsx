@@ -3,6 +3,8 @@ import { Table, Button, Popconfirm, message, Modal, Form, Input, Select } from '
 import { EditOutlined, DeleteOutlined, ReloadOutlined, PlusOutlined  } from '@ant-design/icons';
 import GetToken from '../../../../context/GetToken'
 import useAdminStore from '../../../../store/adminStore';
+import ExportFiles from './export/ExportFilesAttendee';
+import { PiFilesDuotone } from "react-icons/pi";
 
 const BoothAttendee = () => {
   const { 
@@ -225,9 +227,18 @@ const BoothAttendee = () => {
         dataSource={boothAttendeeData}
         scroll={{ x: 1300, y:450 }}
         footer={() => (
-          <div style={{ textAlign: 'left' }}>
+          <div className='totalBox'>
             <p className='total'>
               Total: <b>{totalCount}</b>
+            </p>
+            <p className="exportWrapper">
+               <span className="exportText">
+               <PiFilesDuotone /> Export:   
+               </span>
+               <ExportFiles 
+                 totalOfAttendee={totalCount}
+                 boothAttendeeData={boothAttendeeData}
+               />
             </p>
           </div>
         )}

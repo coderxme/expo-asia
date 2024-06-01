@@ -3,6 +3,8 @@ import { Table, Button, Popconfirm, message, Modal, Form, Input, Select } from '
 import { EditOutlined, DeleteOutlined, ReloadOutlined, PlusOutlined  } from '@ant-design/icons';
 import GetToken from '../../../../context/GetToken'
 import useAdminStore from '../../../../store/adminStore';
+import ExportFiles from './export/ExportFilesAttendee';
+import { PiFilesDuotone } from "react-icons/pi";
 
 const BoothAttendee = () => {
   const { 
@@ -21,7 +23,11 @@ const BoothAttendee = () => {
   const [createVisible, setCreateVisible] = useState(false);
   const [updatetingBooth, setUpdatingBooth] = useState(null);
   const [form] = Form.useForm();
+
   const userRole = myAccountData?.roles[0] || ""
+
+
+
   const totalCount = boothAttendeeData.length;
 
   const columns = [
@@ -55,6 +61,8 @@ const BoothAttendee = () => {
       filterSearch: true,
     },
 
+
+      
     {
       title: 'Attendance',
       dataIndex: 'booth_details.is_in',
@@ -127,13 +135,27 @@ const BoothAttendee = () => {
   };
 
   const handleUpdate = async (values) => {
-    const { name } = values;
-    if ( !name ) {
+    const {
+      name,
+   
+    } = values;
+
+    if (
+      !name
+    
+    ) {
       message.error('Please fill in all required fields.');
       return;
     }
-    const updatedData = { name };
-    const isChanged = Object.keys(updatedData).some((key) => updatedData[key] !== updatetingBooth[key]);
+
+    const updatedData = {
+      name,
+     
+    };
+
+    const isChanged = Object.keys(updatedData).some(
+      (key) => updatedData[key] !== updatetingBooth[key]
+    );
 
     if (!isChanged) {
       message.warning('No changes made.');
@@ -144,7 +166,7 @@ const BoothAttendee = () => {
       await updateBoothAttendee(updatetingBooth.id, updatedData, csrfToken);
       setVisible(false);
       message.success('Booth updated successfully');
-      fetchBoothAttendee();
+      fetchBoothAttendee()
     } catch (error) {
       console.error('Error updating Booth:', error);
       message.error('Failed to update Booth');
@@ -155,11 +177,14 @@ const BoothAttendee = () => {
   const handleCreate = async (values) => {
     const { is_in, booth, participant } = values;
 
+
     if (!is_in || !booth || !participant ) {
       message.error('Please fill in all required fields.');
       return;
     }
+
     const newBoothAttendee = { is_in, booth, participant };
+
     try {
       await createBoothAttendee(newBoothAttendee, csrfToken);
       setCreateVisible(false);
@@ -172,23 +197,20 @@ const BoothAttendee = () => {
     }
   };
 
-
   return (
     <div className='tableContainer'>
       <div className="tableHeader">
-        <h1 className='tableTitle'>Booth</h1>
+        <h1 className='tableTitle'>Booth Attendee</h1>
         <div className="flex gap-2">
-        {userRole === 'Administrator' && (
-          <Button
-              icon={<PlusOutlined />}
-              type='primary'
-              onClick={() => setCreateVisible(true)}
-              className='buttonTableHeader'
-            >
-          Create Booth Attendee
-        </Button>
-        )}
-       
+         <Button
+            hidden
+            icon={<PlusOutlined />}
+            type='primary'
+            onClick={() => setCreateVisible(true)}
+            className='buttonTableHeader'
+          >
+            Create Booth Attendee
+          </Button>
         <Button
           icon={<ReloadOutlined />}
           type='primary'
@@ -205,9 +227,18 @@ const BoothAttendee = () => {
         dataSource={boothAttendeeData}
         scroll={{ x: 1300, y:450 }}
         footer={() => (
-          <div style={{ textAlign: 'left' }}>
+          <div className='totalBox'>
             <p className='total'>
               Total: <b>{totalCount}</b>
+            </p>
+            <p className="exportWrapper">
+               <span className="exportText">
+               <PiFilesDuotone /> Export:   
+               </span>
+               <ExportFiles 
+                 totalOfAttendee={totalCount}
+                 boothAttendeeData={boothAttendeeData}
+               />
             </p>
           </div>
         )}
@@ -278,9 +309,9 @@ const BoothAttendee = () => {
             name='participant'
           >
             <Select placeholder="Select a participant">
-              {participantData.map((item) => (
-                <Select.Option key={item.id} value={item.id}>
-                  {item.name}
+              {participantData.map((type) => (
+                <Select.Option key={type.id} value={type.id}>
+                  {type.name}
                 </Select.Option>
               ))}
             </Select>
