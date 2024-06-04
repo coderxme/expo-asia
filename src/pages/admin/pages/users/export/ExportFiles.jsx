@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import CsvDownloader from 'react-csv-downloader';
 import { PDFDownloadLink, Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
@@ -101,7 +102,7 @@ export default function ExportFiles({ usersData, totalOfUsers }) {
       FirstName: item?.first_name || "N/A",
       LastName: item?.last_name || "N/A",
       Email: item?.email || "N/A",
-      Role: item?.roles[0] || "N/A",
+      Role: item.roles && item.roles.length > 0 ? item.roles[0] : "N/A",
     }));
     return csvData;
   };
@@ -133,7 +134,7 @@ export default function ExportFiles({ usersData, totalOfUsers }) {
               <Text style={styles.tableCell}>{item.first_name || "N/A"}</Text>
               <Text style={styles.tableCell}>{item?.last_name || "N/A"}</Text>
               <Text style={styles.tableCell}>{item?.email || "N/A"}</Text>
-              <Text style={styles.tableCell}>{item?.roles[0] || "N/A"}</Text>
+              <Text style={styles.tableCell}>{item.roles && item.roles.length > 0 ? item.roles[0] : "N/A"}</Text>
             </View>
           ))}
 

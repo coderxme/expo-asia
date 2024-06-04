@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import { Button, Form, Input, message, Modal } from 'antd';
@@ -46,7 +48,7 @@ export default function EmailForm({ email,  hashedCode, formDataReg, captchaValu
       military_branch: formDataReg?.participant_details?.military_branch || "",
       military_branch2: formDataReg?.participant_details?.military_branch2 || "",
       phone_no: formDataReg?.participant_details?.phone_no || "",
-      preferred_attendance: formDataReg?.participant_details?.preferred_attendance || "",
+      // preferred_attendance: formDataReg?.participant_details?.preferred_attendance || "",
     }
   });
 

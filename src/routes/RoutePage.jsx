@@ -9,22 +9,30 @@ import Index2 from '../pages/defense-suppliers-summit/index'
 import Expo from '../pages/expo/Expo'
 import VisitorRegister from '../pages/register/form/visitor/Register'
 import ExhibitorRegister from '../pages/register/form/exibitor/Register'
+import NoPageAvailable from './NoPageAvailable'
 
 
-export default function App() {
+const routes = [
+  { path: '/', element: <Home />, exact: true },
+  { path: '/speakers', element: <Speakers /> },
+  { path: '/program', element: <Program /> },
+  { path: '/online-streaming', element: <OnlineStreaming /> },
+  { path: '/contact-us', element: <ContactUs /> },
+  { path: '/expo', element: <Expo /> },
+  { path: '/air-force-symposium', element: <Index1 /> },
+  { path: '/defense-suppliers-summit', element: <Index2 /> },
+  { path: '/participant', element: <VisitorRegister /> },
+  { path: '/exhibitor', element: <ExhibitorRegister /> },
+  { path: '*', element: <NoPageAvailable /> },
+];
+
+
+export default function RoutePage() {
   return (
     <Routes>
-      <Route index element={<Home />} />
-      <Route path='' element={<Home />} />
-      <Route path='/speakers' element={<Speakers />} />
-      <Route path='/program' element={<Program />} />
-      <Route path='/online-streaming' element={<OnlineStreaming />} />
-      <Route path='/contact-us' element={<ContactUs/>} />
-      <Route path='/expo' element={<Expo/>} />
-      <Route path='/air-force-symposium' element={<Index1/>} />
-      <Route path='/defense-suppliers-summit' element={<Index2/>} />
-      <Route path='/participant'  element={<VisitorRegister/>} />
-      <Route path='/exhibitor'  element={<ExhibitorRegister/>} />
+        {routes.map(({ path, element, exact }) => (
+          <Route key={path} path={path} element={element} exact={exact} />
+        ))}
     </Routes>
   )
 }

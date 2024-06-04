@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Table, Button, Popconfirm, message, Modal, Form, Input, Select, Image } from 'antd';
+import  { useEffect, useState } from 'react';
+import { Table, Button, Popconfirm, message, Modal, Form, Image } from 'antd';
 import { EditOutlined, DeleteOutlined, ReloadOutlined, PlusOutlined  } from '@ant-design/icons';
 import GetToken from '../../../../context/GetToken'
 import useAdminStore from '../../../../store/adminStore';
 import CreateForm from './form/CreateForm';
 import UpdateForm from './form/UpdateForm';
-import { apiParticipant, apiQRCode } from '../../../../api/api';
-import axios from "axios"
+import { apiQRCode } from '../../../../api/api';
 import ExportFiles from './export/ExportFiles';
 import { PiFilesDuotone } from "react-icons/pi";
 
@@ -45,23 +44,6 @@ const Participant = () => {
   const totalCount = participantData.length;
 
 
-  const handleUpdateCategory = async (participantId, newCategory) => {
-    try {
-      // Perform the PUT request to update the category
-      const response = await axios.put(`${apiParticipant}${participantId}`, { participant_categ: newCategory }, {
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': csrfToken
-        }
-      });
-        message.success("Participant category updated successfully");
-    } catch (error) {
-      // Handle errors
-      console.error('Error updating category:', error.message);
-      message.error("Failed to update participant category");
-    }
-  };
-  
   
   
 
@@ -118,17 +100,17 @@ const Participant = () => {
 
     },
 
-    {
-      title: 'Preffered Attendance',
-      render: (text, record) => record?.preferred_attendance || "N/A",
-      filters: Array.from(new Set(participantData.map(item => item.preferred_attendance))).map(attendance => ({
-        text: attendance,
-        value: attendance,
-      })),
-      onFilter: (value, record) => record.preferred_attendance.includes(value),
-      filterSearch: true,
-      width:"200px"
-    },
+    // {
+    //   title: 'Preffered Attendance',
+    //   render: (text, record) => record?.preferred_attendance || "N/A",
+    //   filters: Array.from(new Set(participantData.map(item => item.preferred_attendance))).map(attendance => ({
+    //     text: attendance,
+    //     value: attendance,
+    //   })),
+    //   onFilter: (value, record) => record.preferred_attendance.includes(value),
+    //   filterSearch: true,
+    //   width:"200px"
+    // },
 
     {
       title: 'Forum',

@@ -71,3 +71,13 @@
     opacity: 1;
   }
 }
+
+
+
+.noPageContainer{
+  @apply flex flex-col items-center mt-20 font-opensans 
+}
+
+.noPageContainer .navbar{
+  display: none !important;
+}

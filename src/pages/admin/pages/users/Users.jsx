@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Table, Button, Popconfirm, message, Modal, Form, Input, Select } from 'antd';
 import { EditOutlined, DeleteOutlined, ReloadOutlined, PlusOutlined  } from '@ant-design/icons';
 import GetToken from '../../../../context/GetToken'
@@ -28,6 +28,8 @@ const Users = () => {
   const [form] = Form.useForm();
   const [createForm] = Form.useForm()
   const userRole = myAccountData?.roles[0] || ""
+  const [isVerifying, setIsVerifying] = useState(false);
+
 
 
   useEffect(() => {
@@ -234,6 +236,7 @@ const Users = () => {
 
 
   const handleCreate = async (values) => {
+    setIsVerifying(true);
     const {
       password,
       username,
@@ -241,6 +244,7 @@ const Users = () => {
       last_name,
       email,
       groups,
+      send_email,
     } = values;
 
     if (
@@ -261,8 +265,10 @@ const Users = () => {
       first_name,
       last_name,
       email,
-      groups: [groups]
+      groups: [groups],
+      send_email
      };
+
 
     try {
       await createUsers(newUser, csrfToken);
@@ -270,9 +276,12 @@ const Users = () => {
       message.success('User created successfully');
       createForm.resetFields();
       fetchUsers()
+      
     } catch (error) {
       console.error('Error creating User:', error);
       message.error('Failed to create User');
+    } finally {
+      setIsVerifying(false);
     }
   };
 
@@ -391,6 +400,7 @@ const Users = () => {
            createForm={createForm}
            handleCreate={handleCreate}
            rolesData={rolesData}
+           isVerifying={isVerifying}
         />
       </Modal>
     </div>

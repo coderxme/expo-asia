@@ -38,7 +38,7 @@ export default function RegisterForm() {
           military_branch2: null,
           phone_no: "",
           forum:null,
-          preferred_attendance:""
+          // preferred_attendance:""
         }
       });  
 
@@ -70,10 +70,10 @@ export default function RegisterForm() {
               return;
             }
 
-            if (formData.participant_details.preferred_attendance === '') {
-              message.error("Please select Preferred Attendance");
-              return;
-            }
+            // if (formData.participant_details.preferred_attendance === '') {
+            //   message.error("Please select Preferred Attendance");
+            //   return;
+            // }
 
 
             if (formData.participant_details.last_name === '') {
@@ -213,12 +213,12 @@ export default function RegisterForm() {
                     </Select>
                 </Form.Item>
 
-                <Form.Item label="What is your preferred mode of attendance for the event?" required className='mt-3'>
+                {/* <Form.Item label="What is your preferred mode of attendance for the event?" required className='mt-3'>
                     <Select defaultValue={formData.participant_details.preferred_attendance} onChange={(value) => handleFormChangeParticipant({ target: { name: 'participant_details.preferred_attendance', value } })}>
                          <Option  value="online">Online</Option>
                          <Option  value="f2f">Face-to-Face (F2F)</Option>
                     </Select>
-                </Form.Item>  
+                </Form.Item>   */}
                 
               <Form.Item label="Last Name" required>
                 <Input placeholder="Enter Last Name" value={formData.participant_details.last_name} name="participant_details.last_name" onChange={handleFormChangeParticipant} />
