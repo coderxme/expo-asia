@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import CsvDownloader from 'react-csv-downloader';
 import { PDFDownloadLink, Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
@@ -92,18 +93,15 @@ export default function ExportFilesBooth({ boothData, totalOfBooth }) {
     const date = new Date(dateString);
     return date.toLocaleString('en-US', options);
   };
-
   const generateCSVData = () => {
+    if (!boothData || !Array.isArray(boothData)) return [];
     const csvData = boothData.map(item => ({
-      DateTime: item.created_at ? formatDate(item.created_at) : "N/A",
+      DateTime: item?.created_at ? formatDate(item.created_at) : "N/A",
       Name: item?.name || "N/A",
       EventName: item?.event_details?.name || "N/A",
       EventDescription: item?.event_details?.description || "N/A",
-      Company: item?.company_org_details.map((item) => item?.name || "N/A")
-      .filter((name) => name).join(", "),
-      UserManager: item?.user_manager_details.map((item) => item?.username || "N/A")
-      .filter((username) => username).join(", "),
-    
+      Company: item?.company_org_details?.map((item) => item?.name || "N/A").filter((name) => name).join(", "),
+      UserManager: item?.user_manager_details?.map((item) => item?.username || "N/A").filter((username) => username).join(", "),
     }));
     return csvData;
   };
@@ -130,12 +128,12 @@ export default function ExportFilesBooth({ boothData, totalOfBooth }) {
 
           {boothData.map((item, index) => (
             <View key={index} style={styles.tableRow}>
-              <Text style={styles.tableCell}>{item.created_at ? formatDate(item.created_at) : "N/A"}</Text>
-              <Text style={styles.tableCell}>{item.name || "N/A"}</Text>
+              <Text style={styles.tableCell}>{item?.created_at ? formatDate(item.created_at) : "N/A"}</Text>
+              <Text style={styles.tableCell}>{item?.name || "N/A"}</Text>
               <Text style={styles.tableCell}>{item?.event_details?.name || "N/A"}</Text>
               <Text style={styles.tableCell}>{item?.event_details?.description || "N/A"}</Text>
-              <Text style={styles.tableCell}>{item?.company_org_details.map((item) => item?.name || "N/A").filter((name) => name).join(", ")}</Text>
-              <Text style={styles.tableCell}>{item.user_manager_details.map((item) => item?.username || "N/A").filter((username) => username).join(", ")}</Text>
+              <Text style={styles.tableCell}>{item?.company_org_details?.map((item) => item?.name || "N/A").filter((name) => name).join(", ")}</Text>
+              <Text style={styles.tableCell}>{item?.user_manager_details?.map((item) => item?.username || "N/A").filter((username) => username).join(", ")}</Text>
             </View>
           ))}
         </View>

@@ -6,10 +6,8 @@ import { Button, Form, Input, message, Modal } from 'antd';
 import { apiEmailConfirmation,  apiRegisterParticipant, apiQRCode} from '../../../../api/api';
 import axios from 'axios';
 import Congrats from './Congrats';
-import GetToken from '../../../../context/GetToken';
 
-export default function EmailForm({ email,  hashedCode, formDataReg, captchaValue, sendEmailConfirmation, eventData }) {
-  const csrfToken = GetToken()
+export default function EmailForm({ csrfToken, email,   hashedCode, formDataReg, captchaValue, sendEmailConfirmation }) {
   const [otp, setOTP] = useState('');
   const [isResendOTP, setIsResendOTP] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
@@ -25,32 +23,10 @@ export default function EmailForm({ email,  hashedCode, formDataReg, captchaValu
       email_to_send: email
     }
   });
-  const firstEventId = eventData.map((item) => item.id)[0];
+  // const firstEventId = eventData.map((item) => item.id)[0];
 
-  console.log("test:", firstEventId)
+  // console.log("test:", firstEventId)
 
-  const [formInviteData, setFormInviteData] = useState({
-    invite_details: {
-      custom_msg: "This is the event",
-      event: firstEventId
-      
-    },
-    g_recaptcha_response: captchaValue,
-    participant_details: {
-      forum: formDataReg?.participant_details?.forum || null,
-      first_name: formDataReg?.participant_details?.first_name || "",
-      last_name: formDataReg?.participant_details?.last_name || "",
-      middle_name: formDataReg?.participant_details?.middle_name || "",
-      email: formDataReg?.participant_details?.email || "",
-      designation: formDataReg?.participant_details?.designation || "",
-      company_org_other: formDataReg?.participant_details?.company_org_other || "",
-      // company_org: formDataReg?.participant_details?.company_org || "",
-      military_branch: formDataReg?.participant_details?.military_branch || "",
-      military_branch2: formDataReg?.participant_details?.military_branch2 || "",
-      phone_no: formDataReg?.participant_details?.phone_no || "",
-      // preferred_attendance: formDataReg?.participant_details?.preferred_attendance || "",
-    }
-  });
 
   
   
@@ -125,6 +101,7 @@ export default function EmailForm({ email,  hashedCode, formDataReg, captchaValu
   
     } catch (error) {
         message.error("Incorrect OTP");
+        console.log(error);
     } 
   };
 
@@ -132,7 +109,7 @@ export default function EmailForm({ email,  hashedCode, formDataReg, captchaValu
   const handleRegisterParticipantSubmit = async () => {
     setIsVerifying(true);
     try {
-      const response = await axios.post(apiRegisterParticipant, formInviteData, {
+      const response = await axios.post(apiRegisterParticipant, formDataReg, {
         headers: {
           'X-CSRFToken': csrfToken
         }
@@ -143,8 +120,10 @@ export default function EmailForm({ email,  hashedCode, formDataReg, captchaValu
       message.success("Verify successfully!");
       setSuccessInvite(true)
     } catch (error) {
+      console.log(error);
       setErrorMessage(`${error.response.data.error.participant_details.email} Please refresh the page to register again!`);
       setErrorModalVisible(true);
+      message.error("Failed to verify");
     }  finally {
       setIsVerifying(false);
     }

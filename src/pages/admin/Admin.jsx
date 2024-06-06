@@ -227,12 +227,12 @@ const App = () => {
           
           <SubMenu key="sub1" icon={<LiaPersonBoothSolid />} title="Booth">
             <Menu.Item key="3">Booth</Menu.Item>
-            <Menu.Item key="4">Attendee</Menu.Item>
+            <Menu.Item key="4">Attendance</Menu.Item>
           </SubMenu>
 
           <SubMenu key="sub2" icon={<MdOutlineEvent />} title="Event">
             <Menu.Item key="6">Event</Menu.Item>
-            <Menu.Item key="7">Attendee</Menu.Item>
+            <Menu.Item key="7">Attendance</Menu.Item>
             <Menu.Item key="12">Calendar</Menu.Item>
           </SubMenu>
 

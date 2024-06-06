@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { Select, Table, Button, Popconfirm, message, Modal, Form, Input, DatePicker, TimePicker } from 'antd';
 import { EditOutlined, DeleteOutlined, ReloadOutlined, PlusOutlined } from '@ant-design/icons';
 import GetToken from '../../../../context/GetToken';
@@ -166,11 +166,6 @@ const Event = () => {
   const handleUpdate = async (values) => {
     const { name, description, start_date, start_time, end_date, end_time, venue, exclusive_to } = values;
 
-    if (!name || !description || !start_date || !start_time || !end_date || !end_time || !venue) {
-      message.error('Please fill in all required fields.');
-      return;
-    }
-
     const updatedData = {
       name,
       description,
@@ -204,10 +199,6 @@ const Event = () => {
   const handleCreate = async (values) => {
     const { name, description, start_date, start_time, end_date, end_time, venue, exclusive_to } = values;
 
-    if (!name || !description || !start_date || !start_time || !end_date || !end_time || !venue) {
-      message.error('Please fill in all required fields.');
-      return;
-    }
 
     const newEvent = {
       name,
@@ -299,14 +290,22 @@ const Event = () => {
           <Form.Item
             label='Event Name'
             name='name'
-            rules={[{ required: true, message: 'Please input name!' }]}
+            rules={[
+              { required: true, message: 'Please input name!' },
+              {min: 3, message: 'Name must be at least 3 characters long'},
+              {max: 30, message: 'Name must be at most 30 characters long'},
+            ]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             label='Event Description'
             name='description'
-            rules={[{ required: true, message: 'Please input description!' }]}
+            rules={[
+              { required: true, message: 'Please input description!' },
+              {max: 250, message: 'Description must be at most 250 characters long'},
+              {min: 10, message: 'Description must be at least 10 characters long'},
+            ]}
           >
             <Input />
           </Form.Item>
@@ -345,7 +344,10 @@ const Event = () => {
           <Form.Item
             label='Venue'
             name='venue'
-            rules={[{ required: true, message: 'Please input venue!' }]}
+            rules={[{ required: true, message: 'Please input venue!' },
+              {min: 4, message: 'Venue must be at least 4 characters long'},
+              {max: 30, message: 'Venue must be at most 30 characters long'},
+            ]}
           >
             <Input />
           </Form.Item>
@@ -378,14 +380,21 @@ const Event = () => {
           <Form.Item
             label='Event Name'
             name='name'
-            rules={[{ required: true, message: 'Please input name!' }]}
+            rules={[{ required: true, message: 'Please input name!' },
+              {min: 3, message: 'Name must be at least 3 characters long'},
+              {max: 30, message: 'Name must be at most 30 characters long'},
+            ]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             label='Event Description'
             name='description'
-            rules={[{ required: true, message: 'Please input description!' }]}
+            rules={[
+              { required: true, message: 'Please input description!' },
+              {max: 250, message: 'Description must be at most 250 characters long'},
+              {min: 10, message: 'Description must be at least 10 characters long'},
+            ]}
           >
             <Input />
           </Form.Item>
@@ -424,7 +433,10 @@ const Event = () => {
           <Form.Item
             label='Venue'
             name='venue'
-            rules={[{ required: true, message: 'Please input venue!' }]}
+            rules={[{ required: true, message: 'Please input venue!' },
+              {min: 4, message: 'Venue must be at least 4 characters long'},
+              {max: 30, message: 'Venue must be at most 30 characters long'},
+            ]}
           >
             <Input />
           </Form.Item>

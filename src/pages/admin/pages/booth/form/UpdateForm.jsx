@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { Button, Form, Input, Select } from 'antd';
-const { Option } = Select; 
 
 export default function UpdateForm({ updateForm, handleUpdate, eventData, companyData, usersData }) {
   return (
@@ -10,7 +11,10 @@ export default function UpdateForm({ updateForm, handleUpdate, eventData, compan
     <Form.Item
       label='Name'
       name='name'
-      rules={[{ required: true, message: 'Please input name!' }]}
+      rules={[{ required: true, message: 'Please input name!' },
+        {min: 4, message: 'Name must be at least 4 characters long'},
+        {max: 30, message: 'Name must be at most 30 characters long'},
+      ]}
     >
       <Input />
     </Form.Item>

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { IoPeopleOutline } from "react-icons/io5";
 import { FaPersonBooth, FaRegBuilding } from "react-icons/fa";
@@ -41,7 +42,7 @@ const totalCountNA = participantData.filter(participant =>
                 </div>
 
                 <div className="card">
-                    <h3>Booth Attendee</h3>
+                    <h3>Booth Attendance</h3>
                     <span>
                         <IoPeopleOutline className='icon2'/>
                         <p>{BoothAttendeeTotal}</p>
@@ -49,7 +50,7 @@ const totalCountNA = participantData.filter(participant =>
                 </div>
 
                 <div className="card">
-                    <h3>Event Attendee</h3>
+                    <h3>Event Attendance</h3>
                     <span>
                         <IoPeopleOutline className='icon3'/>
                         <p>{EventAttendeeTotal}</p>
@@ -59,7 +60,7 @@ const totalCountNA = participantData.filter(participant =>
 
             <div className="flexCard">
                 <div className="card">
-                    <h3>Company</h3>
+                    <h3>Sponsor/Exhibitor</h3>
                     <span>
                         <FaRegBuilding className='icon4'/>
                         <p>{CompanyTotal}</p>

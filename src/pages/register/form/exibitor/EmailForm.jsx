@@ -1,13 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import { Button, Form, Input, message, Modal } from 'antd';
 import { apiEmailConfirmation,  apiRegisterCompany, apiQRCode} from '../../../../api/api';
 import axios from 'axios';
 import Congrats from './Congrats';
-import GetToken from '../../../../context/GetToken';
 
-export default function EmailForm({ email, hashedCode, formDataReg, captchaValue, sendEmailConfirmation, eventData }) {
-  const csrfToken = GetToken();
+export default function EmailForm({ csrfToken, email, hashedCode, formDataReg, captchaValue, sendEmailConfirmation, eventData }) {
   const [otp, setOTP] = useState('');
   const [isResendOTP, setIsResendOTP] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
@@ -25,26 +25,22 @@ export default function EmailForm({ email, hashedCode, formDataReg, captchaValue
     }
   });
 
-  const firstEventId = eventData.map((item) => item.id)[0];
+  // const firstEventId = eventData.map((item) => item.id)[0];
 
 
-  const [formInviteData, setFormInviteData] = useState({
-    invite_details: {
-      custom_msg: "This is the event",
-      event: firstEventId
-    },
-    g_recaptcha_response: captchaValue,
-    company_details: {
-      name: formDataReg?.company_details?.name || "",
-      address: formDataReg?.company_details?.address || "",
-      phone:formDataReg?.company_details?.phone || "",
-      telephone:formDataReg?.company_details?.telephone || "",
-      email:formDataReg?.company_details?.email ||  "",
-      website:formDataReg?.company_details?.website || "",
-      is_exhibitor: true,
-      company_org_type:null,
-    }
-  });
+  // const formInviteData = useState({
+  //   g_recaptcha_response: captchaValue,
+  //   company_details: {
+  //     name: formDataReg?.company_details?.name || "",
+  //     address: formDataReg?.company_details?.address || "",
+  //     phone:formDataReg?.company_details?.phone || "",
+  //     telephone:formDataReg?.company_details?.telephone || "",
+  //     email:formDataReg?.company_details?.email ||  "",
+  //     website:formDataReg?.company_details?.website || "",
+  //     is_exhibitor: true,
+  //     company_org_type:null,
+  //   }
+  // });
 
   
   
@@ -126,7 +122,7 @@ export default function EmailForm({ email, hashedCode, formDataReg, captchaValue
   const handleCompanySubmit = async () => {
     setIsVerifying(true);
     try {
-      const response = await axios.post(apiRegisterCompany, formInviteData, {
+      const response = await axios.post(apiRegisterCompany, formDataReg, {
         headers: {
           'X-CSRFToken': csrfToken
         }

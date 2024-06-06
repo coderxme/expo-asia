@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Table, Button, Popconfirm, message, Modal, Form, Input } from 'antd';
 import { EditOutlined, DeleteOutlined, ReloadOutlined, PlusOutlined } from '@ant-design/icons';
 import GetToken from '../../../../context/GetToken';
@@ -56,7 +56,6 @@ const CompanyType = () => {
       onFilter: (value, record) => record.key.includes(value),
       filterSearch: true,
     },
-
     {
       title: 'Action',
       dataIndex: 'action',
@@ -103,19 +102,8 @@ const CompanyType = () => {
   };
 
   const handleUpdate = async (values) => {
-    const {
-      name,
-    
-    } = values;
-
-    if (!name ) {
-      message.error('Please input company type name.');
-      return;
-    }
-
-    const updatedData = {
-      name,
-    };
+    const { name } = values;
+    const updatedData = { name };
 
     const isChanged = Object.keys(updatedData).some(
       (key) => updatedData[key] !== updatingType[key]
@@ -140,12 +128,6 @@ const CompanyType = () => {
 
   const handleCreate = async (values) => {
     const { name } = values;
-
-    if (!name ) {
-      message.error('Please input company type name.');
-      return;
-    }
-
     const newCompany = { name };
 
     try {
@@ -163,7 +145,7 @@ const CompanyType = () => {
   return (
     <div className='tableContainer'>
       <div className="tableHeader">
-        <h1 className='tableTitle'>Company Type</h1>
+        <h1 className='tableTitle'>Sponsor/Exhibitor Type</h1>
         <div className="flex gap-2">
           <Button
             icon={<PlusOutlined />}
@@ -210,9 +192,13 @@ const CompanyType = () => {
           }}
         >
           <Form.Item
-            label='Name'
+            label='Company Name'
             name='name'
-            rules={[{ required: true, message: 'Please input name!' }]}
+            rules={[
+              { required: true, message: 'Please input name!' },
+              {min: 3, message: 'Name must be at least 3 characters long.'},
+              {max: 30, message: 'Name must be at most 30 characters long.'},
+            ]}
           >
             <Input />
           </Form.Item>
@@ -238,7 +224,11 @@ const CompanyType = () => {
           <Form.Item
             label='Name'
             name='name'
-            rules={[{ required: true, message: 'Please input name!' }]}
+            rules={[
+              { required: true, message: 'Please input name!' },
+              {min: 3, message: 'Name must be at least 3 characters long.'},
+              {max: 30, message: 'Name must be at most 30 characters long.'},
+            ]}
           >
             <Input />
           </Form.Item>

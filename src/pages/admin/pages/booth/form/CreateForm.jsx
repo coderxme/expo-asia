@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import { Button, Form, Input, Select } from 'antd';
-const { Option } = Select; 
 
 export default function CreateForm({ createForm, handleCreate, eventData, companyData, usersData }) {
   return (
@@ -7,7 +7,10 @@ export default function CreateForm({ createForm, handleCreate, eventData, compan
     <Form.Item
       label='Booth Name'
       name='name'
-      rules={[{ required: true, message: 'Please input name!' }]}
+      rules={[{ required: true, message: 'Please input name!' },
+        {min: 4, message: 'Name must be at least 4 characters long'},
+        {max: 30, message: 'Name must be at most 30 characters long'},
+      ]}
     >
       <Input />
     </Form.Item>

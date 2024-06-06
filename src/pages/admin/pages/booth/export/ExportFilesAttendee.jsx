@@ -95,12 +95,12 @@ export default function ExportFilesAttendee({ boothAttendeeData, totalOfAttendee
 
   const generateCSVData = () => {
     const csvData = boothAttendeeData.map(item => ({
-      DateTime: item.created_at ? formatDate(item.created_at) : "N/A",
+      DateTime: item?.created_at ? formatDate(item?.created_at) : "N/A",
       Name: item?.participant_details?.name || "N/A",
       BoothName: item?.booth_details?.name || "N/A",
       Attendance: item?.booth_details?.is_in ? "Yes" : "No",
-      Email: item?.participant_details.email || "N/A",
-      PhoneNo: item?.participant_details.phone_no || "N/A",
+      Email: item?.participant_details?.email || "N/A",
+      PhoneNo: item?.participant_details?.phone_no || "N/A",
     }));
     return csvData;
   };
@@ -127,8 +127,8 @@ export default function ExportFilesAttendee({ boothAttendeeData, totalOfAttendee
 
           {boothAttendeeData.map((item, index) => (
             <View key={index} style={styles.tableRow}>
-              <Text style={styles.tableCell}>{item.created_at ? formatDate(item.created_at) : "N/A"}</Text>
-              <Text style={styles.tableCell}>{item.participant_details?.name || "N/A"}</Text>
+              <Text style={styles.tableCell}>{item?.created_at ? formatDate(item.created_at) : "N/A"}</Text>
+              <Text style={styles.tableCell}>{item?.participant_details?.name || "N/A"}</Text>
               <Text style={styles.tableCell}>{item?.booth_details?.is_in ? "Yes" : "No"}</Text>
               <Text style={styles.tableCell}>{item?.participant_details?.email || "N/A"}</Text>
               <Text style={styles.tableCell}>{item?.participant_details?.phone_no || "N/A"}</Text>

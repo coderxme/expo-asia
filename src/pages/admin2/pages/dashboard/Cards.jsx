@@ -12,15 +12,15 @@ export default function Cards({
         <div className='cardContainer'>
             <div className="flexCard">
             <div className="flexCard">
-                <div className="card">
+                {/* <div className="card">
                     <h3>Booth</h3>
                     <span>
                         <LiaPersonBoothSolid className='icon5'/>
                         <p>{BoothTotal}</p>
                     </span>
-                </div>
+                </div> */}
                 <div className="card">
-                    <h3>Booth Attendee</h3>
+                    <h3>Booth Attendance</h3>
                     <span>
                         <IoPeopleOutline className='icon2'/>
                         <p>{BoothAttendeeTotal}</p>

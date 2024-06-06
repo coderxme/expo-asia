@@ -293,16 +293,6 @@ const Participant = () => {
 
     } = values;
 
-    if (
-      !first_name ||
-      !last_name ||
-      !email ||
-      !designation ||
-      !phone_no 
-    ) {
-      message.error('Please fill in all required fields.');
-      return;
-    }
 
     const updatedData = {
       first_name,
@@ -359,17 +349,7 @@ const Participant = () => {
  
     } = values;
 
-    if (
-      !first_name ||
-      !last_name ||
-      !email ||
-      !designation ||
-      !phone_no
-    ) {
-      message.error('Please fill in all required fields.');
-      return;
-    }
-
+   
     const newParticipant = { 
       first_name,
       last_name,

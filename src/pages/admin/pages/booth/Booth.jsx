@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Table, Button, Popconfirm, message, Modal, Form, Select } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import GetToken from '../../../../context/GetToken'
@@ -10,6 +10,7 @@ import RefreshButton from './button/RefreshButton'
 import ExportFiles from './export/ExportFilesBooth';
 import { PiFilesDuotone } from "react-icons/pi";
 
+// eslint-disable-next-line no-unused-vars
 const { Option } = Select; 
 
 const Booth = () => {
@@ -142,10 +143,6 @@ const Booth = () => {
   const handleUpdate = async (values) => {
     const { name, event, company_org, user_manager } = values;
 
-    if (!name || !event || !company_org || !user_manager) {
-      message.error('Please fill in all required fields.');
-      return;
-    }
 
     const updatedData = { name, event, company_org, user_manager };
 
@@ -172,10 +169,6 @@ const Booth = () => {
   const handleCreate = async (values) => {
     const { name, event, company_org, user_manager} = values;
 
-    if (!name || !event || !company_org || !user_manager) {
-      message.error('Please fill in all required fields.');
-      return;
-    }
 
     const newBooth = { name, event, company_org, user_manager };
 

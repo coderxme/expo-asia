@@ -152,7 +152,7 @@ const EventAttendee = () => {
   return (
     <div className='tableContainer'>
       <div className="tableHeader">
-        <h1 className='tableTitle'>Event Attendee</h1>
+        <h1 className='tableTitle'>Event Attendance</h1>
         <Button
           icon={<ReloadOutlined />}
           type='primary'

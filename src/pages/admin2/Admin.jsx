@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable no-fallthrough */
+import { useState } from 'react';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -8,7 +9,6 @@ import Logo from '../../assets/logo-2.png';
 import "./Admin.css";
 import ButtonLogout from './ButtonLogout';
 import BoothAttendee from './pages/booth/BoothAttendee';
-import Booth from './pages/booth/Booth';
 import { IoPeopleOutline } from "react-icons/io5";
 import { LiaPersonBoothSolid } from "react-icons/lia";
 import Dashboard from './pages/dashboard/Dashboard';
@@ -17,7 +17,7 @@ import useAdminStore from '../../store/adminStore';
 import Account from '../admin2/pages/account/Account';
 
 const { Header, Sider, Content } = Layout;
-const { SubMenu } = Menu;
+// const { SubMenu } = Menu;
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -35,11 +35,11 @@ const App = () => {
     switch (key) {
       case '111':
         break;
-      case '3':
-        updatedBreadcrumbs.push('Booth');
-        break;
+      // case '3':
+      //   updatedBreadcrumbs.push('Booth');
+      //   break;
       case '4':
-        updatedBreadcrumbs.push('Booth', 'Booth Attendee');
+        updatedBreadcrumbs.push('Booth Attendee');
         break;
       case '10':
         updatedBreadcrumbs.push('Account');
@@ -54,9 +54,9 @@ const App = () => {
     case '111':
       contentText = <Dashboard />;
       break;
-    case '3':
-      contentText = <Booth />;
-      break;
+    // case '3':
+    //   contentText = <Booth />;
+    //   break;
     case '4':
       contentText = <BoothAttendee />;
       break;
@@ -82,11 +82,15 @@ const App = () => {
           <Menu.Item key="111" icon={<RxDashboard />}>
             Dashboard
           </Menu.Item>
+
+          <Menu.Item key="4" icon={<LiaPersonBoothSolid />}>
+            Booth Attendance
+          </Menu.Item>
           
-          <SubMenu key="sub1" icon={<LiaPersonBoothSolid />} title="Booth">
+          {/* <SubMenu key="sub1" icon={<LiaPersonBoothSolid />} title="Booth">
             <Menu.Item key="3">Booth</Menu.Item>
             <Menu.Item key="4">Attendee</Menu.Item>
-          </SubMenu>
+          </SubMenu> */}
         </Menu>
       </Sider>
       <Layout>

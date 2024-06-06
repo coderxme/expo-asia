@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { Table, Button, Popconfirm, message, Modal, Form, Input, Select } from 'antd';
 import { EditOutlined, DeleteOutlined, ReloadOutlined, PlusOutlined } from '@ant-design/icons';
 import GetToken from '../../../../context/GetToken';
@@ -107,7 +107,7 @@ const Company = () => {
       width:"200px",
       fixed: 'right',
       render: (_, record) => (
-        <span className='flex gap-3 flex-col items-center'>
+        <span className='flex gap-11 flex-col items-center'>
           <Button
             icon={<EditOutlined />}
             size='small'
@@ -155,12 +155,10 @@ const Company = () => {
       phone,
       telephone,
       website,
+       company_org_type
     } = values;
 
-    if (!name || !email || !address || !phone || !telephone || !website) {
-      message.error('Please fill in all required fields.');
-      return;
-    }
+ 
 
     const updatedData = {
       name,
@@ -169,6 +167,7 @@ const Company = () => {
       phone,
       telephone,
       website,
+       company_org_type
     };
 
     const isChanged = Object.keys(updatedData).some(
@@ -195,11 +194,6 @@ const Company = () => {
   const handleCreate = async (values) => {
     const { name, email, address, phone, telephone, website, company_org_type } = values;
 
-    if (!name || !email || !address || !phone || !telephone || !website || !company_org_type) {
-      message.error('Please fill in all required fields.');
-      return;
-    }
-
     const newCompany = { name, email, address, phone, telephone, website, company_org_type };
 
     try {
@@ -210,7 +204,7 @@ const Company = () => {
       createForm.resetFields();
     } catch (error) {
       console.error('Error creating company:', error);
-      message.error('Failed to create company');
+      message.error('Faile to create company');
     }
   };
 
@@ -219,7 +213,7 @@ const Company = () => {
   return (
     <div className='tableContainer'>
       <div className="tableHeader">
-        <h1 className='tableTitle'>Company</h1>
+        <h1 className='tableTitle'>Sponsor/Exhibitor</h1>
         <div className="flex gap-2">
           <Button
             icon={<PlusOutlined />}
@@ -277,12 +271,17 @@ const Company = () => {
             phone: updatingCompany ? updatingCompany.phone : '',
             telephone: updatingCompany ? updatingCompany.telephone : '',
             website: updatingCompany ? updatingCompany.website : '',
+            company_org_type: updatingCompany ? updatingCompany.company_org_type : '',
           }}
         >
           <Form.Item
-            label='Name'
+            label='Company Name'
             name='name'
-            rules={[{ required: true, message: 'Please input name!' }]}
+             rules={[
+              { required: true, message: 'Please input name!' },
+              { min: 3, message: 'Company name must be at least 3 characters long!' },
+              { max: 20, message: 'Company name must be at most 20 characters long!' }
+            ]}
           >
             <Input />
           </Form.Item>
@@ -291,22 +290,42 @@ const Company = () => {
             name='email'
             rules={[
               { required: true, message: 'Please input email!' },
-              { type: 'email', message: 'Invalid email format!' },
+              { type: 'email', message: 'Invalid email format!' }, // Check email format
+              { min: 6, message: 'Email must be at least 6 characters long!' },
+              { max: 50, message: 'Email must be at most 50 characters long!' },
+              {
+                validator(_, value) {
+                  if (value && !value.includes('@')) {
+                    return Promise.reject('Email must contain "@" symbol!');
+                  } else {
+                    return Promise.resolve();
+                  }
+                },
+              },
             ]}
           >
             <Input />
           </Form.Item>
+
           <Form.Item
             label='Address'
             name='address'
-            rules={[{ required: true, message: 'Please input address!' }]}
+             rules={[
+              { required: true, message: 'Please input address!' },
+              { min: 3, message: 'Address must be at least 4 characters long!' },
+              { max: 60, message: 'Address must be at most 60 characters long!' }
+            ]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             label='Phone No'
             name='phone'
-            rules={[{ required: true, message: 'Please input phone number!' }]}
+              rules={[
+              { required: true, message: 'Please input phone number!' },
+              { min: 11, message: 'Phone number must be at least 11 digits' },
+              { max: 15, message: 'Phone number must be at most 15 digits' }
+            ]}
           >
             <Input />
           </Form.Item>
@@ -316,6 +335,21 @@ const Company = () => {
           <Form.Item label='Website' name='website'>
             <Input />
           </Form.Item>
+
+         <Form.Item
+            label='Company Type'
+            name='company_org_type'
+            rules={[{ required: true, message: 'Please select company type!' }]}
+          >
+            <Select placeholder="Select a company type">
+              {companyTypeData.map((type) => (
+                <Select.Option key={type.id} value={type.id}>
+                  {type.name}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+
           <Form.Item>
             <Button className='buttonCreate' type='primary' htmlType='submit'>
               Update
@@ -337,36 +371,64 @@ const Company = () => {
           onFinish={handleCreate}
         >
           <Form.Item
-            label='Name'
+            label='Company Name'
             name='name'
-            rules={[{ required: true, message: 'Please input name!' }]}
+            rules={[
+              { required: true, message: 'Please input name!' },
+              { min: 3, message: 'Company name must be at least 3 characters long!' },
+              { max: 20, message: 'Company name must be at most 20 characters long!' }
+            ]}
           >
             <Input />
           </Form.Item>
+
           <Form.Item
             label='Email'
             name='email'
             rules={[
               { required: true, message: 'Please input email!' },
-              { type: 'email', message: 'Invalid email format!' },
+              { type: 'email', message: 'Invalid email format!' }, // Check email format
+              { min: 6, message: 'Email must be at least 6 characters long!' },
+              { max: 50, message: 'Email must be at most 50 characters long!' },
+              {
+                validator(_, value) {
+                  if (value && !value.includes('@')) {
+                    return Promise.reject('Email must contain "@" symbol!');
+                  } else {
+                    return Promise.resolve();
+                  }
+                },
+              },
             ]}
           >
             <Input />
           </Form.Item>
+
+
           <Form.Item
             label='Address'
             name='address'
-            rules={[{ required: true, message: 'Please input address!' }]}
+            rules={[
+              { required: true, message: 'Please input address!' },
+              { min: 3, message: 'Address must be at least 4 characters long!' },
+              { max: 60, message: 'Address must be at most 60 characters long!' }
+            ]}
           >
             <Input />
           </Form.Item>
+
           <Form.Item
             label='Phone No'
             name='phone'
-            rules={[{ required: true, message: 'Please input phone number!' }]}
+            rules={[
+              { required: true, message: 'Please input phone number!' },
+              { min: 11, message: 'Phone number must be at least 11 digits' },
+              { max: 15, message: 'Phone number must be at most 15 digits' }
+            ]}
           >
             <Input />
           </Form.Item>
+
           <Form.Item label='Telephone' name='telephone'>
             <Input />
           </Form.Item>

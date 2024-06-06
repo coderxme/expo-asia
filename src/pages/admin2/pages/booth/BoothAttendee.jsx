@@ -200,7 +200,7 @@ const BoothAttendee = () => {
   return (
     <div className='tableContainer'>
       <div className="tableHeader">
-        <h1 className='tableTitle'>Booth Attendee</h1>
+        <h1 className='tableTitle'>Booth Attendance</h1>
         <div className="flex gap-2">
          <Button
             hidden
