@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Button, Form, Input, Select } from 'antd';
 
-export default function CreateForm({ createForm, handleCreate, eventData, companyData, usersData }) {
+export default function CreateForm({ createForm, handleCreate, eventData, companyData, usersData, isLoading }) {
   return (
     <Form form={createForm} onFinish={handleCreate} className='mt-10'>
     <Form.Item
@@ -52,8 +52,8 @@ export default function CreateForm({ createForm, handleCreate, eventData, compan
       </Select>
     </Form.Item>
     <Form.Item>
-      <Button className='buttonCreate' type='primary' htmlType='submit'>
-        Create
+      <Button loading={isLoading} className='buttonCreate' type='primary' htmlType='submit'>
+        {isLoading ? 'Creating...' : 'Create'}
       </Button>
     </Form.Item>
   </Form>

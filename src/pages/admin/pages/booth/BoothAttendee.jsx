@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import  { useState } from 'react';
 import { Table, Button, Popconfirm, message, Modal, Form, Input, Select } from 'antd';
 import { EditOutlined, DeleteOutlined, ReloadOutlined, PlusOutlined  } from '@ant-design/icons';
-import GetToken from '../../../../context/GetToken'
 import useAdminStore from '../../../../store/adminStore';
 import ExportFiles from './export/ExportFilesAttendee';
 import { PiFilesDuotone } from "react-icons/pi";
+import useCsrfTokenStore from '../../../../store/csrfTokenStore';
 
-const BoothAttendee = () => {
+const { Option } = Select; 
+
+
+export default function BoothAttendee(){
   const { 
     boothData,
     boothAttendeeData,
@@ -18,16 +21,12 @@ const BoothAttendee = () => {
 
     fetchBoothAttendee
   } = useAdminStore();
-  const csrfToken = GetToken();
+  const csrfToken = useCsrfTokenStore(state => state.csrfToken);
   const [visible, setVisible] = useState(false);
   const [createVisible, setCreateVisible] = useState(false);
   const [updatetingBooth, setUpdatingBooth] = useState(null);
   const [form] = Form.useForm();
-
   const userRole = myAccountData?.roles[0] || ""
-
-
-
   const totalCount = boothAttendeeData.length;
 
   const columns = [
@@ -326,6 +325,5 @@ const BoothAttendee = () => {
       </Modal>
     </div>
   );
-};
+}
 
-export default BoothAttendee;

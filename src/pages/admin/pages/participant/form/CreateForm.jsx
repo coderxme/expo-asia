@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Button, Form, Input, Select } from 'antd'; // Import Select component from antd
 const { Option } = Select;
 
-export default function CreateForm({ onFinish,  createForm, militaryBranchData, forumData }) {
+export default function CreateForm({ onFinish,  createForm, militaryBranchData, forumData, isVerifying }) {
   const [isOtherMilitaryBranch, setIsOtherMilitaryBranch] = useState(false);
 
   const handleSelectChange = (type, value) => {
@@ -155,8 +155,8 @@ export default function CreateForm({ onFinish,  createForm, militaryBranchData, 
         <Input />
       </Form.Item>
       <Form.Item>
-        <Button className='buttonCreate' type='primary' htmlType='submit'>
-          Create
+        <Button  loading={isVerifying}  className='buttonCreate' type='primary' htmlType='submit'>
+           {isVerifying ? 'Creating...' : 'Create'}
         </Button>
       </Form.Item>
     </Form>

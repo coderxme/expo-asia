@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import  { useState } from 'react';
 import { Table, Button, Popconfirm, message, Modal, Form, Input } from 'antd';
 import { EditOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
-import GetToken from '../../../../context/GetToken'
 import useAdminStore from '../../../../store/adminStore';
 import { PiFilesDuotone } from "react-icons/pi";
-import ExportFilesEvent from './export/ExportFilesEvent';
 import ExportFilesAttendee from './export/ExportFilesAttendee';
+import useCsrfTokenStore from '../../../../store/csrfTokenStore';
 
 const EventAttendee = () => {
   const { myAccountData, eventAttendeeData,  deleteEventAttendee, updateEventAttendee } = useAdminStore();
-  const csrfToken = GetToken();
+  const csrfToken = useCsrfTokenStore(state => state.csrfToken);
   const [visible, setVisible] = useState(false);
   const [updatetingEventAttendee, setUpdatingEventAttendee] = useState(null);
 

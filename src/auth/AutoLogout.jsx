@@ -1,12 +1,15 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable react/prop-types */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useCallback, useState, useRef } from 'react';
 import { apiLogout } from '../api/api';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { Modal, Button } from 'antd';
-import GetToken from '../context/GetToken';
+import useCsrfTokenStore from '../store/csrfTokenStore';
 
 const AutoLogout = ({ children }) => {
-  const csrfToken = GetToken();
+  const csrfToken = useCsrfTokenStore((state) => state.csrfToken);
   const [showModal, setShowModal] = useState(false);
   const [countdown, setCountdown] = useState(60); // Initial countdown value
   const timerRef = useRef(null);

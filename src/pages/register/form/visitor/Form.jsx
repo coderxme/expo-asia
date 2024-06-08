@@ -3,7 +3,6 @@ import { motion as m } from "framer-motion";
 import { Button, Form, Input, message, Select } from 'antd'; // Import Select component from antd
 import WaveBackground from '../../../../assets/wave-background.png';
 import { apiEmailConfirmation } from '../../../../api/api';
-import GetToken from '../../../../context/GetToken';
 import Loader from './Loader';
 import EmailForm from './EmailForm';
 import axios from 'axios';
@@ -12,17 +11,22 @@ import ReCAPTCHA from "react-google-recaptcha";
 import useAdminStore from '../../../../store/adminStore';
 const { Option } = Select; 
 const recaptchaKey = import.meta.env.VITE_RECAPTCHAKEY
+import useCsrfTokenStore from '../../../../store/csrfTokenStore';
 
 export default function RegisterForm() {
-    const csrfToken = GetToken();
-   
-    const { 
-       forumData,
-       fetchForum, 
-       fetchMilitaryBranch,
-       fetchCompany,
-       militaryBranchData
-        } = useAdminStore()
+    const csrfToken = useCsrfTokenStore((state) => state.csrfToken);
+    const { militaryBranchData, forumData, fetchForum,  fetchMilitaryBranch, fetchCompany } = useAdminStore()
+    const [registrationSuccess, setRegistrationSuccess] = useState(false);
+    const [isSendingEmail, setIsSendingEmail] = useState(false);
+    const [hashedCode, setHashedCode] = useState("");
+    const [captchaValue, setCaptchaValue] = useState(null);
+    const [showOtherInput, setShowOtherInput] = useState({
+        company: false,
+        military: false
+    });
+
+
+
     const [formData, setFormData] = useState({
       invite_details: {
         custom_msg: "This is the event",
@@ -46,14 +50,6 @@ export default function RegisterForm() {
         }
       });  
 
-      const [registrationSuccess, setRegistrationSuccess] = useState(false);
-      const [isSendingEmail, setIsSendingEmail] = useState(false);
-      const [hashedCode, setHashedCode] = useState("");
-      const [captchaValue, setCaptchaValue] = useState(null);
-      const [showOtherInput, setShowOtherInput] = useState({
-        company: false,
-        military: false
-    });
       useEffect(() => {
         fetchForum()
         fetchMilitaryBranch()
@@ -69,6 +65,11 @@ export default function RegisterForm() {
         return () => clearInterval(interval);
     }, []);
 
+    const onChange = (value) => {
+      console.log("Captcha value:", value);
+      setCaptchaValue(value);
+      setFormData({...formData, g_recaptcha_response: value});
+  };
 
 
 
@@ -232,13 +233,7 @@ export default function RegisterForm() {
             setFormData(updatedFormData);
           };
             
-          const onChange = (value) => {
-            console.log("Captcha value:", value);
-            setTimeout(() => {
-              setCaptchaValue(value);
-              setFormData({...formData, g_recaptcha_response: value});
-            },2000)
-        };
+         
   return (
     <m.div  initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.75, ease: "easeOut" }} className='registerFormWrapper' >
      
@@ -334,9 +329,8 @@ export default function RegisterForm() {
       {isSendingEmail && <Loader />} 
        {registrationSuccess && !isSendingEmail && 
         <EmailForm 
-        sendEmailConfirmation={sendEmailConfirmation}
+          sendEmailConfirmation={sendEmailConfirmation}
           hashedCode={hashedCode} 
-          email={formData.participant_details.email} 
           formDataReg={formData}
           captchaValue={captchaValue}
           csrfToken={csrfToken}

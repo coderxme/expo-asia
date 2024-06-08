@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { Table, Button, Popconfirm, message, Modal, Form, Input, Select } from 'antd';
+import  { useEffect, useState } from 'react';
+import { Table, Button, Popconfirm, message, Modal, Form, Input } from 'antd';
 import { EditOutlined, DeleteOutlined, ReloadOutlined, PlusOutlined } from '@ant-design/icons';
-import GetToken from '../../../../../context/GetToken';
 import useAdminStore from '../../../../../store/adminStore';
+import useCsrfTokenStore from '../../../../../store/csrfTokenStore';
 
 
 const Category = () => {
   const { myAccountData, participantCategoryData,  createParticipantCategory, deleteParticipantCategory, updateParticipantCategory, fetchParticipantCategory } = useAdminStore();
-  const csrfToken = GetToken();
+  const csrfToken = useCsrfTokenStore((state) => state.csrfToken)
   const [visible, setVisible] = useState(false);
   const [createVisible, setCreateVisible] = useState(false);
   const [updatingCategory, setUpdatingCategory] = useState(null);
   const [form] = Form.useForm();
   const [createForm] = Form.useForm(); 
+  const [isLoading, setIsLoading] = useState(false);
 
   const totalCount = participantCategoryData.length;
   const userRole = myAccountData?.roles[0] || ""
@@ -92,6 +93,7 @@ const Category = () => {
   };
 
   const handleUpdate = async (values) => {
+    setIsLoading(true);
     if (!values.name) {
       message.error('Please enter category.');
       return;
@@ -116,6 +118,8 @@ const Category = () => {
     } catch (error) {
       console.error('Error updating Category:', error);
       message.error('Failed to update Category');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -124,6 +128,8 @@ const Category = () => {
       message.error('Please fill in name.');
       return;
     }
+
+    setIsLoading(true);
 
     const newParticipantCategory = { name: values.name };
 
@@ -136,6 +142,8 @@ const Category = () => {
     } catch (error) {
       console.error('Error creating Forum:', error);
       message.error('Failed to create Forum');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -196,8 +204,8 @@ const Category = () => {
             <Input />
           </Form.Item>
           <Form.Item>
-            <Button type='primary' className='buttonCreate' htmlType='submit'>
-              Update
+            <Button loading={isLoading} type='primary' className='buttonCreate' htmlType='submit'>
+              {isLoading ? 'Updating...' : 'Update'}
             </Button>
           </Form.Item>
         </Form>
@@ -218,8 +226,8 @@ const Category = () => {
             <Input />
           </Form.Item>
           <Form.Item>
-            <Button className='buttonCreate' type='primary' htmlType='submit'>
-              Create
+            <Button loading={isLoading} className='buttonCreate' type='primary' htmlType='submit'>
+              {isLoading ? 'Creating...' : 'Create'}
             </Button>
           </Form.Item>
         </Form>

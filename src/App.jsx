@@ -8,6 +8,7 @@ import RouteAdmin from './routes/RouteAdmin'
 import 'animate.css';
 
 export default function App() {
+  
   return (
    <Router>
      <Routes>

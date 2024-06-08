@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import useAdminStore from '../../../../store/adminStore';
-import { Modal, Form, Input, message } from 'antd';
+import { Modal, Form,  message } from 'antd';
 import "./Account.css";
-import GetToken from "../../../../context/GetToken";
 import { useNavigate } from 'react-router-dom';
 import { apiMyAccount } from '../../../../api/api';
 import axios from 'axios';
@@ -10,14 +9,16 @@ import UpdateForm from './form/UpdateForm';
 import ButtonUpdate from './button/ButtonUpdate';
 import ButtonChangedPass from './button/ButtonChangedPass';
 import ChangePassForm from './form/ChangePassForm';
+import useCsrfTokenStore from '../../../../store/csrfTokenStore';
 
 export default function Account() {
-  const csrfToken = GetToken();
+  const csrfToken = useCsrfTokenStore(state => state.csrfToken);
   const { myAccountData, createMyAccount, fetchMyAccount } = useAdminStore();
   const [isPasswordModalVisible, setIsPasswordModalVisible] = useState(false);
   const [passwordForm] = Form.useForm();
   const [updateForm] = Form.useForm();
   const navigate = useNavigate();
+
 
   const showPasswordModal = () => {
     setIsPasswordModalVisible(true);

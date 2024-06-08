@@ -7,7 +7,7 @@ import {
 import { Button, Layout, Menu, Breadcrumb } from 'antd'; // Import Breadcrumb
 import Logo from '../../assets/logo-2.png';
 import "./Admin.css";
-import ButtonLogout from './ButtonLogout';
+import ButtonLogout from '../../auth/ButtonLogout'
 import BoothAttendee from './pages/booth/BoothAttendee';
 import { IoPeopleOutline } from "react-icons/io5";
 import { LiaPersonBoothSolid } from "react-icons/lia";

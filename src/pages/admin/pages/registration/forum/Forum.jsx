@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { Table, Button, Popconfirm, message, Modal, Form, Input, Select } from 'antd';
+import  { useEffect, useState } from 'react';
+import { Table, Button, Popconfirm, message, Modal, Form, Input } from 'antd';
 import { EditOutlined, DeleteOutlined, ReloadOutlined, PlusOutlined } from '@ant-design/icons';
-import GetToken from '../../../../../context/GetToken';
 import useAdminStore from '../../../../../store/adminStore';
+import useCsrfTokenStore from '../../../../../store/csrfTokenStore';
 
 
 const Forum = () => {
   const { forumData,  deleteForum, updateForum,  createForum, fetchForum, myAccountData } = useAdminStore();
-  const csrfToken = GetToken();
+  const csrfToken = useCsrfTokenStore((state) => state.csrfToken)
   const [visible, setVisible] = useState(false);
   const [createVisible, setCreateVisible] = useState(false);
   const [updatingForum, setUpdatingForum] = useState(null);
   const [form] = Form.useForm();
   const [createForm] = Form.useForm(); 
+  const [isLoading, setIsLoading] = useState(false);
 
   const totalCount = forumData.length;
 
@@ -91,6 +92,7 @@ const Forum = () => {
   };
 
   const handleUpdate = async (values) => {
+    setIsLoading(true)
     if (!values.name) {
       message.error('Please enter forum.');
       return;
@@ -115,10 +117,13 @@ const Forum = () => {
     } catch (error) {
       console.error('Error updating Forum:', error);
       message.error('Failed to update Forum');
+    } finally {
+       setIsLoading(false)
     }
   };
 
   const handleCreate = async (values) => {
+    setIsLoading(true);
     if (!values.name) {
       message.error('Please fill in name.');
       return;
@@ -135,6 +140,8 @@ const Forum = () => {
     } catch (error) {
       console.error('Error creating Forum:', error);
       message.error('Failed to create Forum');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -195,8 +202,8 @@ const Forum = () => {
             <Input />
           </Form.Item>
           <Form.Item>
-            <Button type='primary' className='buttonCreate' htmlType='submit'>
-              Update
+            <Button loading={isLoading} type='primary' className='buttonCreate' htmlType='submit'>
+              {isLoading ? 'Updating...' : 'Update'}
             </Button>
           </Form.Item>
         </Form>
@@ -217,8 +224,8 @@ const Forum = () => {
             <Input />
           </Form.Item>
           <Form.Item>
-            <Button className='buttonCreate' type='primary' htmlType='submit'>
-              Create
+            <Button loading={isLoading} className='buttonCreate' type='primary' htmlType='submit'>
+              {isLoading ? 'Creating...' : 'Create'}	
             </Button>
           </Form.Item>
         </Form>

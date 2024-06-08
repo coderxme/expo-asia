@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Table, Button, Popconfirm, message, Modal, Form, Input, Select } from 'antd';
 import { EditOutlined, DeleteOutlined, ReloadOutlined, PlusOutlined  } from '@ant-design/icons';
-import GetToken from '../../../../context/GetToken'
 import useAdminStore from '../../../../store/adminStore';
 import { apiUsers } from '../../../../api/api';
 import axios from 'axios';
@@ -9,6 +8,7 @@ import { PiFilesDuotone } from "react-icons/pi";
 import CreateForm from './forms/CreateForm';
 import ExportFiles from './export/ExportFiles';
 const { Option } = Select;
+import useCsrfTokenStore from '../../../../store/csrfTokenStore';
 
 const Users = () => {
   const { 
@@ -20,8 +20,7 @@ const Users = () => {
       createUsers,
       myAccountData
   } = useAdminStore();
-
-  const csrfToken = GetToken();
+  const csrfToken = useCsrfTokenStore(state => state.csrfToken);
   const [visible, setVisible] = useState(false);
   const [createVisible, setCreateVisible] = useState(false);
   const [updatingUsers, setUpdatingUsers] = useState(null);

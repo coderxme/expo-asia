@@ -4,7 +4,7 @@ import { Form, Input, Select, Button } from 'antd';
 
 const { Option } = Select;
 
-export default function UpdateForm({ updateForm, handleUpdate, updatingParticipant,  militaryBranchData, forumData, category  }) {
+export default function UpdateForm({ isVerifying, updateForm, handleUpdate, updatingParticipant,  militaryBranchData, forumData, category  }) {
   const [isOtherMilitaryBranch, setIsOtherMilitaryBranch] = useState(false);
 
   useEffect(() => {
@@ -186,8 +186,8 @@ export default function UpdateForm({ updateForm, handleUpdate, updatingParticipa
       </Form.Item>
 
       <Form.Item>
-        <Button className='buttonCreate' type='primary' htmlType='submit'>
-          Update
+        <Button loading={isVerifying} className='buttonCreate' type='primary' htmlType='submit'>
+          {isVerifying ? 'Updating...' : 'Update'}
         </Button>
       </Form.Item>
     </Form>

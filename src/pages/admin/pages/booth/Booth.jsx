@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Table, Button, Popconfirm, message, Modal, Form, Select } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import GetToken from '../../../../context/GetToken'
 import useAdminStore from '../../../../store/adminStore';
 import CreateForm from './form/CreateForm';
 import UpdateForm from './form/UpdateForm';
@@ -9,19 +8,21 @@ import CreateButton from './button/CreateButton';
 import RefreshButton from './button/RefreshButton'
 import ExportFiles from './export/ExportFilesBooth';
 import { PiFilesDuotone } from "react-icons/pi";
+import useCsrfTokenStore from '../../../../store/csrfTokenStore';
 
 // eslint-disable-next-line no-unused-vars
 const { Option } = Select; 
 
-const Booth = () => {
+export default function Booth(){
   const { usersData, myAccountData, companyData, boothData, deleteBooth, updateBooth, createBooth, eventData, fetchBooths } = useAdminStore();
-  const csrfToken = GetToken();
+  const csrfToken = useCsrfTokenStore(state => state.csrfToken);
   const [visible, setVisible] = useState(false);
   const [createVisible, setCreateVisible] = useState(false);
   const [updatingBooth, setUpdatingBooth] = useState(null);
   const [updateForm] = Form.useForm();
   const [createForm] = Form.useForm();
   const userRole = myAccountData?.roles[0] || ""
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (updatingBooth) {
@@ -141,6 +142,7 @@ const Booth = () => {
   };
 
   const handleUpdate = async (values) => {
+    setIsLoading(true)
     const { name, event, company_org, user_manager } = values;
 
 
@@ -163,14 +165,16 @@ const Booth = () => {
     } catch (error) {
       console.error('Error updating Booth:', error);
       message.error('Failed to update Booth');
+    } finally {
+      setIsLoading(false)
     }
   };
 
   const handleCreate = async (values) => {
     const { name, event, company_org, user_manager} = values;
-
-
     const newBooth = { name, event, company_org, user_manager };
+
+    setIsLoading(true);
 
     try {
       await createBooth(newBooth, csrfToken);
@@ -181,6 +185,8 @@ const Booth = () => {
     } catch (error) {
       console.error('Error creating booth:', error);
       message.error('Failed to create booth');
+    } finally{
+      setIsLoading(false)
     }
   };
 
@@ -228,6 +234,7 @@ const Booth = () => {
          eventData={eventData}
          companyData={companyData}
          usersData={usersData}
+         isLoading={isLoading}
        />
       </Modal>
       <Modal
@@ -242,10 +249,10 @@ const Booth = () => {
          eventData={eventData}
          companyData={companyData}
          usersData={usersData}
+         isLoading={isLoading}
        />
       </Modal>
     </div>
   );
-};
+}
 
-export default Booth;

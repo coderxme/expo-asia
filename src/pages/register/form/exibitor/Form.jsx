@@ -3,20 +3,20 @@ import { motion as m } from "framer-motion";
 import { Button, Form, Input, message, Select } from 'antd'; // Import Select component from antd
 import WaveBackground from '../../../../assets/wave-background.png';
 import { apiCompanOrgType, apiEmailConfirmation } from '../../../../api/api';
-import GetToken from '../../../../context/GetToken';
 import Loader from './Loader';
 import EmailForm from './EmailForm';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import ReCAPTCHA from "react-google-recaptcha";
 import useAdminStore from '../../../../store/adminStore';
+import useCsrfTokenStore from '../../../../store/csrfTokenStore'
 
 const recaptchaKey = import.meta.env.VITE_RECAPTCHAKEY
 const { Option } = Select; 
 
 
 export default function RegisterForm() {
-    const csrfToken = GetToken();
+  const csrfToken = useCsrfTokenStore((state) => state.csrfToken);
     const {  eventData, fetchEvent  } = useAdminStore()
     const [captchaValue, setCaptchaValue] = useState("");
 
@@ -33,6 +33,8 @@ export default function RegisterForm() {
         company_org_type: null,
       }
     });
+
+
 
       const [isSubmitting ] = useState(false);
       const [registrationSuccess, setRegistrationSuccess] = useState(false);
@@ -60,7 +62,11 @@ export default function RegisterForm() {
         return () => clearInterval(interval);
     }, []);
     
-
+    const onChange = (value) => {
+      console.log("Captcha value:", value);
+      setCaptchaValue(value);
+      setCompanyFormData({ ...companyFormData, g_recaptcha_response: value });
+   };
 
 
         const handleCompanyRegister = () => {
@@ -170,13 +176,7 @@ export default function RegisterForm() {
           };
 
 
-          const onChange = (value) => {
-            console.log("Captcha value:", value);
-            setTimeout(() => {
-              setCaptchaValue(value);
-              setCompanyFormData({ ...companyFormData, g_recaptcha_response: value });
-            },2000)
-        };
+      
 
   return (
     <m.div  initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.75, ease: "easeOut" }} className='registerFormWrapper' >

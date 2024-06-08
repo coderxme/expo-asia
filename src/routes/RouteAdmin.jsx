@@ -4,9 +4,7 @@ import Admin2 from '../pages/admin2/Admin'
 import AutoLogout from '../auth/AutoLogout'
 import SessionTimeOut from '../auth/SessionTimeOut'
 
-
 export default function App() {
-
 
   return (
     <AutoLogout>

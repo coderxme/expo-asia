@@ -1,26 +1,16 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
 import image from '../../../../assets/congrats-check.png';
-import { Button, Image } from 'antd';
+import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { AiOutlineDownload } from "react-icons/ai";
 
-export default function Congrats({ qrCode }) {
+export default function Congrats() {
   const navigate = useNavigate();
-  const handleDownloadQRCode = () => {
-    const downloadLink = document.createElement('a');
-    downloadLink.href = qrCode;
-    downloadLink.download = 'QRCode.png';
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-  };
 
   const handleFinish = () => {
     navigate("/");
   };
 
-  console.log('QR Code:', qrCode)
 
   return (
           <div className="congratsForm">

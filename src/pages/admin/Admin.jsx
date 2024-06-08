@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -6,14 +6,14 @@ import {
 import { Button, Layout, Menu, Breadcrumb } from 'antd'; // Import Breadcrumb
 import Logo from '../../assets/logo-2.png';
 import "./Admin.css";
-import ButtonLogout from './ButtonLogout';
+import ButtonLogout from '../../auth/ButtonLogout'
 import BoothAttendee from './pages/booth/BoothAttendee';
 import Booth from './pages/booth/Booth';
 import Participant from './pages/participant/Participant';
 import Event from './pages/event/Event';
 import EventAttendee from './pages/event/EventAttendee';
 import Company from './pages/company/Company';
-import { FaPersonBooth, FaRegBuilding } from "react-icons/fa";
+import { FaRegBuilding } from "react-icons/fa";
 import { IoPeopleOutline } from "react-icons/io5";
 import { LiaPersonBoothSolid } from "react-icons/lia";
 import CompanyType from './pages/company-type/CompanyType';
@@ -22,15 +22,12 @@ import Account from './pages/account/Account';
 import Dashboard from './pages/dashboard/Dashboard';
 import { RxDashboard } from "react-icons/rx";
 import Invite from "./pages/invite/Invite"
-import { CgDetailsMore } from "react-icons/cg";
 import { HiOutlineUserGroup } from "react-icons/hi2";
 import { PiPersonThin } from "react-icons/pi";
 
-import { AiOutlineMail } from "react-icons/ai";
 import Forum from './pages/forum/Forum';
 import EventCalendar from './pages/event/EventCalendar';
 import Users from './pages/users/Users';
-// import MilitaryBranch from './pages/participant/military-branch/MilitaryBranch';
 import Roles from './pages/roles/Roles';
 import Registration from './pages/registration/Registration';
 import { FaWpforms } from "react-icons/fa6";
@@ -117,9 +114,6 @@ const App = () => {
     case '1':
       contentText = <Participant />;
       break;
-    case '14':
-      contentText = <MilitaryBranch />;
-      break;
     case '2':
       contentText = <Company />;
       break;
@@ -178,14 +172,6 @@ const App = () => {
           selectedKeys={[selectedMenuKey]}
         >
 
-        {/* {userRole !== "Administrator" ? (
-          <Menu.Item key="112" icon={<RxDashboard />}>
-            Dashboard
-          </Menu.Item>
-        ) : (
-          null
-        ) } */}
-
         {userRole === "Administrator" && (
           <>
           <Menu.Item key="111" icon={<RxDashboard />}>
@@ -215,15 +201,6 @@ const App = () => {
           </SubMenu>
           </>
           )}
-         
-          {/* <SubMenu key="sub4" icon={<HiOutlineUserGroup/>} title="Participant">
-            <Menu.Item key="1">Participant</Menu.Item>
-            <Menu.Item key="11">Forum </Menu.Item>
-            <Menu.Item key="14">Military Branch </Menu.Item>
-          </SubMenu> */}
-
-          
-         
           
           <SubMenu key="sub1" icon={<LiaPersonBoothSolid />} title="Booth">
             <Menu.Item key="3">Booth</Menu.Item>
@@ -235,13 +212,6 @@ const App = () => {
             <Menu.Item key="7">Attendance</Menu.Item>
             <Menu.Item key="12">Calendar</Menu.Item>
           </SubMenu>
-
-          {/* <Menu.Item key="10" icon={<AiOutlineMail />}>
-            Invite
-          </Menu.Item> */}
-          {/* <Menu.Item key="11" icon={<CgDetailsMore />}>
-            Forum
-          </Menu.Item> */}
         </Menu>
       </Sider>
       <Layout>

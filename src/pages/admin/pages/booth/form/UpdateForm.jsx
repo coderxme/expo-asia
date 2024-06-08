@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import { Button, Form, Input, Select } from 'antd';
 
-export default function UpdateForm({ updateForm, handleUpdate, eventData, companyData, usersData }) {
+export default function UpdateForm({ updateForm, handleUpdate, eventData, companyData, usersData, isLoading }) {
   return (
     <Form
     form={updateForm}
@@ -56,8 +56,8 @@ export default function UpdateForm({ updateForm, handleUpdate, eventData, compan
       </Select>
     </Form.Item>
     <Form.Item>
-      <Button type='primary' className='buttonCreate' htmlType='submit'>
-        Update
+      <Button loading={isLoading} type='primary' className='buttonCreate' htmlType='submit'>
+        {isLoading ? 'Updating...' : 'Update'}
       </Button>
     </Form.Item>
   </Form>

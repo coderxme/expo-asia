@@ -1,20 +1,21 @@
 import  { useEffect, useState } from 'react';
 import { Table, Button, Popconfirm, message, Modal, Form, Input, Select } from 'antd';
 import { EditOutlined, DeleteOutlined, ReloadOutlined, PlusOutlined } from '@ant-design/icons';
-import GetToken from '../../../../context/GetToken';
 import useAdminStore from '../../../../store/adminStore';
 import { PiFilesDuotone } from "react-icons/pi";
 import ExportFiles from './export/ExportFiles';
+import useCsrfTokenStore from '../../../../store/csrfTokenStore';
 
 const Company = () => {
   const {  myAccountData, companyData,  deleteCompany, updateCompany, createCompany, companyTypeData, fetchCompany } = useAdminStore();
-  const csrfToken = GetToken();
+  const csrfToken = useCsrfTokenStore(state => state.csrfToken);
   const [visible, setVisible] = useState(false);
   const [createVisible, setCreateVisible] = useState(false);
   const [updatingCompany, setUpdatingCompany] = useState(null);
   const [updateForm] = Form.useForm();
   const [createForm] = Form.useForm(); 
   const userRole = myAccountData?.roles[0] || ""
+  const [isLoading, setIsLoading] = useState(false);
 
 
   useEffect(() => {
@@ -148,6 +149,7 @@ const Company = () => {
   };
 
   const handleUpdate = async (values) => {
+    setIsLoading(true);
     const {
       name,
       email,
@@ -187,6 +189,8 @@ const Company = () => {
     } catch (error) {
       console.error('Error updating company:', error);
       message.error('Failed to update company');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -195,7 +199,7 @@ const Company = () => {
     const { name, email, address, phone, telephone, website, company_org_type } = values;
 
     const newCompany = { name, email, address, phone, telephone, website, company_org_type };
-
+    setIsLoading(true);
     try {
       await createCompany(newCompany, csrfToken);
       setCreateVisible(false);
@@ -205,6 +209,8 @@ const Company = () => {
     } catch (error) {
       console.error('Error creating company:', error);
       message.error('Faile to create company');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -351,8 +357,8 @@ const Company = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button className='buttonCreate' type='primary' htmlType='submit'>
-              Update
+            <Button loading={isLoading} className='buttonCreate' type='primary' htmlType='submit'>
+               {isLoading ? 'Updating...' : 'Update'}	
             </Button>
           </Form.Item>
         </Form>
@@ -449,8 +455,8 @@ const Company = () => {
             </Select>
           </Form.Item>
           <Form.Item>
-            <Button className='buttonCreate' type='primary' htmlType='submit'>
-              Create
+            <Button loading={isLoading} className='buttonCreate' type='primary' htmlType='submit'>
+              {isLoading ? 'Creating...' : 'Create'}	
             </Button>
           </Form.Item>
         </Form>

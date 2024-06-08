@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Table, Button, Popconfirm, message, Modal, Form, Input, Select } from 'antd';
+import { useEffect, useState } from 'react';
+import { Table, Button, Popconfirm, message, Modal, Form, Input } from 'antd';
 import { EditOutlined, DeleteOutlined, ReloadOutlined, PlusOutlined } from '@ant-design/icons';
 import useAdminStore from '../../../../../store/adminStore';
-import GetToken from "../../../../../context/GetToken"
+import useCsrfTokenStore from '../../../../../store/csrfTokenStore';
 
 const MilitaryBranch = () => {
   const { myAccountData, militaryBranchData,  deleteMilitaryBranch, updateMilitaryBranch,  createMilitaryBranch, fetchMilitaryBranch } = useAdminStore();
-  const csrfToken = GetToken();
+  const csrfToken = useCsrfTokenStore((state) => state.csrfToken)
   const [visible, setVisible] = useState(false);
   const [createVisible, setCreateVisible] = useState(false);
   const [updatingMilitaryBranch, setUpdatingMilitaryBranch] = useState(null);
   const [UpdateForm] = Form.useForm();
   const [createForm] = Form.useForm(); 
-
+  const [isLoading, setIsLoading] = useState(false);
   const totalCount = militaryBranchData.length;
   const userRole = myAccountData?.roles[0] || ""
 
@@ -103,6 +103,7 @@ const MilitaryBranch = () => {
   };
 
   const handleUpdate = async (values) => {
+    setIsLoading(true);
     if (!values.abrv) {
       message.error('Please enter military branch.');
       return;
@@ -127,10 +128,13 @@ const MilitaryBranch = () => {
     } catch (error) {
       console.error('Error updating Military branch:', error);
       message.error('Failed to update Military branch');
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleCreate = async (values) => {
+    setIsLoading(true);
     if (!values.abrv) {
       message.error('Please fill in abbreviation');
       return;
@@ -147,6 +151,8 @@ const MilitaryBranch = () => {
     } catch (error) {
       console.error('Error creating Military branch:', error);
       message.error('Failed to create Military branch');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -215,8 +221,8 @@ const MilitaryBranch = () => {
             <Input />
           </Form.Item>
           <Form.Item>
-            <Button type='primary' className='buttonCreate' htmlType='submit'>
-              Update
+            <Button loading={isLoading} type='primary' className='buttonCreate' htmlType='submit'>
+              {isLoading ? 'Updating...' : 'Update'}
             </Button>
           </Form.Item>
         </Form>
@@ -244,8 +250,8 @@ const MilitaryBranch = () => {
             <Input />
           </Form.Item>
           <Form.Item>
-            <Button className='buttonCreate' type='primary' htmlType='submit'>
-              Create
+            <Button loading={isLoading} className='buttonCreate' type='primary' htmlType='submit'>
+              {isLoading ? 'Creating...' : 'Create'}
             </Button>
           </Form.Item>
         </Form>

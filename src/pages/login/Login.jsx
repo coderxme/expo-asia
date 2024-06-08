@@ -3,18 +3,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../auth/AuthContext';
 import axios from 'axios';
 import { apiLogin } from '../../api/api';
-import GetToken from '../../context/GetToken';
 import { Input, Button, Form, message } from 'antd';
 import './Login.css'
 import { Link } from 'react-router-dom';
+import useCsrfTokenStore from '../../store/csrfTokenStore'
 
 export default function Login() {
-  const csrfToken = GetToken();
+  const csrfToken = useCsrfTokenStore((state) => state.csrfToken)
   const [loading, setLoading] = useState(false);
-  const { authState, dispatch } = useAuth();
   const [form] = Form.useForm();
   
 
@@ -36,8 +34,6 @@ export default function Login() {
       if (response.data.error) {
         message.error(response.data.error);
       } else {
-        const { token } = response.data;
-        dispatch({ type: 'LOGIN', payload: { user: formData.username, token } });
           if (userRole !== "Administrator") {
             return navigate('/expo-asia-admin/dashboard-2');
           } else {

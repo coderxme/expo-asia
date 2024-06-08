@@ -1,13 +1,13 @@
 import  { useEffect, useState } from 'react';
 import { Table, Button, Popconfirm, message, Modal, Form, Image } from 'antd';
 import { EditOutlined, DeleteOutlined, ReloadOutlined, PlusOutlined  } from '@ant-design/icons';
-import GetToken from '../../../../context/GetToken'
 import useAdminStore from '../../../../store/adminStore';
 import CreateForm from './form/CreateForm';
 import UpdateForm from './form/UpdateForm';
 import { apiQRCode } from '../../../../api/api';
 import ExportFiles from './export/ExportFiles';
 import { PiFilesDuotone } from "react-icons/pi";
+import useCsrfTokenStore from '../../../../store/csrfTokenStore';
 
 const Participant = () => {
   const { 
@@ -24,15 +24,14 @@ const Participant = () => {
       fetchParticipants,
   } = useAdminStore();
 
-
+  const csrfToken = useCsrfTokenStore(state => state.csrfToken);
   const [visible, setVisible] = useState(false);
   const [createVisible, setCreateVisible] = useState(false);
   const [updatingParticipant, setUpdatingParticipant] = useState(null);
   const [updateForm] = Form.useForm();
   const [createForm] = Form.useForm()
-  const csrfToken = GetToken();
   const userRole = myAccountData?.roles[0] || ""
-
+  const [isVerifying, setIsVerifying] = useState(false);
 
   useEffect(() => {
     if (updatingParticipant) {
@@ -276,6 +275,7 @@ const Participant = () => {
   };
 
   const handleUpdate = async (values) => {
+    setIsVerifying(true);
     const {
       first_name,
       last_name,
@@ -328,11 +328,15 @@ const Participant = () => {
     } catch (error) {
       console.error('Error updating participant:', error);
       message.error('Failed to update participant');
+    } finally {
+      setIsVerifying(false);
     }
   };
 
 
   const handleCreate = async (values) => {
+    setIsVerifying(true);
+
     const {
       first_name,
       last_name,
@@ -374,6 +378,8 @@ const Participant = () => {
     } catch (error) {
       console.error('Error creating Participant:', error);
       message.error('Failed to create Participant');
+    }  finally {
+      setIsVerifying(false);
     }
   };
 
@@ -436,7 +442,7 @@ const Participant = () => {
           militaryBranchData={militaryBranchData}
           forumData={forumData}
           category={participantCategoryData}
-
+          isVerifying={isVerifying}
        />
       </Modal>
 
@@ -454,7 +460,7 @@ const Participant = () => {
         createForm={createForm}
         militaryBranchData={militaryBranchData}
         forumData={forumData}
-
+        isVerifying={isVerifying}
         />
       </Modal>
     </div>

@@ -1,100 +1,26 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from 'react';
-import { Button, Form, Input, message, Modal } from 'antd';
-import { apiEmailConfirmation,  apiRegisterCompany, apiQRCode} from '../../../../api/api';
+import { useState } from 'react';
+import { Button, Form, Input, message, Modal, Spin } from 'antd';
+import { apiEmailConfirmation, apiRegisterCompany} from '../../../../api/api';
 import axios from 'axios';
 import Congrats from './Congrats';
+import useCsrfTokenStore from '../../../../store/csrfTokenStore';
 
-export default function EmailForm({ csrfToken, email, hashedCode, formDataReg, captchaValue, sendEmailConfirmation, eventData }) {
+export default function EmailForm({  email, hashedCode, formDataReg,  sendEmailConfirmation }) {
+  const csrfToken = useCsrfTokenStore((state) => state.csrfToken);
   const [otp, setOTP] = useState('');
   const [isResendOTP, setIsResendOTP] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
-  const [verificationSuccess, setVerificationSuccess] = useState(false); 
   const [successInvite, setSuccessInvite] = useState(false); 
   const [uniqueID, setUniqueID] = useState("");
-  const [qrCode, setQrCode] = useState("");
   const [errorModalVisible, setErrorModalVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
-
-  const [formData] = useState({
-    SendEmailConfirmation: {
-      email_to_send: email
-    }
-  });
-
-  // const firstEventId = eventData.map((item) => item.id)[0];
-
-
-  // const formInviteData = useState({
-  //   g_recaptcha_response: captchaValue,
-  //   company_details: {
-  //     name: formDataReg?.company_details?.name || "",
-  //     address: formDataReg?.company_details?.address || "",
-  //     phone:formDataReg?.company_details?.phone || "",
-  //     telephone:formDataReg?.company_details?.telephone || "",
-  //     email:formDataReg?.company_details?.email ||  "",
-  //     website:formDataReg?.company_details?.website || "",
-  //     is_exhibitor: true,
-  //     company_org_type:null,
-  //   }
-  // });
-
   
   
+  console.log('FormData of Sponsors/Exhibitors:', formDataReg);
 
-
-  console.log('Form Data:', formDataReg);
-  console.log("uniqueID:", uniqueID);
-
-
-  const handleSubmitQRCode = async () => {
-    try {
-      const response = await axios.get(
-        `${apiQRCode}${uniqueID}`,
-        {}, // pass empty object as the second parameter
-        {
-          headers: {
-            'X-CSRFToken': csrfToken
-          }
-        }
-      );
-      console.log("qrcode:", response);
-      setQrCode(response.request.responseURL);
-    } catch (error) {
-      console.error('Failed to get QR code:', error);
-    } 
-  };
-
-
-
-  useEffect(() => {
-    if (successInvite) {
-      handleSubmitQRCode()
-    }
-  }, [handleSubmitQRCode]);
-
-  // const handleSubmitOTP = async () => {
-  //   setIsResendOTP(true);
-  //   try {
-  //     const response = await axios.post(apiEmailConfirmation, formData, {
-  //       headers: {
-  //         'X-CSRFToken': csrfToken
-  //       }
-  //     });
-  //     console.log("test:", response);
-  //     message.success("OTP Sent to your email");
-  //   } catch (error) {
-  //     console.error('Error adding register:', error);
-  //     message.error("Failed to register");
-  //   } finally {
-  //     setIsResendOTP(false);
-  //   }
-  // };
-
- 
 
   const handleVerify = async () => {
     try {
@@ -110,11 +36,11 @@ export default function EmailForm({ csrfToken, email, hashedCode, formDataReg, c
         }
       });
       console.log("test:", response);
-      setVerificationSuccess(true); // Set verification success
       handleCompanySubmit()
   
     } catch (error) {
-        message.error("Incorrect OTP");
+        message.error("Incorrect confirmation code!");
+        console.error(error);
     } 
   };
 
@@ -154,26 +80,36 @@ export default function EmailForm({ csrfToken, email, hashedCode, formDataReg, c
     handleChangeOTP,
   };
   if (successInvite) {
-    return <Congrats qrCode={qrCode}  uniqueID={uniqueID}  />;
+    return <Congrats  uniqueID={uniqueID}  />;
   }
 
   return (
  <>
-    <Modal
-    title="Error"
-    visible={errorModalVisible}
-    onCancel={() => setErrorModalVisible(false)}
-    footer={[
-      <Button key="close" onClick={() => setErrorModalVisible(false)}>
-        Close
-      </Button>
-    ]}
-  >
+    <Modal title="Error" visible={errorModalVisible} onCancel={() => setErrorModalVisible(false)} footer={[
+          <Button key="close" onClick={() => setErrorModalVisible(false)}>
+            Close
+          </Button>
+        ]}>
+
     <p>{errorMessage}</p>
     <Button type="primary" onClick={() => window.location.reload()}>
       Refresh Page
     </Button>
   </Modal>
+
+  <Modal
+        title="Verifying..."
+        visible={isVerifying}
+        footer={null}
+        closable={false}
+        centered
+      >
+        <div style={{ textAlign: 'center' }}>
+          <Spin size="large" />
+          <p style={{ marginTop: 20 }}>Please wait while we verify your details...</p>
+        </div>
+      </Modal>
+
     <div className="emailForm">
       <h2>Verify your Email Address</h2>
       <p>An email with a verification code was just sent to your email address.</p>

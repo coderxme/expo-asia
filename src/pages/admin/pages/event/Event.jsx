@@ -1,11 +1,11 @@
 import  { useEffect, useState } from 'react';
 import { Select, Table, Button, Popconfirm, message, Modal, Form, Input, DatePicker, TimePicker } from 'antd';
 import { EditOutlined, DeleteOutlined, ReloadOutlined, PlusOutlined } from '@ant-design/icons';
-import GetToken from '../../../../context/GetToken';
 import useAdminStore from '../../../../store/adminStore';
 import moment from 'moment';
 import { PiFilesDuotone } from "react-icons/pi";
 import ExportFilesEvent from './export/ExportFilesEvent';
+import useCsrfTokenStore from '../../../../store/csrfTokenStore';
 
 const Event = () => {
   const { 
@@ -18,8 +18,7 @@ const Event = () => {
 
     fetchEvent
   } = useAdminStore();
-
-  const csrfToken = GetToken();
+  const csrfToken = useCsrfTokenStore(state => state.csrfToken);
   const [visible, setVisible] = useState(false);
   const [createVisible, setCreateVisible] = useState(false);
   const [updatingEvent, setUpdatingEvent] = useState(null);
@@ -27,6 +26,7 @@ const Event = () => {
   const [createForm] = Form.useForm(); 
   const totalCount = eventData.length;
   const userRole = myAccountData?.roles[0] || ""
+  const [isLoading, setIsLoading] = useState(false);
 
 
   useEffect(() => {
@@ -164,8 +164,8 @@ const Event = () => {
   };
 
   const handleUpdate = async (values) => {
+    setIsLoading(true);
     const { name, description, start_date, start_time, end_date, end_time, venue, exclusive_to } = values;
-
     const updatedData = {
       name,
       description,
@@ -193,13 +193,13 @@ const Event = () => {
     } catch (error) {
       console.error('Error updating event:', error);
       message.error('Failed to update event');
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleCreate = async (values) => {
     const { name, description, start_date, start_time, end_date, end_time, venue, exclusive_to } = values;
-
-
     const newEvent = {
       name,
       description,
@@ -209,6 +209,7 @@ const Event = () => {
       exclusive_to
     };
 
+    setIsLoading(true);
     try {
       await createEvent(newEvent, csrfToken);
       setCreateVisible(false);
@@ -218,6 +219,8 @@ const Event = () => {
     } catch (error) {
       console.error('Error creating event:', error);
       message.error('Failed to create event');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -364,12 +367,14 @@ const Event = () => {
             </Select>
           </Form.Item>
           <Form.Item >
-            <Button className='buttonCreate' type='primary' htmlType='submit'>
-              Update
+            <Button loading={isLoading} className='buttonCreate' type='primary' htmlType='submit'>
+              {isLoading ? 'Updating...' : 'Update'}	
             </Button>
           </Form.Item>
         </Form>
       </Modal>
+
+
       <Modal
         title='Create Event'
         visible={createVisible}
@@ -453,8 +458,8 @@ const Event = () => {
             </Select>
           </Form.Item>
           <Form.Item >
-            <Button className='buttonCreate' type='primary' htmlType='submit'>
-              Create
+            <Button  loading={isLoading} className='buttonCreate' type='primary' htmlType='submit'>
+              {isLoading ? 'Creating...' : 'Create'}
             </Button>
           </Form.Item>
         </Form>

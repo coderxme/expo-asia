@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react';
 import { Table, Button, Popconfirm, message, Modal, Form, Input } from 'antd';
 import { EditOutlined, DeleteOutlined, ReloadOutlined, PlusOutlined } from '@ant-design/icons';
-import GetToken from '../../../../context/GetToken';
 import useAdminStore from '../../../../store/adminStore';
+import useCsrfTokenStore from '../../../../store/csrfTokenStore';
 
 const CompanyType = () => {
   const {myAccountData, companyTypeData,  deleteCompanyType, updateCompanyType, createCompanyType, fetchCompanyType } = useAdminStore();
-  const csrfToken = GetToken();
+  const csrfToken = useCsrfTokenStore(state => state.csrfToken);
   const [visible, setVisible] = useState(false);
   const [createVisible, setCreateVisible] = useState(false);
   const [updatingType, setUpdatingType] = useState(null);
   const [updateForm] = Form.useForm();
   const [createForm] = Form.useForm(); 
   const userRole = myAccountData?.roles[0] || ""
+  const [isLoading, setIsLoading] = useState(false);
 
 
 
@@ -104,11 +105,11 @@ const CompanyType = () => {
   const handleUpdate = async (values) => {
     const { name } = values;
     const updatedData = { name };
-
+     
     const isChanged = Object.keys(updatedData).some(
       (key) => updatedData[key] !== updatingType[key]
     );
-
+    setIsLoading(true);
     if (!isChanged) {
       message.warning('No changes made.');
       setVisible(false);
@@ -122,6 +123,8 @@ const CompanyType = () => {
     } catch (error) {
       console.error('Error updating company type:', error);
       message.error('Failed to update company type');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -129,7 +132,7 @@ const CompanyType = () => {
   const handleCreate = async (values) => {
     const { name } = values;
     const newCompany = { name };
-
+    setIsLoading(true);
     try {
       await createCompanyType(newCompany, csrfToken);
       setCreateVisible(false);
@@ -139,6 +142,8 @@ const CompanyType = () => {
     } catch (error) {
       console.error('Error creating company type:', error);
       message.error('Failed to create company type');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -204,8 +209,8 @@ const CompanyType = () => {
           </Form.Item>
          
           <Form.Item>
-            <Button className='buttonCreate' type='primary' htmlType='submit'>
-              Update
+            <Button loading={isLoading} className='buttonCreate' type='primary' htmlType='submit'>
+               {isLoading ? 'Updating...' : 'Update'}
             </Button>
           </Form.Item>
         </Form>
@@ -234,8 +239,8 @@ const CompanyType = () => {
           </Form.Item>
     
           <Form.Item>
-            <Button className='buttonCreate' type='primary' htmlType='submit'>
-              Create
+            <Button loading={isLoading} className='buttonCreate' type='primary' htmlType='submit'>
+              {isLoading ? 'Creating...' : 'Create'}
             </Button>
           </Form.Item>
         </Form>
